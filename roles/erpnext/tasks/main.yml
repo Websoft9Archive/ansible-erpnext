@@ -1,0 +1,21 @@
+---
+- name: Update pip
+  shell: pip install upgrade pip 
+
+- name: Install setuptools
+  pip:
+    name: [setuptools, cryptography]
+    state: latest
+
+- name: download install.py
+  shell: wget -o ~/install.py https://raw.githubusercontent.com/frappe/bench/master/playbooks/install.py
+
+- name: Create erpnext user
+  user:
+    name: frapper
+    shell: /usr/sbin/nologin
+
+- name: run install.py
+  shell: sudo python install.py --production --user frapper
+
+  

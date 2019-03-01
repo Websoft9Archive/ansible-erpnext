@@ -1,0 +1,48 @@
+---
+
+- name: APT update
+  command: apt update
+
+- name: Upgrade all packages to the latest version
+  apt:
+    name: "*"
+    state: latest
+    force_apt_get: True
+
+- name: Remove dependencies that are no longer required
+  apt:
+    autoremove: yes
+
+- name: Install Common Software
+  apt: 
+    name: [wget,openssl,unzip,bzip2,expect,at,vim,screen,git,htop,imagemagick,goaccess,python3-mysqldb,python-mysqldb,python-pip,python3-pip,unattended-upgrades,python3-pexpect]
+    state: latest
+    force_apt_get: True
+    allow_unauthenticated: yes
+
+- name: Configuration unattended-upgrades
+  copy: src=20auto-upgrades dest=/etc/apt/apt.conf.d/
+
+- name: Create swap Space
+  command: dd if=/dev/zero of=/mnt/swap bs=256M count=8
+  when: ansible_swaptotal_mb == 0
+
+- name: Make swap
+  command: mkswap /mnt/swap
+  when: ansible_swaptotal_mb == 0
+
+- name: Action swap
+  command: swapon /mnt/swap
+  when: ansible_swaptotal_mb == 0
+  
+- name: Set swapiness
+  sysctl:
+    name: vm.swappiness
+    value: "10"
+
+- name: Add to fstab
+  lineinfile:
+      dest: /etc/fstab
+      regexp: '/mnt/swap'
+      line: "/mnt/swap swap swap defaults 0 0"
+      state: present
