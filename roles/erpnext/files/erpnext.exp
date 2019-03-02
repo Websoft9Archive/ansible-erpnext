@@ -1,6 +1,6 @@
 #!/usr/bin/expect -f
 set timeout 30
-set passwdofroot 123456
+set passwdofroot "fsi#JQ&"
 set passwdofadmin admin
 spawn sudo python install.py --production --user frapper
 expect {
