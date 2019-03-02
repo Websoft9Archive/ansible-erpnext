@@ -1,0 +1,12 @@
+#!/usr/bin/expect -f
+set timeout 30
+set passwdofroot 123456
+set passwdofadmin admin
+spawn sudo python install.py --production --user frapper
+expect {
+"mysql" { send "$passwdofroot\r";exp_continue }
+"mysql" { send "$passwdofroot\r";exp_continue }
+"Administrator" { send "$passwdofadmin\r";exp_continue }
+"Administrator" { send "$passwdofadmin\r" }
+}
+interact

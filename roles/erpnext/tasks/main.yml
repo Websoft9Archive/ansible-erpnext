@@ -1,21 +1,53 @@
 ---
 - name: Update pip
-  shell: pip install upgrade pip 
+  shell: pip install --upgrade pip 
 
 - name: Install setuptools
   pip:
-    name: [setuptools, cryptography]
+    name: [setuptools, cryptography, pexpect]
     state: latest
 
-- name: download install.py
-  shell: wget -o ~/install.py https://raw.githubusercontent.com/frappe/bench/master/playbooks/install.py
+# - name: download install.py
+#   shell: wget -o ~/install.py https://raw.githubusercontent.com/frappe/bench/master/playbooks/install.py
+
+- name: copy install.py
+  template:
+    src: install.py
+    dest: /root/
+    mode: 0755
 
 - name: Create erpnext user
   user:
     name: frapper
     shell: /usr/sbin/nologin
 
+
+- name: copy install.py
+  copy:
+    src: erpnext.exp
+    dest: /root/erpnext.exp
+    owner: root
+    group: root
+    mode: 0755
+
 - name: run install.py
-  shell: sudo python install.py --production --user frapper
+  shell: expect /root/erpnext.exp
+
+- name: delete install.py
+  file: 
+    path: /root/install.py
+    state: absent
+
+- name: delete install.py
+  file: 
+    path: /root/erpnext.exp
+    state: absent
+
+- name: change permission of password.txt 
+  file:
+    path: /root/password.txt
+    mode: 0640
+
+
 
   
