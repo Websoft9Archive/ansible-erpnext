@@ -5,3 +5,4 @@
 4. 官方的ansible playbook的dns_caching role有一个小错误，目前采用fork到自己仓库，修正后将install.py里的仓库地址改为自己的地址，
    install脚本通过ansible从本地上传到服务器；
 5. ERPNext 的数据库配置文件已加密，因此不用设计随机密码。
+5. 本程序目前只适用于Ubuntu安装
