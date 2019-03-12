@@ -21,7 +21,6 @@
     name: frapper
     shell: /usr/sbin/nologin
 
-
 - name: copy install.py
   copy:
     src: erpnext.exp
@@ -45,7 +44,8 @@
 
 - name: change permission of password.txt 
   file:
-    path: /root/password.txt
+    src: /home/frapper/password.txt
+    dest: /root/password.txt
     mode: 0640
 
 
