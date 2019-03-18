@@ -19,17 +19,7 @@
   user:
     name: frapper
     shell: /usr/sbin/nologin
-
-- name: Install erpnext
-  expect:
-    command: sudo python install.py --production --user frapper
-    responses: 
-      "mysql": "{{mysql_password}}"
-      'Administrator': 'admin'   
-    timeout: 600
-    echo: yes  
-
-
+    
 - block:
   - name: Install erpnext
     expect:
