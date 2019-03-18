@@ -9,7 +9,7 @@
 
 - name: Install Common Software
   apt: 
-    name: [wget,openssl,unzip,bzip2,expect,at,vim,screen,git,htop,imagemagick,goaccess,python3-mysqldb,python-mysqldb,python-pip,python3-pip,unattended-upgrades,python3-pexpect]
+    name: [wget,openssl,unzip,bzip2,expect,at,vim,screen,git,htop,imagemagick,goaccess,python3-mysqldb,python-mysqldb,python-pip,python3-pip,unattended-upgrades,python3-pexpect,python-pexpect]
     state: latest
     force_apt_get: True
     allow_unauthenticated: yes

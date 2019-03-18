@@ -1,53 +1,112 @@
 ---
-- name: Update pip
-  shell: pip install --upgrade pip 
+# - name: Update pip
+#   shell: pip install --upgrade pip 
 
-- name: Install setuptools
-  pip:
-    name: [setuptools, cryptography, pexpect]
-    state: latest
+# # - name: Install setuptools
+# #   pip:
+# #     name: [setuptools, cryptography,pexpect]
+ 
+# # - name: download install.py
+# #   shell: wget -o ~/install.py https://raw.githubusercontent.com/frappe/bench/master/playbooks/install.py
 
-# - name: download install.py
-#   shell: wget -o ~/install.py https://raw.githubusercontent.com/frappe/bench/master/playbooks/install.py
+# - name: copy install.py
+#   copy:
+#     src: install.py
+#     dest: /root/
+#     mode: 0755
 
-- name: copy install.py
-  template:
-    src: install.py
-    dest: /root/
-    mode: 0755
+# - name: Create erpnext user
+#   user:
+#     name: frapper
+#     shell: /usr/sbin/nologin
 
-- name: Create erpnext user
-  user:
-    name: frapper
-    shell: /usr/sbin/nologin
+# - name: Install erpnext
+#   expect:
+#     command: sudo python install.py --production --user frapper
+#     responses: 
+#       "mysql": "{{mysql_password}}"
+#       'Administrator': 'admin'   
+#     timeout: 600
+#     echo: yes  
 
-- name: copy install.py
-  copy:
-    src: erpnext.exp
-    dest: /root/erpnext.exp
-    owner: root
-    group: root
-    mode: 0755
 
-- name: run install.py
-  shell: expect /root/erpnext.exp
+- block:
+  - name: Install erpnext
+    expect:
+      command: sudo python install.py --production --user frapper
+      responses: 
+        "mysql": "{{mysql_password}}"
+        'Administrator': 'admin'   
+      timeout: 600
+      echo: yes  
+  rescue:
+   - name: Install erpnext
+     expect:
+      command: sudo python install.py --production --user frapper
+      responses: 
+        "mysql": "{{mysql_password}}"
+        'Administrator': 'admin'   
+      timeout: 600
+      echo: yes  
 
-- name: delete install.py
-  file: 
+- name: Remove install.py
+  file:
     path: /root/install.py
     state: absent
 
-- name: delete install.py
-  file: 
-    path: /root/erpnext.exp
-    state: absent
+- name: change Nginx User
+  lineinfile:
+    path:  /etc/nginx/nginx.conf
+    regexp: 'user www-data;'
+    line: 'user frapper;'
+
+- name: Retart Nginx
+  service:
+      name: nginx 
+      enabled: yes
+      state: restarted
+
 
 - name: change permission of password.txt 
   file:
-    src: /home/frapper/password.txt
-    dest: /root/password.txt
+    path: /home/frapper/passwords.txt
+    state: absent
+
+- name: Setting rc.local
+  file:
+    path: /etc/rc.local
+    state: touch
+    mode: 0750
+
+- name: Write rc.local
+  shell: echo "#!/bin/bash" > /etc/rc.local
+
+- name: restart rc.local
+  service: name=rc.local state=restarted enabled=yes
+
+
+- name: Write Databases Password
+  shell: echo 'Databases root Password:'{{mysql_password}}  > /root/password.txt
+
+- name: Password Text File Permission
+  file:
+    path: /root/password.txt
     mode: 0640
 
 
+- name: Databases Random Password
+  copy: 
+    src: init.sh
+    dest: /root/
+    mode: 0750
 
-  
+- name: Setting Startup
+  lineinfile:
+    path: /etc/rc.local
+    regexp: '/root/init.sh'
+    line: '/root/init.sh'
+    mode: 0750
+
+
+- name: Setting File Permission
+  shell: chown -R frapper. /home/frapper/.bench/bench.egg-info
