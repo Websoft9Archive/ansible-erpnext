@@ -1,33 +1,33 @@
 ---
-# - name: Update pip
-#   shell: pip install --upgrade pip 
+- name: Update pip
+  shell: pip install --upgrade pip 
 
-# # - name: Install setuptools
-# #   pip:
-# #     name: [setuptools, cryptography,pexpect]
+# - name: Install setuptools
+#   pip:
+#     name: [setuptools, cryptography,pexpect]
  
-# # - name: download install.py
-# #   shell: wget -o ~/install.py https://raw.githubusercontent.com/frappe/bench/master/playbooks/install.py
+# - name: download install.py
+#   shell: wget -o ~/install.py https://raw.githubusercontent.com/frappe/bench/master/playbooks/install.py
 
-# - name: copy install.py
-#   copy:
-#     src: install.py
-#     dest: /root/
-#     mode: 0755
+- name: copy install.py
+  copy:
+    src: install.py
+    dest: /root/
+    mode: 0755
 
-# - name: Create erpnext user
-#   user:
-#     name: frapper
-#     shell: /usr/sbin/nologin
+- name: Create erpnext user
+  user:
+    name: frapper
+    shell: /usr/sbin/nologin
 
-# - name: Install erpnext
-#   expect:
-#     command: sudo python install.py --production --user frapper
-#     responses: 
-#       "mysql": "{{mysql_password}}"
-#       'Administrator': 'admin'   
-#     timeout: 600
-#     echo: yes  
+- name: Install erpnext
+  expect:
+    command: sudo python install.py --production --user frapper
+    responses: 
+      "mysql": "{{mysql_password}}"
+      'Administrator': 'admin'   
+    timeout: 600
+    echo: yes  
 
 
 - block:
