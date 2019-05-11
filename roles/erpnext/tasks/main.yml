@@ -23,7 +23,7 @@
 - block:
   - name: Install erpnext
     expect:
-      command: sudo python install.py --production --user frapper
+      command: sudo python /root/install.py --production --user frapper
       responses: 
         "mysql": "{{mysql_password}}"
         'Administrator': 'admin'   
@@ -32,7 +32,7 @@
   rescue:
    - name: Install erpnext
      expect:
-      command: sudo python install.py --production --user frapper
+      command: sudo python /root/install.py --production --user frapper
       responses: 
         "mysql": "{{mysql_password}}"
         'Administrator': 'admin'   
