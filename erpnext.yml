@@ -1,3 +1,13 @@
+- name: erpnext
+  hosts: erpnext
+  become: yes
+  become_method: sudo
+  become_user: ubuntu
+  gather_facts: False
+  pre_tasks:
+   - name: 'install python'
+     raw: 'sudo apt-get -y install python'
+
 - hosts: erpnext
   become: yes
   become_method: sudo
