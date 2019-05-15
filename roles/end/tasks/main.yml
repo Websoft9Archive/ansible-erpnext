@@ -1,0 +1,7 @@
+- name: Remove SSH info
+  file: 
+    path: '{{item}}'
+    state: absent
+  with_items:
+    - /home/ubuntu/.ssh
+    - /root/.ssh
