@@ -3,5 +3,5 @@
     path: '{{item}}'
     state: absent
   with_items:
-    - /home/ubuntu/.ssh
+    - /home/{{admin_username}}/.ssh
     - /root/.ssh
