@@ -1,5 +1,5 @@
 - name: erpnext
-  hosts: server
+  hosts: all
   become: yes
   become_method: sudo
   remote_user: '{{admin_username}}'
@@ -8,7 +8,7 @@
    - name: 'install python'
      raw: 'sudo apt-get -y install python'
 
-- hosts: server
+- hosts: all
   become: yes
   become_method: sudo
   remote_user: '{{admin_username}}'
