@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 获取mysql 默认密码
-old_password=$(cat /credentials/password.txt | awk -F ":" '{print $2}' )
+old_password=$(cat /credentials/password.txt | awk 'NR==2' |awk -F ":" '{print $2}' )
 
  # 截取随机生成的用户名
 nexterp_user=$(cat /home/frapper/frappe-bench/sites/site1.local/site_config.json | awk 'NR'==2 | awk -F "\"" '{print $4}')
