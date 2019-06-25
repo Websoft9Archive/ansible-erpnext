@@ -1,4 +1,4 @@
-Websoft9 ERPNext Stack 11.1.10
+Websoft9 ERPNext Stack 11.1.39
 ===========================
 
 1. OVERVIEW
