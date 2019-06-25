@@ -12,11 +12,7 @@ If you are using on a VPS make sure it has >= 1Gb of RAM or has swap setup prope
 
 ## 版本
 
-本项目ERPNext采用的源码部署方式，为了保证每次安装为最新版本，需要在运行脚本之前Knowage源码下载地址。
-
-修改方法：roles/knowage/defaults/main.yml的 knowage_url 字段
-
-源码下载地址：https://www.knowage-suite.com/site/knowage-download/
+本项目采用的ERPNext官方提供的python脚本安装，每次安装均可以保证为最新版。
 
 ## 安装指南
 
@@ -28,6 +24,12 @@ If you are using on a VPS make sure it has >= 1Gb of RAM or has swap setup prope
 //假设普通用户的username为
 admin_username: websoft9
 ~~~
+
+注意事项：
+
+- 由于网络环境，即使是海外服务器安装，过程中也有可能出现错误，再次运行即可；
+- 官方的ansible playbook的dns_caching role有一个小错误，目前采用fork到自己仓库，修正后将install.py里的仓库地址改为自己的地址，
+   install脚本通过ansible从本地上传到服务器；
 
 ## 组件
 Knowage,Nginx,JAVA,MYSQL,phpMyAdmin(Docker)
@@ -41,13 +43,3 @@ Knowage,Nginx,JAVA,MYSQL,phpMyAdmin(Docker)
 配置文件：/data/wwwroot/Knowage-Server-CE/conf/server.xml
 
 文档链接：[readme.txt](readme.txt)
-
-
-
-# ERPNEXT 安装注意事项：
-1. 使用Python脚本安装时，由于网络环境，只能在海外区域安装成功；
-2. 已实现交互式脚本，自动输入密码；
-3. 即使是海外服务器安装，过程中也有可能出现错误，再次运行即可；
-4. 官方的ansible playbook的dns_caching role有一个小错误，目前采用fork到自己仓库，修正后将install.py里的仓库地址改为自己的地址，
-   install脚本通过ansible从本地上传到服务器；
-5. 本程序目前只适用于Ubuntu安装
