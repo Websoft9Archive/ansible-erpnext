@@ -12,7 +12,7 @@ If you are using on a VPS make sure it has >= 1Gb of RAM or has swap setup prope
 
 ## 版本
 
-本项目采用的ERPNext官方提供的python脚本安装，每次安装均可以保证为最新版。
+本项目采用的ERPNext官方提供的python脚本安装，每次安装均可以保证为最新版（[查看最新版](https://github.com/frappe/erpnext/releases)）。
 
 ## 安装指南
 
