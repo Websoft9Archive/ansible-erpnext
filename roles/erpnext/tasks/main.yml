@@ -104,3 +104,8 @@
 
 - name: Setting File Permission
   shell: chown -R frapper. /home/frapper/.bench/bench.egg-info
+
+- name: del mysql Automatically generated for Debian scripts.
+  file:
+    path: /etc/mysql/debian.cnf
+    state: absent
