@@ -18,7 +18,7 @@ Platform. It combines leading open source projects, such as Java,ActiveMQ...
 Websoft9 ERPNext stack ships with the following software versions:
 
 ********
-- ERPNext 11.1.10
+- ERPNext 11.1.39
 - Nginx 1.14.0
 - Java1.8.0
 - MariaDB 10.2.22
