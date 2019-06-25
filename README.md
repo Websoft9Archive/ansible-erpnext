@@ -8,7 +8,7 @@
 
 ## 服务器配置要求
 
-If you are using on a VPS make sure it has >= 1Gb of RAM or has swap setup properly. [详细查看](https://github.com/frappe/bench)
+最低1核2G，保证有20G磁盘空间，否则安装失败 [详细查看](https://github.com/frappe/bench)
 
 ## 版本
 
