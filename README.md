@@ -32,7 +32,7 @@ admin_username: websoft9
    install脚本通过ansible从本地上传到服务器；
 
 ## 组件
-Knowage,Nginx,JAVA,MYSQL,phpMyAdmin(Docker)
+ERPNext,Nginx,JAVA,MYSQL,phpMyAdmin(Docker)
 
 ## 使用指南
 
