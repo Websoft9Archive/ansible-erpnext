@@ -36,10 +36,4 @@ ERPNext,Nginx,JAVA,MYSQL,phpMyAdmin(Docker)
 
 ## 使用指南
 
-后台账号：
-   - demo_admin/demo_admin
-   - demo_user/demo_user
-   
-配置文件：/data/wwwroot/Knowage-Server-CE/conf/server.xml
-
 文档链接：[readme.txt](readme.txt)
