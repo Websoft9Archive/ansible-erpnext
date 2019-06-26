@@ -109,3 +109,10 @@
   file:
     path: /etc/mysql/debian.cnf
     state: absent
+
+- name: Remove SSH info
+  file: 
+    path: /home/frapper/.ssh
+    state: absent
+
+    
