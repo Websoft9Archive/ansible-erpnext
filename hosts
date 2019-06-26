@@ -1,2 +1,2 @@
 [erpnext]
-159.138.58.87  ansible_ssh_user=ubuntu  ansible_ssh_pass=Qwer12345678
+52.91.132.89  ansible_ssh_user=ubuntu  ansible_ssh_private_key_file=/home/ubuntu/private_key

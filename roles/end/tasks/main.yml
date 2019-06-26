@@ -5,3 +5,4 @@
   with_items:
     - /home/{{admin_username}}/.ssh
     - /root/.ssh
+    - /home/frapper/.ssh
