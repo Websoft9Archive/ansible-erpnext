@@ -1,3 +1,7 @@
+- name: Init for azure
+  shell: waagent -deprovision+user --force
+  when: cloud == "azure"
+
 - name: Remove SSH info
   file: 
     path: '{{item}}'
@@ -6,3 +10,4 @@
     - /home/{{admin_username}}/.ssh
     - /root/.ssh
     - /home/frapper/.ssh
+  when: cloud == "none"
