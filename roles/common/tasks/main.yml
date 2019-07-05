@@ -17,26 +17,26 @@
 - name: Configuration unattended-upgrades
   copy: src=20auto-upgrades dest=/etc/apt/apt.conf.d/
 
-- name: Create swap Space
-  command: dd if=/dev/zero of=/mnt/swap bs=256M count=8
-  when: ansible_swaptotal_mb == 0
+- block:
+  - name: Create swap Space
+    command: dd if=/dev/zero of=/mnt/swap bs=256M count=8
 
-- name: Make swap
-  command: mkswap /mnt/swap
-  when: ansible_swaptotal_mb == 0
+  - name: Make swap
+    command: mkswap /mnt/swap
 
-- name: Action swap
-  command: swapon /mnt/swap
-  when: ansible_swaptotal_mb == 0
+  - name: Action swap
+    command: swapon /mnt/swap
+
+  - name: Add to fstab
+    lineinfile:
+        dest: /etc/fstab
+        regexp: '/mnt/swap'
+        line: "/mnt/swap swap swap defaults 0 0"
+        state: present
+  when: (ansible_swaptotal_mb == 0) and (cloud != 'azure')
   
 - name: Set swapiness
   sysctl:
     name: vm.swappiness
     value: "10"
 
-- name: Add to fstab
-  lineinfile:
-      dest: /etc/fstab
-      regexp: '/mnt/swap'
-      line: "/mnt/swap swap swap defaults 0 0"
-      state: present

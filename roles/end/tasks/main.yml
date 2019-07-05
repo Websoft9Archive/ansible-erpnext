@@ -1,7 +1,22 @@
-- name: Init for azure
-  shell: waagent -deprovision+user --force
+- block:
+  - name: ResourceDisk EnableSwap
+    lineinfile:
+        dest: /etc/waagent.conf
+        regexp: 'ResourceDisk.EnableSwap=n'
+        line: "ResourceDisk.EnableSwap=y"
+        state: present
+
+  - name: ResourceDisk SwapSizeMB
+    lineinfile:
+        dest: /etc/waagent.conf
+        regexp: 'ResourceDisk.SwapSizeMB=0'
+        line: "ResourceDisk.SwapSizeMB=2048"
+        state: present
+
+  - name: Init for azure
+    shell: waagent -deprovision+user --force
+    
   when: cloud == "azure"
-  ignore_errors: yes
 
 - name: Remove SSH info
   file: 
