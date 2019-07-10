@@ -35,6 +35,22 @@
         state: present
   when: (ansible_swaptotal_mb == 0) and (cloud != 'azure')
   
+- block:
+  - name: ResourceDisk EnableSwap
+    lineinfile:
+      dest: /etc/waagent.conf
+      regexp: 'ResourceDisk.EnableSwap=n'
+      line: "ResourceDisk.EnableSwap=y"
+      state: present
+
+  - name: ResourceDisk SwapSizeMB
+    lineinfile:
+      dest: /etc/waagent.conf
+      regexp: 'ResourceDisk.SwapSizeMB=0'
+      line: "ResourceDisk.SwapSizeMB=2048"
+      state: present
+  when: cloud == 'azure'
+
 - name: Set swapiness
   sysctl:
     name: vm.swappiness
