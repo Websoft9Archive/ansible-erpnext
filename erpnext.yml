@@ -17,4 +17,4 @@
   roles:
     - { role: common, tags: "common" }
     - { role: erpnext, tags: "erpnext" }
-    - { role: end, tags: "end" }
+    
