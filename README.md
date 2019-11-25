@@ -24,11 +24,22 @@
 我们会定期检查安装脚本 URL 地址的准确性，以保证用户可以顺利安装。
 
 ## 安装指南
+Ubuntu系统默认是不允许用户以root身份登录的，可以使用以下方法允许root用户登录：
+首先设置root密码，利用现有管理员帐户登陆Ubuntu，在终端执行命令：
+```
+sudo passwd root
+```
+接着设置root密码，重复密码。这样就有了可用的root用户。
+以 root 用户登录 ubuntu
+```
+su root
+```
+输入刚才设置的root密码即可以root用户登录
 
-以 root 用户登录 Linux，运行下面的**命令脚本**即可启动自动化部署，然后耐心等待，直至安装成功。
+运行下面的**命令脚本**即可启动自动化部署，然后耐心等待，直至安装成功。
 
 ```
-wget -N https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py ; python install.py erpnext https://github.com/Websoft9/ansible-erpnext.git
+wget -N https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py ; sudo python install.py erpnext https://github.com/Websoft9/ansible-erpnext.git
 
 ```  
 
