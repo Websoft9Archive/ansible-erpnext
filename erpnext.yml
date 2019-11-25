@@ -1,18 +1,24 @@
-- name: erpnext
+# # 服务器前置任务(ubuntu使用)
+- name: Preinstall-erpnext
   hosts: all
   become: yes
   become_method: sudo
-  become_user: root
   gather_facts: False
   pre_tasks:
-   - name: 'install python'
-     raw: 'sudo apt update && sudo apt-get -y install python'
+   - name: Install Python
+     raw: sudo apt update && sudo apt-get -y install python
+     ignore_errors: True
+
+
+# # 核心任务
 
 - hosts: all
   become: yes
   become_method: sudo
-  become_user: root
+  gather_facts: True
   roles:
     - { role: common, tags: "common" }
     - { role: erpnext, tags: "erpnext" }
+    - { role: end, tags: "end" }
+    
     

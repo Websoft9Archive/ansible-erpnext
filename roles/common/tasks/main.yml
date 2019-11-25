@@ -1,21 +1,58 @@
----
-- name: Upgrade all packages to the latest version
-  apt:
-    name: "*"
-    state: latest
-    update_cache: yes
-    force_apt_get: True
-    autoremove: yes
+- name: Check Cloud
+  shell: echo "{{ansible_kernel}}" | awk -F '-' '{print $3}'
+  register: cloud
 
-- name: Install Common Software
-  apt: 
-    name: [wget,openssl,unzip,bzip2,expect,at,vim,screen,git,htop,imagemagick,goaccess,python3-mysqldb,python-mysqldb,python-pip,python3-pip,unattended-upgrades,python3-pexpect,python-pexpect]
-    state: latest
-    force_apt_get: True
-    allow_unauthenticated: yes
+# Centos 更新 安装基础软件工具等操作
+- block:
+  - name: System Upgrade
+    yum: name=* state=latest
 
-- name: Configuration unattended-upgrades
-  copy: src=20auto-upgrades dest=/etc/apt/apt.conf.d/
+  - name: Install EPEL
+    yum:
+      name: epel-release
+
+  - name: Disable SELinux
+    selinux:
+      state: disabled
+
+  - name:  temporarily disable Selinux
+    shell: setenforce 0 
+    when: ansible_selinux.status != 'disabled'
+
+  - name: Install Common Software
+    yum: 
+      name: [mosh,yum-utils,wget,openssl,unzip,bzip2,expect,at,vim, screen,pwgen,git, htop, yum-cron,ImageMagick, goaccess,MySQL-python,python-pip,inotify-tools]
+      state: installed
+    
+  - name: Configuration yum-cron
+    copy: src=yum-cron.conf dest=/etc/yum/
+
+  - name: Start yum-cron
+    service: name=yum-cron state=started enabled=yes
+  
+  when: ansible_distribution == 'CentOS'
+
+# Ubuntu 更新 安装基础软件工具等操作
+- block:
+  - name: Upgrade all packages to the latest version
+    apt:
+      name: "*"
+      state: latest
+      update_cache: yes
+      force_apt_get: True
+      autoremove: yes
+
+  - name: Install Common Software
+    apt: 
+      name: [mosh,curl,gnupg2,ca-certificates,lsb-release,wget,openssl,unzip,bzip2,expect,at,vim,screen,pwgen,git,htop,imagemagick,goaccess,python3-mysqldb,python-mysqldb,python-pip,python3-pip,unattended-upgrades,python3-pexpect,python-pexpect]
+      state: latest
+      force_apt_get: True
+      allow_unauthenticated: yes
+
+  - name: Configuration unattended-upgrades
+    copy: src=20auto-upgrades dest=/etc/apt/apt.conf.d/
+  
+  when: ansible_distribution == 'Ubuntu'
 
 - block:
   - name: Create swap Space
@@ -26,15 +63,16 @@
 
   - name: Action swap
     command: swapon /mnt/swap
-
+  
   - name: Add to fstab
     lineinfile:
         dest: /etc/fstab
         regexp: '/mnt/swap'
         line: "/mnt/swap swap swap defaults 0 0"
         state: present
-  when: (ansible_swaptotal_mb == 0) and (cloud != 'azure')
-  
+
+  when: (ansible_swaptotal_mb == 0) and (cloud.stdout != 'azure')
+
 - block:
   - name: ResourceDisk EnableSwap
     lineinfile:
@@ -49,10 +87,43 @@
       regexp: 'ResourceDisk.SwapSizeMB=0'
       line: "ResourceDisk.SwapSizeMB=2048"
       state: present
-  when: cloud == 'azure'
+  when: cloud.stdout == 'azure'
+
 
 - name: Set swapiness
   sysctl:
     name: vm.swappiness
     value: "10"
 
+- name: Fix No space left on device
+  sysctl:
+    name: fs.inotify.max_user_watches
+    value: "8192000"
+
+- block:
+  - name: AWS Configure
+    apt:
+      name: ec2-instance-connect
+      update_cache: yes
+    when: ansible_distribution == 'Ubuntu'
+
+  - name: AWS Configure
+    yum:
+      name: ec2-instance-connect
+    when: ansible_distribution == 'Centos'
+  
+  - name: Start ec2-instance-connect
+    service:
+      name: ec2-instance-connect
+      state: started
+      enabled: yes
+  when: cloud.stdout == 'aws'
+
+- name: Create Dir
+  file:
+    path: '/data/{{item}}'
+    state: directory
+  with_items:
+    - logs
+    - config
+    - cert
