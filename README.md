@@ -1,39 +1,48 @@
-# ERPNext自动化安装与部署
+# ERPNext 自动化安装与部署
 
-本项目是基于Ansible的[ERPNext](https://erpnext.com/)自动化安装脚本，实现在Ansible上一键安装ERPNext。本项目是开源项目，支持MIT开源协议。如果您不熟悉Ansible的使用，您可以直接使用我们在公有云上提供的镜像。
+本项目是由 [Websoft9](http://www.websoft9.com) 研发的 [ERPNext](https://erpnext.com/) 自动化安装程序，开发语言是 Ansible。使用本项目，只需要用户在 Linux 上运行一条命令，即可自动化安装 GitLab，让原本复杂的安装过程变得没有任何技术门槛。  
 
-## 操作系统
+本项目是开源项目，采用 LGPL3.0 开源协议。
 
-目前仅支持Ubuntu16.x以上部署此脚本
+## 配置要求
 
-## 服务器配置要求
+操作系统：目支持 Ubuntu16.x以上部署此脚本，确保是干净的操作系统
+硬件配置：最低1核2G，20G系统盘空间，否则无法运行  
 
-最低1核2G，保证有20G磁盘空间，否则安装失败 [详细查看](https://github.com/frappe/bench)
+更多配置要求，参考[官方文档](https://github.com/frappe/bench)
 
-## 版本
+## 组件
 
-本项目采用的ERPNext官方提供的python脚本安装，每次安装均可以保证为最新版（[查看最新版](https://github.com/frappe/erpnext/releases)）。
+包含的核心组件为：ERPNext, Nginx, Node.js 等  
+
+更多请见[参数表](/docs/zh/stack-components.md)
+
+## 本项目安装的是 BT（宝塔） 最新版吗？
+
+本项目采用官方提供的安装脚本进行安装，官方会在安装脚本中对 ERPNext 的版本进行控制，即每一次安装均可保证为 ERPNext 官方发布的最新稳定版。
+
+我们会定期检查安装脚本 URL 地址的准确性，以保证用户可以顺利安装。
 
 ## 安装指南
 
-本Ansible脚本支持root用户、普通用户（+su权限提升）等两种账号模式，也支持密码和秘钥对登录方式。
+以 root 用户登录 Linux，运行下面的**命令脚本**即可启动自动化部署，然后耐心等待，直至安装成功。
 
-其中普通用户登录需要增加变量：
+```
+wget -N https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py ; python install.py erpnext https://github.com/Websoft9/ansible-erpnext.git
 
-~~~
-//假设普通用户的username为
-admin_username: websoft9
-~~~
+```  
 
-注意事项：
+注意：  
 
-- 由于网络环境，即使是海外服务器安装，过程中也有可能出现错误，再次运行即可；
-- 官方的ansible playbook的dns_caching role有一个小错误，目前采用fork到自己仓库，修正后将install.py里的仓库地址改为自己的地址，
-   install脚本通过ansible从本地上传到服务器；
+1. 如果以非 root 用户身份登录 Linux，请先通过 sudo 或 su 提升权限，再运行脚本。
+2. 由于自动化安装过程中有大量下载任务，若网络不通（或速度太慢）会引起下载失败，从而导致安装程序终止运行。此时，请重置服务器后再次尝试安装，若仍然无法完成，请使用我们在公有云上发布的 [BT（宝塔） 镜像](https://apps.websoft9.com/bt) 的部署方式
 
-## 组件
-ERPNext,Nginx,JAVA,MYSQL,phpMyAdmin(Docker)
 
-## 使用指南
+## 文档
 
-文档链接：[readme.txt](readme.txt)
+文档链接：https://support.websoft9.com/docs/erpnext
+
+## FAQ
+
+- 命令脚本部署与镜像部署有什么区别？请参考[镜像部署-vs-脚本部署](https://support.websoft9.com/docs/faq/zh/bz-product.html#镜像部署-vs-脚本部署)
+- 本项目支持在 Ansible Tower 上运行吗？支持
