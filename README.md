@@ -35,7 +35,7 @@ wget -N https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/i
 注意：  
 
 1. 如果以非 root 用户身份登录 Linux，请先通过 sudo 或 su 提升权限，再运行脚本。
-2. 由于自动化安装过程中有大量下载任务，若网络不通（或速度太慢）会引起下载失败，从而导致安装程序终止运行。此时，请重置服务器后再次尝试安装，若仍然无法完成，请使用我们在公有云上发布的 [BT（宝塔） 镜像](https://apps.websoft9.com/bt) 的部署方式
+2. 由于自动化安装过程中有大量下载任务，若网络不通（或速度太慢）会引起下载失败，从而导致安装程序终止运行。此时，请重置服务器后再次尝试安装，若仍然无法完成，请使用我们在公有云上发布的 [ERPNext 镜像](https://apps.websoft9.com/erpnext) 的部署方式
 
 
 ## 文档
