@@ -25,16 +25,19 @@
 
 ## 安装指南
 
-以 root 用户登录 Linux，运行下面的**命令脚本**即可启动自动化部署，然后耐心等待，直至安装成功。
+登录 Linux，运行下面的**命令脚本**即可启动自动化部署，然后耐心等待，直至安装成功。  
 
 ```
-wget -N https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py ; python install.py erpnext https://github.com/Websoft9/ansible-erpnext.git
+#非 root 用户登录后，需先提升成为 root 权限
+sudo su -
 
+#自动化安装命令
+wget -N https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py ; python install.py erpnext https://github.com/Websoft9/ansible-erpnext.git
 ```  
 
 注意：  
 
-1. 如果以非 root 用户身份登录 Linux，请先通过 sudo 或 su 提升权限，再运行脚本。
+1. 自动化脚本需服务器上已经安装 Python 2.7 或以上版本，一般操作系统会自带 Python，如果无法运行脚本，请先安装 Python
 2. 由于自动化安装过程中有大量下载任务，若网络不通（或速度太慢）会引起下载失败，从而导致安装程序终止运行。此时，请重置服务器后再次尝试安装，若仍然无法完成，请使用我们在公有云上发布的 [ERPNext 镜像](https://apps.websoft9.com/erpnext) 的部署方式
 
 
