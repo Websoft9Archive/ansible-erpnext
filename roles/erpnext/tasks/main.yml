@@ -2,12 +2,9 @@
 - name: Update pip
   shell: pip install --upgrade pip 
 
-# - name: Install setuptools
-#   pip:
-#     name: [setuptools, cryptography,pexpect]
- 
-# - name: download install.py
-#   shell: wget -o ~/install.py https://raw.githubusercontent.com/frappe/bench/master/playbooks/install.py
+- name: Install setuptools
+  pip:
+    name: [setuptools, cryptography,pexpect]
 
 - name: copy install.py
   copy:
