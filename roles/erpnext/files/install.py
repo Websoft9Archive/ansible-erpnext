@@ -212,7 +212,7 @@ def clone_bench_repo(args):
 		clone_path = tmp_bench_repo
 
 	branch = args.bench_branch or 'master'
-	repo_url = args.repo_url or 'https://github.com/hliblack/bench'
+	repo_url = args.repo_url or 'https://github.com/frappe/bench'
 
 
 	success = run_os_command(
