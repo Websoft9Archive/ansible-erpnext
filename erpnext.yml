@@ -33,8 +33,7 @@
     - { role: wkhtmltopdf, tags: "wkhtmltopdf" }
     - { role: nginx, tags: "nginx" }
 
-    # #- { role: end , tags: "end"} 
-
+# Erpnext
 - name: setup bench and dev environment
   hosts: all
   vars:
@@ -47,6 +46,7 @@
   # setup frappe-bench
     - { role: erpnext, tags: "erpnext"}
 
+# 初始化
 - name: end
   hosts: all
   become: yes
