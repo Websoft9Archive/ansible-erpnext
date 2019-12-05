@@ -26,6 +26,7 @@
       default: 2
 
   roles:
+    - { role: cloud, tags: "cloud" }
     - { role: common , tags: "common"} 
     - { role: node.js, tags: "node.js" }
     - { role: redis, tags: "redis" }
