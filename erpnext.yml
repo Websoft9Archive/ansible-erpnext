@@ -44,7 +44,6 @@
     frappe_branch: "version-12"
     python: "/usr/bin/python3"
   roles:
-  # setup frappe-bench
     - { role: erpnext, tags: "erpnext"}
 
 # 初始化
