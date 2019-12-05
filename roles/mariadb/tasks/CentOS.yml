@@ -1,0 +1,42 @@
+- name: Add MariaDB repository
+  yum_repository:
+    name: mariadb
+    description: mariadb YUM repo
+    file: MariaDB
+    baseurl: http://yum.mariadb.org/{{mariadbver}}/centos7-amd64
+    gpgkey: https://yum.mariadb.org/RPM-GPG-KEY-MariaDB
+    # gpgcheck: yes
+
+
+- name: Install MariaDB
+  yum: 
+    name: [MariaDB-server,MariaDB-client,MySQL-python]
+
+- name: Create Databases Directory
+  file:
+    path: /data/mysql
+    state: directory
+    owner: mysql
+    group: mysql
+  
+- name: Copy MariaDB Configuration
+  template: src=my.cnf.jinja2 dest=/etc/my.cnf
+
+- name: init Source data
+  shell: mysql_install_db --user=mysql --datadir=/data/mysql
+
+
+- name: Restart MariaDB
+  service:
+    name: mariadb
+    state: restarted
+    enabled: yes
+
+
+- name: Create a MariaDB  symbolic link
+  file:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    state: link
+  with_items:
+    - {src: '/etc/my.cnf',dest: /data/config/my.cnf}

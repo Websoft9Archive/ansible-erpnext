@@ -1,0 +1,24 @@
+- name: import an official nginx signing key
+  apt_key: 
+    url: https://nginx.org/keys/nginx_signing.key
+    state: present
+
+- name: Import Nginx Official Repo
+  apt_repository:
+    repo: deb http://nginx.org/packages/ubuntu {{ansible_distribution_release}} nginx
+    filename: nginx
+    update_cache: yes
+
+- name: Install Nginx
+  apt:
+    name: [nginx]
+  
+- name: Import Certbot PPA
+  apt_repository:
+    repo: ppa:certbot/certbot
+
+- name: Install Certbot
+  apt: 
+    name: [certbot,python-certbot-nginx]
+
+

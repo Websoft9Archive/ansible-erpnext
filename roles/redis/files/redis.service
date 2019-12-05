@@ -1,0 +1,14 @@
+[Unit]
+Description=redis
+After=network.target
+
+[Service]
+Type=forking
+PIDFile=/var/run/redis.pid
+ExecStart=/usr/local/bin/redis-server /etc/redis/redis.conf
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s QUIT $MAINPID
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target

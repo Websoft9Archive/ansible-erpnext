@@ -1,0 +1,36 @@
+---
+- block: 
+  - name: install base fonts
+    yum: 
+      name: [libXrender,libXext,xorg-x11-fonts-75dpi,xorg-x11-fonts-Type1]
+
+  - name: Install wkhtmltox
+    yum:
+      name: https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox-0.12.5-1.centos{{ansible_distribution_major_version}}.x86_64.rpm
+
+  when: ansible_os_family == 'RedHat'
+
+
+- block: 
+  - name: install base fonts
+    apt: 
+      name: [libxrender1,libxext6,xfonts-75dpi,xfonts-base]
+      force: yes
+
+  - name: Install wkhtmltox
+    apt:
+      deb: https://downloads.wkhtmltopdf.org/0.12/0.12.5/wkhtmltox_0.12.5-1.{{ansible_lsb.codename}}_amd64.deb
+
+  when: ansible_os_family == 'Debian'
+
+
+- name: wkhtmltox symbolic link
+  file:
+    src: /usr/local/bin/{{item}}
+    dest: /usr/bin/{{item}}
+    state: link
+  with_items:
+    - wkhtmltopdf
+    - wkhtmltoimage
+
+

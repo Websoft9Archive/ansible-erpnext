@@ -1,0 +1,69 @@
+- name: Install GCC
+  yum:
+    name: 'gcc'
+  when: ansible_distribution == 'CentOS'
+
+- name: Install GCC
+  apt:
+    name: 'gcc'
+  when: ansible_distribution == 'Ubuntu'
+
+
+
+- name: Download Redis Source Code
+  unarchive:
+    src: http://download.redis.io/releases/redis-{{redis_ver}}.tar.gz
+    dest: /opt/
+    remote_src: yes
+
+- name: Install redis
+  shell: make && make install
+  args:
+    chdir: /opt/redis-{{redis_ver}}
+
+- name: Delte redis source code
+  file:
+    path: /opt/redis-{{redis_ver}}
+    state: absent
+
+- name: create redis dir
+  file: 
+    path: "{{item}}"
+    state: directory
+  with_items:
+    - /etc/redis
+    - /data/redis
+
+- name: Copy redis config
+  copy:
+    src: redis.conf
+    dest: /etc/redis
+
+- name: config Redis Service
+  copy: 
+    src: redis.service
+    dest: /lib/systemd/system/
+
+- name: Start Redis
+  service:
+    name: redis.service
+    state: started
+    enabled: yes
+
+- name: Create a redis symbolic link
+  file:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    state: link
+  with_items:
+    - {src:  /var/log/redis.log,dest: /data/logs/redis.log} 
+    - {src:  /etc/redis,dest: /data/config/redis} 
+
+
+
+- name: Check redis Version
+  shell: /usr/local/bin/redis-server -v
+  register: redis_ver
+  args:
+    executable: /bin/bash
+  notify: [redis Version,Check redis Server]

@@ -1,115 +1,111 @@
 ---
-- name: Update pip
-  shell: pip install --upgrade pip 
-
-- name: Install setuptools
-  pip:
-    name: [setuptools, cryptography,pexpect]
-
-- name: copy install.py
-  copy:
-    src: install.py
-    dest: /root/
-    mode: 0755
-
-- name: Create erpnext user
-  user:
-    name: frapper
-    shell: /usr/sbin/nologin
-    
 - block:
-  - name: Install erpnext
-    expect:
-      command: sudo python /root/install.py --production --user frapper
-      responses: 
-        "mysql": "{{mysql_password}}"
-        'Administrator': 'admin'   
-      timeout: 600
-      echo: yes  
-  rescue:
-   - name: Install erpnext
-     expect:
-      command: sudo python /root/install.py --production --user frapper
-      responses: 
-        "mysql": "{{mysql_password}}"
-        'Administrator': 'admin'   
-      timeout: 600
-      echo: yes  
+  - name: replace mariadb's configration file
+    template:
+      src: mariadb.cnf.j2
+      dest: /etc/mysql/conf.d/mysql.cnf
 
-- name: Remove install.py
-  file:
-    path: /root/install.py
-    state: absent
-
-- name: change Nginx User
-  lineinfile:
-    path:  /etc/nginx/nginx.conf
-    regexp: 'user www-data;'
-    line: 'user frapper;'
-
-- name: Retart Nginx
-  service:
-      name: nginx 
+  - name: restart mariadb
+    service: 
+      name: mysql  
+      state: restarted 
       enabled: yes
-      state: restarted
 
+  - name: update pip
+    command: pip install --upgrade pip
 
-- name: change permission of password.txt 
-  file:
-    path: /home/frapper/passwords.txt
-    state: absent
+  - name: add a linux user
+    user:
+      name: frappe
+      shell: /bin/bash
+      home: /home/frappe
+  become: yes
+  become_user: root
 
-- name: Setting rc.local
-  file:
-    path: /etc/rc.local
-    state: touch
-    mode: 0750
+- block:
+  - name: Download bench repo
+    git:
+      repo: https://github.com/frappe/bench
+      dest: /home/frappe/bench-repo
 
-- name: Write rc.local
-  shell: echo "#!/bin/bash" > /etc/rc.local
+  - name: Install bench
+    pip: name={{ bench_repo_path }} extra_args='-e'
+    become: yes
+    become_user: root
 
-- name: restart rc.local
-  service: name=rc.local state=restarted enabled=yes
+  - name: python3 bench init for production
+    command: bench init {{ bench_path }} --frappe-path {{ frappe_repo_url }} --frappe-branch {{ frappe_branch }} --python {{ python }}
+    args:
+      creates: "{{ bench_path }}"
+      
+  - name: change mariadb host
+    shell:
+      bench set-mariadb-host 127.0.0.1
+    args:
+      chdir: /home/frappe/frappe-bench
 
-- name: Create credentials Folder
-  file:
-    path: /credentials
-    state: directory
+  - name: Add a site
+    expect:
+      command: bench new-site erpnext
+      responses: 
+        "password": "{{root_password}}"
+      timeout: 300
+    args:
+      chdir: /home/frappe/frappe-bench
 
-- name: Create Password doc
-  file:
-    path: /credentials/password.txt
-    mode: 644
-    state: touch
+  - name: get apps
+    command: 
+      bench get-app erpnext https://github.com/frappe/erpnext
+    args:
+      chdir: /home/frappe/frappe-bench
 
-- name: Write Databases Password
-  shell: echo -e 'MySQL username:root\nMySQL Password:'{{mysql_password}}  > /credentials/password.txt
+  - name: Add apps
+    command: 
+      bench --site erpnext install-app erpnext
+    args:
+      chdir: /home/frappe/frappe-bench
 
-- name: Databases Random Password
-  copy: 
-    src: init.sh
-    dest: /root/
-    mode: 0750
+  - name: generate nginx port forwarding file
+    command:
+      bench setup nginx
+    args:
+      chdir: /home/frappe/frappe-bench
+  become: yes
+  become_user: frappe
 
-- name: Setting Startup
-  lineinfile:
-    path: /etc/rc.local
-    regexp: '/root/init.sh'
-    line: '/root/init.sh'
-    mode: 0750
+- block: 
+  - name: add erpnext.service
+    copy:
+      src: erpnext.service
+      dest: /etc/systemd/system/erpnext.service
+      owner: root
+      group: root
+      mode: 0640
 
+  - name: start erpnext.service
+    service: name=erpnext.service  state=started  enabled=yes
 
-- name: Setting File Permission
-  shell: chown -R frapper. /home/frapper/.bench/bench.egg-info
+  - name: delete default nginx configurationfile
+    file: 
+      path: /etc/nginx/conf.d/default.conf
+      state: absent
 
-- name: del mysql Automatically generated for Debian scripts.
-  file:
-    path: /etc/mysql/debian.cnf
-    state: absent
+  - name: generate soft link of nginx configrationfile
+    file:
+      src: /home/frappe/frappe-bench/config/nginx.conf
+      dest: /etc/nginx/conf.d/default.conf
+      owner: root
+      group: root
+      state: link
 
-- name: Remove SSH info
-  file: 
-    path: /home/frapper/.ssh
-    state: absent
+  - name: restart nginx
+    service: name=nginx  state=restarted  enabled=yes    
+  become: yes
+  become_user: root
 
-    
+- name: bench update
+  command: bench update --patch
+  args:
+    chdir: /home/frappe/frappe-bench
+  become: yes
+  become_user: frappe

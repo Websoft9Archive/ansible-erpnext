@@ -1,0 +1,56 @@
+- import_tasks: CentOS.yml
+  when: ansible_distribution == 'CentOS'
+
+- import_tasks: Ubuntu.yml
+  when: ansible_distribution == 'Ubuntu'
+
+
+- name: Configure Nginx
+  copy:
+    src: nginx.conf
+    dest: /etc/nginx/
+
+
+- name: Create a Nginx Log symbolic link
+  file:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    state: link
+  with_items:
+    - {src: /etc/nginx/conf.d,dest: /data/config/nginx}  
+    - {src: /var/log/nginx,dest: /data/logs/nginx}  
+
+- name: Change Directory Owner
+  file:
+    path: /data/{{item}}
+    state: directory
+    owner: www-data
+    group: www-data
+  with_items:
+    - wwwroot
+    - cert
+  when: ansible_distribution == 'Ubuntu'
+
+
+- name: Change Directory Owner
+  file:
+    path: /data/{{item}}
+    state: directory
+    owner: nginx
+    group: nginx
+  with_items:
+    - wwwroot
+    - cert
+  when: ansible_distribution == 'CentOS'
+
+
+- name: Start Nginx
+  service:
+    name: nginx
+    state: restarted
+    enabled: yes
+
+- name: Check Nginx Version
+  shell: nginx -v
+  register: nginx_ver
+  notify: Nginx Version
