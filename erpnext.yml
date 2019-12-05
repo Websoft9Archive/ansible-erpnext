@@ -26,8 +26,8 @@
       default: 2
 
   roles:
-    - { role: cloud, tags: "cloud" }
     - { role: common , tags: "common"} 
+    - { role: cloud, tags: "cloud" }
     - { role: node.js, tags: "node.js" }
     - { role: redis, tags: "redis" }
     - { role: mariadb, tags: "mariadb" }
@@ -53,6 +53,7 @@
   become: yes
   become_method: sudo 
   roles:
+    - { role: initdb, tags: initdb }
     - { role: end, tags: "end" }
 
 
