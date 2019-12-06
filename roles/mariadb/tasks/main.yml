@@ -38,6 +38,27 @@
   command: mysql -uroot -p{{mariadb_password}} -e "DELETE FROM mysql.db WHERE Db='test' OR Db='test\\_%'"
 
 
+- name: Create DB
+  mysql_db:
+    login_user: root
+    login_password: '{{mysql_password}}'
+    name: "{{app_db}}"
+  when: (app_db != none) and (app_db is defined)
+
+- name: Create User
+  mysql_user:
+    login_user: root
+    login_password: '{{mysql_password}}'
+    name: "{{app_db_user}}"
+    password: "{{app_db_password}}"
+    host: "{{app_db_host}}"
+    priv: '{{app_db}}.*:ALL,GRANT'
+  when: (app_db_user != none) and (app_db_host != none) and (app_db != none) and (app_db_user is defined) and (app_db_host is defined) and (app_db is defined)and (app_db_password != none) and (app_db_password is defined)
+
+
+
+
+
 - name: Create credentials Folder
   file:
     path: /credentials

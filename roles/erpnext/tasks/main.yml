@@ -1,4 +1,5 @@
 ---
+# 配置数据库，添加frappe用户
 - block:
   - name: replace mariadb's configration file
     template:
@@ -22,6 +23,7 @@
   become: yes
   become_user: root
 
+# 安装 erpnext
 - block:
   - name: Download bench repo
     git:
@@ -48,7 +50,7 @@
     expect:
       command: bench new-site erpnext
       responses: 
-        "password": "{{root_password}}"
+        "password": "{{mariadb_password}}"
       timeout: 300
     args:
       chdir: /home/frappe/frappe-bench
@@ -73,6 +75,7 @@
   become: yes
   become_user: frappe
 
+# 配置服务并设置端口转发
 - block: 
   - name: add erpnext.service
     copy:
@@ -99,10 +102,19 @@
       state: link
 
   - name: restart nginx
-    service: name=nginx  state=restarted  enabled=yes    
+    service: name=nginx  state=restarted  enabled=yes
+
+  - name: get erpnext database username
+    shell: grep 'db_name' /home/frappe/frappe-bench/sites/erpnext/site_config.json | awk -F '"' '{print $4}'
+    register: erpnext_dbuser
+
+  - name: get erpnext database password
+    shell: grep 'db_password' /home/frappe/frappe-bench/sites/erpnext/site_config.json | awk -F '"' '{print $4}'
+    register: erpnext_dbpass    
   become: yes
   become_user: root
 
+# 更新
 - name: bench update
   command: bench update --patch
   args:
