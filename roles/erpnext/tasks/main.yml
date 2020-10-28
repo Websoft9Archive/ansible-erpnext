@@ -1,123 +1,19 @@
 ---
-# 配置数据库，添加frappe用户
-- block:
-  - name: replace mariadb's configration file
-    template:
-      src: mariadb.cnf.j2
-      dest: /etc/mysql/conf.d/mysql.cnf
-
-  - name: restart mariadb
-    service: 
-      name: mysql  
-      state: restarted 
-      enabled: yes
-
-  - name: update pip
-    command: pip install --upgrade pip
-
-  - name: add a linux user
-    user:
-      name: frappe
-      shell: /bin/bash
-      home: /home/frappe
-  become: yes
-  become_user: root
-
-# 安装 erpnext
-- block:
-  - name: Download bench repo
-    git:
-      repo: https://github.com/frappe/bench
-      dest: /home/frappe/bench-repo
-
-  - name: Install bench
-    pip: name={{ bench_repo_path }} extra_args='-e'
-    become: yes
-    become_user: root
-
-  - name: python3 bench init for production
-    command: bench init {{ bench_path }} --frappe-path {{ frappe_repo_url }} --frappe-branch {{ frappe_branch }} --python {{ python }}
-    args:
-      creates: "{{ bench_path }}"
-      
-  - name: change mariadb host
-    shell:
-      bench set-mariadb-host 127.0.0.1
-    args:
-      chdir: /home/frappe/frappe-bench
-
-  - name: Add a site
-    expect:
-      command: bench new-site erpnext
-      responses: 
-        "password": "{{mariadb_password}}"
-      timeout: 300
-    args:
-      chdir: /home/frappe/frappe-bench
-
-  - name: get apps
-    command: 
-      bench get-app erpnext https://github.com/frappe/erpnext
-    args:
-      chdir: /home/frappe/frappe-bench
-
-  - name: Add apps
-    command: 
-      bench --site erpnext install-app erpnext
-    args:
-      chdir: /home/frappe/frappe-bench
-
-  - name: generate nginx port forwarding file
-    command:
-      bench setup nginx
-    args:
-      chdir: /home/frappe/frappe-bench
-  become: yes
-  become_user: frappe
-
-# 配置服务并设置端口转发
-- block: 
-  - name: add erpnext.service
-    copy:
-      src: erpnext.service
-      dest: /etc/systemd/system/erpnext.service
-      owner: root
-      group: root
-      mode: 0640
-
-  - name: start erpnext.service
-    service: name=erpnext.service  state=started  enabled=yes
-
-  - name: delete default nginx configurationfile
-    file: 
-      path: /etc/nginx/conf.d/default.conf
-      state: absent
-
-  - name: generate soft link of nginx configrationfile
-    file:
-      src: /home/frappe/frappe-bench/config/nginx.conf
-      dest: /etc/nginx/conf.d/default.conf
-      owner: root
-      group: root
-      state: link
-
-  - name: restart nginx
-    service: name=nginx  state=restarted  enabled=yes
-
-  - name: get erpnext database username
-    shell: grep 'db_name' /home/frappe/frappe-bench/sites/erpnext/site_config.json | awk -F '"' '{print $4}'
-    register: erpnext_dbuser
-
-  - name: get erpnext database password
-    shell: grep 'db_password' /home/frappe/frappe-bench/sites/erpnext/site_config.json | awk -F '"' '{print $4}'
-    register: erpnext_dbpass    
-  become: yes
-  become_user: root
-
-# 更新
-- name: bench update
-  command: bench update --patch
+# preparation before start-up
+- name: Clone erpnext and rename dir
+  shell: |
+    git clone https://github.com/frappe/frappe_docker.git
+    test -d "frappe_docker" && mv frappe_docker erpnext
   args:
-    chdir: /home/frappe/frappe-bench
-  become: yes
-  become_user: frappe
+    chdir: /data/wwwroot/ 
+    
+- name: Copy env for production 
+  template:
+    src:  .env
+    dest: /data/wwwroot/erpnext/.env
+    
+# pull and run docker-compose
+- name: Pull and run docker-compose
+  shell: docker-compose up -d
+  args:
+    chdir: /data/wwwroot/erpnext
