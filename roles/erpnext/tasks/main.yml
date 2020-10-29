@@ -1,33 +1,31 @@
 ---
 # preparation before start-up
-- name: Clone erpnext and rename dir
+- name: Clone erpnext and nginx-proxy  and rename dir
   shell: |
     git clone {{erpnext_clone_url}}
     test -d "frappe_docker" && mv frappe_docker erpnext
+    git clone {{nginx_prox_clone_urlnginx_prox_clone_url}}
+    test -d "docker-compose-letsencrypt-nginx-proxy-companion" &&  \
+    mv docker-compose-letsencrypt-nginx-proxy-companion nginx-proxy
   args:
     chdir: /data/wwwroot/ 
 
-# - name: Clone nginx-proxy and rename dir
-#   shell: |
-#     git clone {{nginx_prox_clone_urlnginx_prox_clone_url}}
-#     test -d "docker-compose-letsencrypt-nginx-proxy-companion" && mv docker-compose-letsencrypt-nginx-proxy-companion nginx-proxy
-#   args:
-#     chdir: /data/wwwroot/erpnext
-
-# - name: Copy env for production 
-#   copy:
-#     src:  
-#     dest: /data/wwwroot/erpnext/
-
-
+- name: Copy nginx-proxy env and running
+  shell: |
+    cp .env.sample .env
+    bash start.sh
+  args:
+    chdir: /data/wwwroot/nginx-proxy 
     
-- name: Copy env for production 
+- name: Copy erpnext env
   template:
     src:  .env
     dest: /data/wwwroot/erpnext/.env
     
-# pull and run docker-compose
+# pull and run erpnext
 - name: Pull and run docker-compose
-  shell: docker-compose --project-name {{project_name}} up -d
+  shell: |
+    docker-compose     --project-name  {{project_name}}    -f installation/docker-compose-common.yml  \    
+     -f installation/docker-compose-erpnext.yml   -f installation/erpnext-publish.yml     up -d
   args:
     chdir: /data/wwwroot/erpnext

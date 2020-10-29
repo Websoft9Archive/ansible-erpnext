@@ -5,9 +5,6 @@
 - src: http://github.com/websoft9dev/role_cloud
   version: master
 
-- src: http://github.com/websoft9dev/role_nginx
-  version: master  
-
 - src: http://github.com/websoft9dev/role_mariadb
   version: master
 
