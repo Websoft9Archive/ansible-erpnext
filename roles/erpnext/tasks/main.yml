@@ -14,7 +14,6 @@
     
 # pull and run docker-compose
 - name: Pull and run docker-compose
-  shell:
-    docker-compose up -d
+  shell: docker-compose up -d
   args:
     chdir: /data/wwwroot/erpnext

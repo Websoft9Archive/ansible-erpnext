@@ -1,3 +1,0 @@
-- name: MariaDB Version
-  debug:
-    var: mysql_ver.stdout
