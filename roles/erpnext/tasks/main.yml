@@ -2,10 +2,24 @@
 # preparation before start-up
 - name: Clone erpnext and rename dir
   shell: |
-    git clone https://github.com/frappe/frappe_docker.git
+    git clone {{erpnext_clone_url}}
     test -d "frappe_docker" && mv frappe_docker erpnext
   args:
     chdir: /data/wwwroot/ 
+
+# - name: Clone nginx-proxy and rename dir
+#   shell: |
+#     git clone {{nginx_prox_clone_urlnginx_prox_clone_url}}
+#     test -d "docker-compose-letsencrypt-nginx-proxy-companion" && mv docker-compose-letsencrypt-nginx-proxy-companion nginx-proxy
+#   args:
+#     chdir: /data/wwwroot/erpnext
+
+# - name: Copy env for production 
+#   copy:
+#     src:  
+#     dest: /data/wwwroot/erpnext/
+
+
     
 - name: Copy env for production 
   template:
@@ -14,6 +28,6 @@
     
 # pull and run docker-compose
 - name: Pull and run docker-compose
-  shell: docker-compose up -d
+  shell: docker-compose --project-name {{project_name}} up -d
   args:
     chdir: /data/wwwroot/erpnext
