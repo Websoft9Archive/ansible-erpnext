@@ -27,6 +27,6 @@
   shell: |
     docker-compose     --project-name  {{project_name}}    -f installation/docker-compose-common.yml  \    
      -f installation/docker-compose-erpnext.yml   -f installation/erpnext-publish.yml     up -d
-    sleep 100
+    sleep 300
   args:
     chdir: /data/wwwroot/erpnext
