@@ -1,12 +1,14 @@
 # Major version list: lv12  v11.1.15  v11
-erpnext_version: latest
-frappe_version: latest
+erpnext_version: "latest"
+frappe_version: "latest"
 
-admin_password: 123456
+admin_username: "Administrator"
+admin_password: "admin"
+ 
+project_name: "erpnext"
 
-project_name: erpnext
+mariadb_host: "mariadb"
+mariadb_root_password: "123456"
 
-mariadb_host: mariadb
-
-erpnext_clone_url: https://github.com/frappe/frappe_docker.git
-nginx_prox_clone_url: https://github.com/evertramos/docker-compose-letsencrypt-nginx-proxy-companion.git
+erpnext_clone_url: "https://github.com/frappe/frappe_docker.git"
+nginx_prox_clone_url: "https://github.com/evertramos/docker-compose-letsencrypt-nginx-proxy-companion.git"

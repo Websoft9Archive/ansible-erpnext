@@ -33,12 +33,11 @@
     chdir: /data/wwwroot/erpnext
 
 - block:
-  - name: Check erpnext Version
-    shell:  /data/logs/install_version.txt
+  # - name: Check erpnext Version
+  #   shell:  /data/logs/install_version.txt
 
-  - name: Check erpnext Version
-    shell:  /data/logs/install_version.txt
-
+  # - name: Check erpnext Version
+  #   shell:  /data/logs/install_version.txt
 
 
   - name: copy script files to remote
