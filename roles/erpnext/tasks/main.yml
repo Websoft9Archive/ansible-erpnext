@@ -31,3 +31,20 @@
     sleep 300
   args:
     chdir: /data/wwwroot/erpnext
+
+- block:
+  - name: Check erpnext Version
+    shell:  /data/logs/install_version.txt
+
+  - name: Check erpnext Version
+    shell:  /data/logs/install_version.txt
+
+
+
+  - name: copy script files to remote
+    copy: src=check_dockerapp_service.sh dest=/tmp/check_dockerapp_service.sh
+
+  - name: Check dockerapp service
+    shell: bash /tmp/check_dockerapp_service.sh
+    register: check_dockerapp_service
+    notify: check_dockerapp_service
