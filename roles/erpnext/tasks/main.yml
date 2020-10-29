@@ -14,6 +14,7 @@
   shell: |
     cp .env.sample .env
     bash start.sh
+    sleep 30
   args:
     chdir: /data/wwwroot/nginx-proxy 
     
