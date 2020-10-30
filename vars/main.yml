@@ -1,33 +1,25 @@
-mariadb_version: "10.3"     
-mariadb_root_password: "123456"
-mariadb_remote: True
+# mariadb_version: "10.3"     
+# mariadb_root_password: "123456"
+# mariadb_remote: True
 docker_applications: 
   - phpmyadmin
       
 
-init_docker:
-  erpnext:
-    admin_username: 
-    admin_password: "admin123"
-    db: 
-    db_name: seafile_db
-    db_username: root
-    db_password: "123456"
-    service_after: "docker.service mysqld.service"
-    compose_path: "/data/wwwroot/seafile/docker-compose.yml"
-    compose_commands:
-      - 'sudo sed -i "s/DB_ROOT_PASSWD=.*/DB_ROOT_PASSWD=$new_password/g" /data/wwwroot/seafile/docker-compose.yml'
-      - 'sudo sed -i "s/SEAFILE_ADMIN_PASSWORD=.*/SEAFILE_ADMIN_PASSWORD=$new_password/g" /data/wwwroot/seafile/docker-compose.yml'
-      - sudo mysql -u root -p$new_password -e "drop user 'seafile'@' %.%.%.%'"
-      - sudo mysql -u root -p$new_password -e "DROP DATABASE ccnet_db"
-      - sudo mysql -u root -p$new_password -e "DROP DATABASE seafile_db"
-      - sudo mysql -u root -p$new_password -e "DROP DATABASE seahub_db"
-    volumes: 
-      - /data/wwwroot/seafile/seafile-data
-    commands: 
-      - sudo sleep 30s
-      - ip=$(curl ifconfig.me)
-      - sed -i  "s/SITE_NAME.*/SITE_NAME=$ip/g"  /data/wwwroot/erpnext/.env
-      - sed -i 's/SITES=.*/SITES=`$ip`/g' /data/wwwroot/erpnext/.env
+# init_docker:
+#   erpnext:
+#     admin_username: "Administrator"
+#     admin_password: "admin"
+#     db: 
+#     db_name: 
+#     db_username: root
+#     db_password: "123456"
+#     compose_path: "/data/wwwroot/erpnext/docker-compose.yml"
+#     compose_commands:
+#       - 
+#     commands: 
+#       - sudo sleep 30s
+#       - ip=$(curl ifconfig.me)
+#       - sed -i  "s/SITE_NAME.*/SITE_NAME=$ip/g"  /data/wwwroot/erpnext/.env
+#       - sed -i 's/SITES=.*/SITES=`$ip`/g' /data/wwwroot/erpnext/.env
 
 

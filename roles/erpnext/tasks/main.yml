@@ -6,32 +6,25 @@
     test -d "frappe_docker" && mv frappe_docker erpnext
   args:
     chdir: /data/wwwroot/ 
-    
-- name: Copy erpnext env
-  template:
-    src:  .env
-    dest: /data/wwwroot/erpnext/.env
 
 - name: Get  public ip
   shell: curl ifconfig.me 
   register: public_ip
 
+- name: Copy erpnext env
+  template:
+    src:  .env
+    dest: /data/wwwroot/erpnext/.env
+
 # pull and run erpnext
 - name: Pull and run docker-compose
   shell: |
-    docker-compose  --project-name  {{project_name}}  up -d
+    docker-compose up -d
     sleep 300
   args:
-    chdir: /data/wwwroot/erpnext
+    chdir: /data/wwwroot/erpnext  
 
 - block:
-  # - name: Check erpnext Version
-  #   shell:  /data/logs/install_version.txt
-
-  # - name: Check erpnext Version
-  #   shell:  /data/logs/install_version.txt
-
-
   - name: copy script files to remote
     copy: src=check_dockerapp_service.sh dest=/tmp/check_dockerapp_service.sh
 

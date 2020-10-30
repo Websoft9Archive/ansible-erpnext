@@ -4,8 +4,6 @@ frappe_version: "edge"
 
 admin_username: "Administrator"
 admin_password: "admin"
- 
-project_name: "erpnext"
 
 mariadb_host: "mariadb"
 mariadb_root_password: "123456"
