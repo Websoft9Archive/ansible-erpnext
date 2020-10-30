@@ -33,7 +33,7 @@
 - shell: docker logs erpnext_site-creator_1
   register: site_install_log
 - debug:
-    var: site_install_log.stdout_lines
+    var: site_install_log.stdout
 
 # check service state 
 - block:
