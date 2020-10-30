@@ -12,6 +12,8 @@
     public_ip=`curl ifconfig.me`
     echo public_ip
   register: public_ip
+- debug:
+    var: public_ip
 
 - name: Copy erpnext env
   template:
@@ -32,7 +34,8 @@
   shell: ln -sf /var/lib/docker/volumes /data/wwwroot/erpnext_data
 
 # check site install installation progress  
-- shell: docker logs erpnext_site-creator_1
+- name: Check site install installation progress 
+  shell: docker logs erpnext_site-creator_1
   register: site_install_log
 - debug:
     var: site_install_log.stdout
