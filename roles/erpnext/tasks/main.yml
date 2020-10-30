@@ -9,7 +9,7 @@
 
 - name: Get  public ip
   shell: |
-    public_ip=`curl ifconfig.me`
+    public_ip=`curl -sS ifconfig.me`
     echo public_ip
   register: public_ip
 - debug:
