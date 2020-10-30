@@ -1,33 +1,25 @@
 ---
 # preparation before start-up
-- name: Clone erpnext and nginx-proxy  and rename dir
+- name: Clone erpnext and rename dir
   shell: |
     git clone {{erpnext_clone_url}}
     test -d "frappe_docker" && mv frappe_docker erpnext
-    git clone {{nginx_prox_clone_urlnginx_prox_clone_url}}
-    test -d "docker-compose-letsencrypt-nginx-proxy-companion" &&  \
-    mv docker-compose-letsencrypt-nginx-proxy-companion nginx-proxy
   args:
     chdir: /data/wwwroot/ 
-
-- name: Copy nginx-proxy env and running
-  shell: |
-    cp .env.sample .env
-    bash start.sh
-    sleep 30
-  args:
-    chdir: /data/wwwroot/nginx-proxy 
     
 - name: Copy erpnext env
   template:
     src:  .env
     dest: /data/wwwroot/erpnext/.env
-    
+
+- name: Get  public ip
+  shell: curl ifconfig.me 
+  register: public_ip
+
 # pull and run erpnext
 - name: Pull and run docker-compose
   shell: |
-    docker-compose     --project-name  {{project_name}}    -f installation/docker-compose-common.yml  \    
-     -f installation/docker-compose-erpnext.yml   -f installation/erpnext-publish.yml     up -d
+    docker-compose  --project-name  {{project_name}}  up -d
     sleep 300
   args:
     chdir: /data/wwwroot/erpnext
@@ -43,7 +35,7 @@
   - name: copy script files to remote
     copy: src=check_dockerapp_service.sh dest=/tmp/check_dockerapp_service.sh
 
-  - name: Check dockerapp service
+  - name: Check erpnext_dockerapp service
     shell: bash /tmp/check_dockerapp_service.sh
-    register: check_dockerapp_service
-    notify: check_dockerapp_service
+    register: check_erpnext_dockerapp_service
+    notify: check_erpnext_dockerapp_service

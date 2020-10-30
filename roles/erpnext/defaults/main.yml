@@ -1,6 +1,6 @@
-# Major version list: lv12  v11.1.15  v11
-erpnext_version: "latest"
-frappe_version: "latest"
+# Major version list: edge(develop)、v12、v11.1.15、v11
+erpnext_version: "edge"
+frappe_version: "edge"
 
 admin_username: "Administrator"
 admin_password: "admin"
