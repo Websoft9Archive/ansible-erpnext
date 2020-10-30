@@ -1,6 +1,3 @@
-mariadb_version: "10.3"     
-mariadb_root_password: "123456"
-mariadb_remote: True
 docker_applications: 
   - phpmyadmin
  
@@ -10,7 +7,6 @@ docker_applications:
     admin_username: Administrator  
     admin_password: "admin"
     db: mariadb
-    db_name: erpnext
     db_username: "root"
     db_password: "123456"
     service_after: "docker.service"

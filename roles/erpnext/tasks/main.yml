@@ -25,6 +25,10 @@
   args:
     chdir: /data/wwwroot/erpnext  
 
+# configure erpnext
+- name: Create soft link
+  shell: ln -sf /var/lib/docker/volumes /data/wwwroot/erpnext_data
+
 # check site install installation progress  
  - shell: docker logs erpnext_site-creator_1
    register: site_install_log
