@@ -13,7 +13,7 @@
     echo public_ip
   register: public_ip
 - debug:
-    var: public_ip
+    var: public_ip.stdout
 
 - name: Copy erpnext env
   template:
