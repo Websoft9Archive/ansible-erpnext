@@ -8,7 +8,9 @@
     chdir: /data/wwwroot/ 
 
 - name: Get  public ip
-  shell: curl ifconfig.me 
+  shell: |
+    public_ip=curl ifconfig.me 
+    echo public_ip
   register: public_ip
 
 - name: Copy erpnext env
