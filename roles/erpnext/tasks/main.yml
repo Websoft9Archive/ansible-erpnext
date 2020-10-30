@@ -19,11 +19,19 @@
 # pull and run erpnext
 - name: Pull and run docker-compose
   shell: |
+    sed -i "s/on-failure/always/g" docker-compose.yml
     docker-compose up -d
     sleep 300
   args:
     chdir: /data/wwwroot/erpnext  
 
+# check site install installation progress  
+ - shell: docker logs erpnext_site-creator_1
+   register: site_install_log
+ - debug:
+      var: site_install_log.stdout_lines
+
+# check service state 
 - block:
   - name: copy script files to remote
     copy: src=check_dockerapp_service.sh dest=/tmp/check_dockerapp_service.sh

@@ -1,25 +1,25 @@
-# mariadb_version: "10.3"     
-# mariadb_root_password: "123456"
-# mariadb_remote: True
+mariadb_version: "10.3"     
+mariadb_root_password: "123456"
+mariadb_remote: True
 docker_applications: 
   - phpmyadmin
-      
+ 
 
-# init_docker:
-#   erpnext:
-#     admin_username: "Administrator"
-#     admin_password: "admin"
-#     db: 
-#     db_name: 
-#     db_username: root
-#     db_password: "123456"
-#     compose_path: "/data/wwwroot/erpnext/docker-compose.yml"
-#     compose_commands:
-#       - 
-#     commands: 
-#       - sudo sleep 30s
-#       - ip=$(curl ifconfig.me)
-#       - sed -i  "s/SITE_NAME.*/SITE_NAME=$ip/g"  /data/wwwroot/erpnext/.env
-#       - sed -i 's/SITES=.*/SITES=`$ip`/g' /data/wwwroot/erpnext/.env
-
+ init_docker:
+  erpnext:
+    admin_username: Administrator  
+    admin_password: "admin"
+    db: mariadb
+    db_name: erpnext
+    db_username: "root"
+    db_password: "123456"
+    service_after: "docker.service"
+    compose_path: "/data/wwwroot/superset/docker-compose.yml" 
+    compose_commands: 
+        - sudo sleep 30s
+        - ip=$(curl ifconfig.me)
+        - sed -i  "s/SITE_NAME.*/SITE_NAME=$ip/g"  /data/wwwroot/erpnext/.env
+        - sed -i 's/SITES=.*/SITES=`$ip`/g' /data/wwwroot/erpnext/.env
+    
+   
 
