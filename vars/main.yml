@@ -2,7 +2,7 @@ docker_applications:
   - phpmyadmin
  
 
- init_docker:
+init_docker:
   erpnext:
     admin_username: Administrator  
     admin_password: "admin"
