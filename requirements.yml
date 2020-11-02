@@ -8,6 +8,9 @@
 - src: http://github.com/websoft9dev/role_docker
   version: master
 
+- src: http://github.com/websoft9dev/role_mariadb
+  version: master
+
 - src: http://github.com/websoft9dev/role_init
   version: master
 
