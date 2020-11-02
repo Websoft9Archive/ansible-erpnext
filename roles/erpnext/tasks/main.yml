@@ -8,7 +8,8 @@
     chdir: /data/wwwroot/ 
 
 - name: Get  public ip
-  shell: curl -s -4 icanhazip.com
+  shell: |
+    curl -s -4 icanhazip.com
   register: public_ip
 - debug: var=public_ip.stdout
 
