@@ -29,7 +29,6 @@ init_docker:
         - sed -i  "s/SITE_NAME.*/SITE_NAME=$ip/g"  /data/wwwroot/erpnext/.env
         - sed -i 's/SITES=.*/SITES=`$ip`/g' /data/wwwroot/erpnext/.env
         - sed -i "s/MARIADB_HOST=mariadb/MARIADB_HOST=$ip/g" /data/wwwroot/erpnext.env
-        # - sed -i "s/MYSQL_ROOT_PASSWORD=123456/MYSQL_ROOT_PASSWORD=$new_password/g" .env
-         - sed -i "s/ADMIN_PASSWORD=admin/ADMIN_PASSWORD=$new_password/g" .env
+        - sed -i "s/ADMIN_PASSWORD=admin/ADMIN_PASSWORD=$new_password/g" .env
    
 
