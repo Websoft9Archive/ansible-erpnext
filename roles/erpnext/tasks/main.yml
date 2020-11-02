@@ -22,7 +22,7 @@
   shell: |
     sed -i "s/on-failure/always/g" docker-compose.yml
     docker-compose up -d
-    sleep 300
+    sleep 360s
   args:
     chdir: /data/wwwroot/erpnext  
 
