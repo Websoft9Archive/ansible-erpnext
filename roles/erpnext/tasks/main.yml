@@ -17,6 +17,11 @@
     src:  .env
     dest: /data/wwwroot/erpnext/.env
 
+- name: Change mariadb engine
+  shell: |
+    sed -i  '/default-storage-engine=/s/INNODB/MyISAM/g' /etc/my.cnf
+    systemctl restart mariadb
+
 # pull and run erpnext
 - name: Pull and run docker-compose
   shell: |
