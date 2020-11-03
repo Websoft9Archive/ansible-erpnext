@@ -4,8 +4,8 @@ frappe_version: "edge"
 
 admin_username: "Administrator"
 admin_password: "admin"
-
-mariadb_host: "mariadb"
+# mariadb  172.17.0.1
+mariadb_host: "172.17.0.1"
 mariadb_root_password: "123456"
 
 erpnext_clone_url: "https://github.com/frappe/frappe_docker.git"
