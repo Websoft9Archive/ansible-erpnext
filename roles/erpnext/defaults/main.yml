@@ -1,4 +1,4 @@
-# Major version list: edge(develop)、v12、v11.1.15、v11
+# Major version list: edge(develop)、v12、v11.1.15、v11、latest
 erpnext_version: "edge"
 frappe_version: "edge"
 
