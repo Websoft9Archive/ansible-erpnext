@@ -21,7 +21,7 @@
   copy: src=my.cnf dest=/etc/my.cnf
 
 - name: Restart mariadb
-  shell: sytemctl restart mariadb
+  shell: systemctl restart mariadb
 
 # pull and run erpnext
 - name: Pull and run docker-compose
