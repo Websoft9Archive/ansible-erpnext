@@ -17,6 +17,12 @@
     src:  .env
     dest: /data/wwwroot/erpnext/.env
 
+- name: Copy MariaDB Configuration
+  copy: src=my.cnf dest=/etc/my.cnf
+
+- name: Restart mariadb
+  shell: sytemctl restart mariadb
+
 # pull and run erpnext
 - name: Pull and run docker-compose
   shell: |
@@ -48,8 +54,10 @@
     notify: check_erpnext_dockerapp_service
 
 # Check version
+  - name: copy script files to remote
+    copy: src=check_dockerapp_version.sh dest=/tmp/check_dockerapp_version.sh
+
   - name: Check redis、nginx、erpnext Version 
-    shell: |
-      sudo echo "redis_version: `docker exec -it erpnext_redis-queue_1 /bin/bash -c 'redis-server -v |cut -d " " -f 3'`" |sudo tee -a /data/logs/install_version.txt
-      sudo echo "`docker exec -it   erpnext_erpnext-nginx_1 /bin/bash -c 'nginx -v'`" |sudo tee -a /data/logs/install_version.txt
-      sudo echo "`docker exec -it erpnext_erpnext-worker-default_1 /bin/bash -c 'cat app_versions.json |sed -n 2p'`" |sudo tee -a /data/logs/install_version.txt
+    shell: bash /tmp/check_dockerapp_version.sh
+
+     
