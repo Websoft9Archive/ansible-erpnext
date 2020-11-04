@@ -7,6 +7,8 @@ docker_applications:
 
 docker_addnetwork: erpnext_default
 
+mariadb_engine: "MyISAM"
+
 init_db: 
   mariadb:
     admin: root
