@@ -1,10 +1,16 @@
 # 根据需求添加相对应的role
 - src: http://github.com/websoft9dev/role_common
+
 - src: http://github.com/websoft9dev/role_cloud
+
 - src: http://github.com/websoft9dev/role_docker
+
 - src: http://github.com/websoft9dev/role_mariadb
+
 - src: http://github.com/websoft9dev/role_init
+
 - src: http://github.com/websoft9dev/role_preend
+
 - src: http://github.com/websoft9dev/role_end
 
 
