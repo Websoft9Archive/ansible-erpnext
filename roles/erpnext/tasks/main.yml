@@ -46,7 +46,12 @@
 # check service state 
 - block:
   - name: copy script files to remote
-    copy: src=check_dockerapp_service.sh dest=/tmp/check_dockerapp_service.sh
+    copy:
+      src: '{{item.src}}'
+      dest: '{{item.dest}}'
+    with_items:
+      - {src: 'check_dockerapp_service.sh',dest: /tmp/check_dockerapp_service.sh}
+      - {src: 'check_dockerapp_version.sh',dest: /tmp/check_dockerapp_version.sh}
 
   - name: Check erpnext_dockerapp service
     shell: bash /tmp/check_dockerapp_service.sh
@@ -54,9 +59,6 @@
     notify: check_erpnext_dockerapp_service
 
 # Check version
-  - name: copy script files to remote
-    copy: src=check_dockerapp_version.sh dest=/tmp/check_dockerapp_version.sh
-
   - name: Check redis、nginx、erpnext Version 
     shell: bash /tmp/check_dockerapp_version.sh
 
