@@ -2,8 +2,6 @@ mariadb_version: "10.3"
 mariadb_root_password: "123456"
 mariadb_remote: True
 
-mariadb_engine: "MyISAM"
-
 init_db: 
   mariadb:
     admin: root
@@ -11,8 +9,6 @@ init_db:
 
 docker_applications: 
   - phpmyadmin
-
-#docker_addnetwork: erpnext_default
 
 init_docker:
   erpnext:
