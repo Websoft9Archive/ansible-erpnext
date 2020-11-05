@@ -12,7 +12,7 @@ init_db:
 docker_applications: 
   - phpmyadmin
 
-docker_addnetwork: erpnext_default
+#docker_addnetwork: erpnext_default
 
 init_docker:
   erpnext:
@@ -27,8 +27,10 @@ init_docker:
     compose_commands: 
         - sudo sleep 30s
         - ip=$(curl ifconfig.me)
+        - rm -rf /data/mysql/_*
         - sudo sed -i  "s/SITE_NAME.*/SITE_NAME=$ip/g"  /data/wwwroot/erpnext/.env
         - sudo sed -i "s/SITES=.*/SITES=\`$ip\`/g" /data/wwwroot/erpnext/.env
         - sudo sed -i "s/ADMIN_PASSWORD=admin/ADMIN_PASSWORD=$new_password/g" /data/wwwroot/erpnext/.env
         - sudo sed -i "s/MYSQL_ROOT_PASSWORD=123456/MYSQL_ROOT_PASSWORD=$new_password/g" /data/wwwroot/erpnext/.env
+    
 
