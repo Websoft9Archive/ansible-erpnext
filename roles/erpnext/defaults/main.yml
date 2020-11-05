@@ -1,6 +1,6 @@
 # Major version list: edge(develop)、v12、v11.1.15、v11、latest
-erpnext_version: "edge"
-frappe_version: "edge"
+erpnext_version: "latest"
+frappe_version: "latest"
 
 admin_username: "Administrator"
 admin_password: "admin"
@@ -9,4 +9,3 @@ mariadb_host: "172.17.0.1"
 mariadb_root_password: "123456"
 
 erpnext_clone_url: "https://github.com/frappe/frappe_docker.git"
-nginx_prox_clone_url: "https://github.com/evertramos/docker-compose-letsencrypt-nginx-proxy-companion.git"

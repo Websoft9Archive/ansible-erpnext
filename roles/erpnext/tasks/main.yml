@@ -2,6 +2,7 @@
 # preparation before start-up
 - name: Clone erpnext and rename dir
   shell: |
+    test -d erpnext && rm -rf erpnext*
     git clone {{erpnext_clone_url}}
     test -d "frappe_docker" && mv frappe_docker erpnext
   args:
