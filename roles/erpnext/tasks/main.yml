@@ -27,6 +27,7 @@
 # pull and run erpnext,configure traefik enable
 - name: Pull and run docker-compose
   shell: |
+    docker-compose pull
     sed -i "s/on-failure/always/g" docker-compose.yml
     docker-compose up -d
     sleep 360s
