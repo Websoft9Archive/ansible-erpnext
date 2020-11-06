@@ -1,4 +1,4 @@
-docker_addnetwork: "frappedocker_default"
+docker_addnetwork: "erpnext_default"
 
 docker_applications: 
   - phpmyadmin
