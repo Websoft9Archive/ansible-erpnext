@@ -18,12 +18,6 @@
     src:  .env
     dest: /data/wwwroot/erpnext/.env
 
-# - name: Copy MariaDB Configuration
-#   copy: src=my.cnf dest=/etc/my.cnf
-
-# - name: Restart mariadb
-#   shell: systemctl restart mariadb
-
 # pull and run erpnext,configure traefik enable
 - name: Pull and run docker-compose
   shell: |
