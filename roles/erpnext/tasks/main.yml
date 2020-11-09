@@ -38,7 +38,7 @@
     - {src: /home/frappe/frappe-bench/apps/erpnext,dest: /data/wwwroot}
     - {src: /home/frappe/frappe-bench/apps/frappe,dest: /data/wwwroot}
     - {src: /home/frappe/frappe-bench/config/,dest: /data/config}
-    - {src:/home/frappe/frappe-bench/logs/,dest: /data/logs}
+    - {src: /home/frappe/frappe-bench/logs/,dest: /data/logs}
     
 # Check version,
 - block:
