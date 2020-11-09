@@ -3,9 +3,9 @@ docker_applications:
 
 # init passsword of database
 init_db: 
-    mriadb:
-      admin: root
-      password: "123456"  
+  mariadb:
+    admin: root
+    password: "123456"  
   
 # init password of applications
 init_application:
@@ -13,7 +13,7 @@ init_application:
     username: Administrator
     password: admin
     commands : 
-      - su - frappe -c "cd /home/frappe/frappe-bench && bench --site {{erpnext_site_name}} set-admin-password $newpassword"
+      - su - frappe -c "cd /home/frappe/frappe-bench && export GIT_PYTHON_REFRESH=quiet && bench --site {{erpnext_site_name}} set-admin-password $newpassword"
       
 
     

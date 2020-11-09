@@ -19,6 +19,7 @@
 
 - name: Run install.py
   shell: |
+    export LC_ALL=C.UTF-8
     cd /tmp;
     sudo python3 install.py --production  \
     --version {{erpnext_version}} \
@@ -27,6 +28,51 @@
     --admin-password {{erpnext_admin_password}} \
     --site {{erpnext_site_name}}
 
-  
+# create link
+- name: Create link
+  file:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    state: link
+  with_items:
+    - {src: /home/frappe/frappe-bench/apps/erpnext,dest: /data/wwwroot}
+    - {src: /home/frappe/frappe-bench/apps/frappe,dest: /data/wwwroot}
+    - {src: /home/frappe/frappe-bench/config/,dest: /data/config}
+    - {src:/home/frappe/frappe-bench/logs/,dest: /data/logs}
+    
+# Check version,
+- block:
+  - name: Check erpnext Version
+    shell: sudo echo  /data/logs/install_version.txt
 
+  - name: Check nginx Version
+    shell: sudo echo $(nginx -v) | tee -a /data/logs/install_version.txt
+
+  - name: Check mariadb Version
+    shell: sudo echo  $(mysql -V) | tee -a /data/logs/install_version.txt
+
+  - name: Check redis Version
+    shell: sudo echo $(redis-server -v |awk '{print $1,$2,$3}') | tee -a /data/logs/install_version.txt
+
+  - name: Check nodejs Version
+    shell: sudo echo "node.js version:" $(nodejs -v) | tee -a /data/logs/install_version.txt
   
+  - name: Check bench Version
+    shell: sudo echo $(nginx -v) | tee -a /data/logs/install_version.txt
+
+# check service state
+- name: Check nginx Service
+  shell: systemctl status {{item}} | grep Active*
+  register: check_nginx_service
+  notify: check_nginx_service
+  
+- name: Check mariadb Service
+  shell: systemctl status mysqld | grep Active*
+  register: check_mariadb_service
+  notify: check_mariadb_service
+
+- name: Check redis Service
+  shell: systemctl status redis | grep Active*
+  register: check_redis_service
+  notify: check_redis_service
+

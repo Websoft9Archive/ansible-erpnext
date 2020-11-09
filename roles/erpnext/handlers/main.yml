@@ -1,3 +1,11 @@
-- name:  check_erpnext_dockerapp_service
+- name:  check_mariadb_service
   debug:
-    var: check_erpnext_dockerapp_service.stdout_lines
+    var: check_mariadb_service.stdout
+
+- name:  check_nginx_service
+  debug:
+    var: check_nginx_service.stdout
+
+- name:  check_redis_service
+  debug:
+    var: check_redis_service.stdout
