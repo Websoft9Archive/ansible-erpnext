@@ -1,5 +1,5 @@
-# 11 | 12 | 13
-erpnext_version: "13"
+# 11 | 12 
+erpnext_version: "12"
 
 # python3 | python2.7
 erpnext_python_version: "python3"

@@ -43,22 +43,22 @@
 # Check version,
 - block:
   - name: Check erpnext Version
-    shell: sudo echo  /data/logs/install_version.txt
+    shell: sudo echo "erpnext version:" {{erpnext_version}} | tee -a /data/logs/install_version.txt
 
   - name: Check nginx Version
-    shell: sudo echo $(nginx -v) | tee -a /data/logs/install_version.txt
+    shell: sudo echo $(nginx -v) |sudo tee -a /data/logs/install_version.txt
 
   - name: Check mariadb Version
-    shell: sudo echo  $(mysql -V) | tee -a /data/logs/install_version.txt
+    shell: sudo echo  $(mysql -V) |sudo tee -a /data/logs/install_version.txt
 
   - name: Check redis Version
-    shell: sudo echo $(redis-server -v |awk '{print $1,$2,$3}') | tee -a /data/logs/install_version.txt
+    shell: sudo echo $(redis-server -v |awk '{print $1,$2,$3}') |sudo tee -a /data/logs/install_version.txt
 
-  - name: Check nodejs Version
-    shell: sudo echo "node.js version:" $(nodejs -v) | tee -a /data/logs/install_version.txt
+  - name: Check node.js Version
+    shell: sudo echo "node.js version:" $(nodejs -v) |sudo tee -a /data/logs/install_version.txt
   
   - name: Check bench Version
-    shell: sudo echo $(nginx -v) | tee -a /data/logs/install_version.txt
+    shell: sudo echo "bench version:" $(su frappe -c "export GIT_PYTHON_REFRESH=quiet && bench --version |egrep 5") | tee -a /data/logs/install_version.txt
 
 # check service state
 - name: Check nginx Service
