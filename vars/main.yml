@@ -1,24 +1,20 @@
-docker_addnetwork: "erpnext_default"
-
 docker_applications: 
   - phpmyadmin
 
-init_docker:
+# init passsword of database
+init_db: 
+    mriadb:
+      admin: root
+      password: "123456"  
+  
+# init password of applications
+init_application:
   erpnext:
-    admin_username: Administrator  
-    admin_password: "admin"
-    db: mariadb
-    db_name:
-    db_username: "root"
-    db_password: "123456"
-    service_after: "docker.service"
-    compose_path: "/data/wwwroot/erpnext/docker-compose.yml" 
-    compose_commands: 
-        - sudo sleep 30s
-        - ip=$(curl ifconfig.me)
-        - sudo sed -i  "s/SITE_NAME.*/SITE_NAME=$ip/g"  /data/wwwroot/erpnext/.env
-        - sudo sed -i "s/SITES=.*/SITES=\`$ip\`/g" /data/wwwroot/erpnext/.env
-        - sudo sed -i "s/ADMIN_PASSWORD=admin/ADMIN_PASSWORD=$new_password/g" /data/wwwroot/erpnext/.env
-        - sudo sed -i "s/MYSQL_ROOT_PASSWORD=123456/MYSQL_ROOT_PASSWORD=$new_password/g" /data/wwwroot/erpnext/.env
+    username: Administrator
+    password: admin
+    commands : 
+      - su - frappe -c "cd /home/frappe/frappe-bench && bench --site {{erpnext_site_name}} set-admin-password $newpassword"
+      
+
     
 

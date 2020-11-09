@@ -1,0 +1,3 @@
+- name:  check_erpnext_dockerapp_service
+  debug:
+    var: check_erpnext_dockerapp_service.stdout_lines

@@ -1,62 +1,32 @@
----
-# preparation before start-up
-- name: Clone erpnext and rename dir
+# prerequisites  
+- name: Install requisite package
   shell: |
-    test -d erpnext && rm -rf erpnext*
-    git clone {{erpnext_clone_url}}
-    test -d "frappe_docker" && mv frappe_docker erpnext
-  args:
-    chdir: /data/wwwroot/ 
+    apt install build-essential python3-setuptools
+    pip3 install minimum
+  when: ansible_os_family == "Debian"
 
-- name: Get  public ip
-  shell: curl -s -4 icanhazip.com
-  register: public_ip
-- debug: var=public_ip.stdout
-
-- name: Copy erpnext env
-  template:
-    src:  .env
-    dest: /data/wwwroot/erpnext/.env
-
-# pull and run erpnext,configure traefik enable
-- name: Pull and run docker-compose
+- name: Install requisite package
   shell: |
-    docker-compose pull
-    sed -i "s/on-failure/always/g" docker-compose.yml
-    docker-compose up -d
-    sleep 360s
-    docker update  --restart=always  erpnext_traefik_1
-  args:
-    chdir: /data/wwwroot/erpnext  
+    yum groupinstall "Development Tools" -y
+    yum install python3 -y
+  when: ansible_os_family == "RedHat" 
 
-# configure erpnext
-- name: Create soft link
-  shell: ln -sf /var/lib/docker/volumes /data/wwwroot/erpnext_data
+# download and run install.py
+- name: Download install.py
+  get_url:
+    url: wget https://raw.githubusercontent.com/frappe/bench/develop/install.py
+    dest: /tmp/install.py
 
-# check site install installation progress  
-- name: Check site install installation progress 
-  shell: docker logs erpnext_site-creator_1 |grep -i conn
-  register: site_install_log
-- debug:
-    var: site_install_log.stdout
+- name: Run install.py
+  shell: |
+    cd /tmp;
+    sudo python3 install.py --production  \
+    --version {{erpnext_version}} \
+    --python {{erpnext_python_version}} \
+    --mysql-root-password {{erpnext_mysql_root_password}} \
+    --admin-password {{erpnext_admin_password}} \
+    --site {{erpnext_site_name}}
 
-# check service state 
-- block:
-  - name: copy script files to remote
-    copy:
-      src: '{{item.src}}'
-      dest: '{{item.dest}}'
-    with_items:
-      - {src: 'check_dockerapp_service.sh',dest: /tmp/check_dockerapp_service.sh}
-      - {src: 'check_dockerapp_version.sh',dest: /tmp/check_dockerapp_version.sh}
+  
 
-  - name: Check erpnext_dockerapp service
-    shell: bash /tmp/check_dockerapp_service.sh
-    register: check_erpnext_dockerapp_service
-    notify: check_erpnext_dockerapp_service
-
-# Check version
-  - name: Check redis、nginx、erpnext Version 
-    shell: bash /tmp/check_dockerapp_version.sh
-
-     
+  

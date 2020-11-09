@@ -1,0 +1,11 @@
+# Major version list: edge(develop)、v12、v11.1.15、v11、latest
+erpnext_version: "latest"
+frappe_version: "latest"
+
+admin_username: "Administrator"
+admin_password: "admin"
+# docker_db:mariadb   local_db:172.17.0.1
+mariadb_host: "mariadb"
+mariadb_root_password: "123456"
+
+erpnext_clone_url: "https://github.com/frappe/frappe_docker.git"

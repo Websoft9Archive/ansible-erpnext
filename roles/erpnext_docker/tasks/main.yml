@@ -1,0 +1,62 @@
+---
+# preparation before start-up
+- name: Clone erpnext and rename dir
+  shell: |
+    test -d erpnext && rm -rf erpnext*
+    git clone {{erpnext_clone_url}}
+    test -d "frappe_docker" && mv frappe_docker erpnext
+  args:
+    chdir: /data/wwwroot/ 
+
+- name: Get  public ip
+  shell: curl -s -4 icanhazip.com
+  register: public_ip
+- debug: var=public_ip.stdout
+
+- name: Copy erpnext env
+  template:
+    src:  .env
+    dest: /data/wwwroot/erpnext/.env
+
+# pull and run erpnext,configure traefik enable
+- name: Pull and run docker-compose
+  shell: |
+    docker-compose pull
+    sed -i "s/on-failure/always/g" docker-compose.yml
+    docker-compose up -d
+    sleep 360s
+    docker update  --restart=always  erpnext_traefik_1
+  args:
+    chdir: /data/wwwroot/erpnext  
+
+# configure erpnext
+- name: Create soft link
+  shell: ln -sf /var/lib/docker/volumes /data/wwwroot/erpnext_data
+
+# check site install installation progress  
+- name: Check site install installation progress 
+  shell: docker logs erpnext_site-creator_1 |grep -i conn
+  register: site_install_log
+- debug:
+    var: site_install_log.stdout
+
+# check service state 
+- block:
+  - name: copy script files to remote
+    copy:
+      src: '{{item.src}}'
+      dest: '{{item.dest}}'
+    with_items:
+      - {src: 'check_dockerapp_service.sh',dest: /tmp/check_dockerapp_service.sh}
+      - {src: 'check_dockerapp_version.sh',dest: /tmp/check_dockerapp_version.sh}
+
+  - name: Check erpnext_dockerapp service
+    shell: bash /tmp/check_dockerapp_service.sh
+    register: check_erpnext_dockerapp_service
+    notify: check_erpnext_dockerapp_service
+
+# Check version
+  - name: Check redis、nginx、erpnext Version 
+    shell: bash /tmp/check_dockerapp_version.sh
+
+     
