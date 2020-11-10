@@ -5,13 +5,13 @@
   vars_prompt:
     - name: 'erpnext_installmethod_selection'
       prompt: "Please select the installation method? \n
-      1: Shell,可用\n
+      1: Script,可用\n
       2: Docker,待测试\n"
       private: no
       default: 1
   vars:
     erpnext_installmethod_select:
-      '1': 'Shell'
+      '1': 'Script'
       '2': 'Docker'
 
     erpnext_installmethod: "{{erpnext_installmethod_select[erpnext_installmethod_selection]}}"
@@ -19,8 +19,8 @@
   pre_tasks:
     - debug:
         msg: erpnext will be installed using {{erpnext_installmethod}}
-    - include_vars: vars/main.yml
-      when: erpnext_installmethod == "Shell"
+    - include_vars: vars/script.yml
+      when: erpnext_installmethod == "Script"
     - include_vars: vars/docker.yml
       when: erpnext_installmethod == "Docker"
 
@@ -28,7 +28,7 @@
     - {role: role_common , tags: "role_common"}
     - {role: role_cloud , tags: "role_cloud"}
     - {role: role_docker , tags: "role_docker"}
-    - {role: erpnext , tags: "erpnext", when: erpnext_installmethod == "Shell"}
+    - {role: erpnext_script , tags: "erpnext_cript", when: erpnext_installmethod == "Script"}
     - {role: erpnext_docker , tags: "erpnext_docker", when: erpnext_installmethod == "Docker"}
     - {role: role_init , tags: "role_init"}
     - {role: role_preend , tags: "role_preend"}
