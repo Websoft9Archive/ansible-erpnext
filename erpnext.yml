@@ -2,7 +2,6 @@
   hosts: all
   become: yes
   become_method: sudo
-# vars_files defined in tasks
   vars_prompt:
     - name: 'erpnext_installmethod_selection'
       prompt: "Please select the installation method? \n
@@ -16,7 +15,15 @@
       '2': 'Docker'
 
     erpnext_installmethod: "{{erpnext_installmethod_select[erpnext_installmethod_selection]}}"
-  
+
+  pre_tasks:
+    - debug:
+        msg: erpnext will be installed using {{erpnext_installmethod}}
+    - include_vars: vars/main.yml
+      when: erpnext_installmethod == "Shell"
+    - include_vars: vars/docker.yml
+      when: erpnext_installmethod == "Docker"
+
   roles:
     - {role: role_common , tags: "role_common"}
     - {role: role_cloud , tags: "role_cloud"}

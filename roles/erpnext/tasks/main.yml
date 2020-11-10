@@ -1,7 +1,3 @@
----
-vars_files:
-- vars/main.yml
-
 # prerequisites  
 - name: Install requisite package
   shell: |
