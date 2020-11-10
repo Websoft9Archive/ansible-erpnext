@@ -2,19 +2,19 @@
   hosts: all
   become: yes
   become_method: sudo
-
-  - name: 'erpnext_installmethod_selection'
-    prompt: "Please select the installation method? \n
-    1: Shell,可用\n
-    2: Docker,待测试\n"
-    private: no
-    default: 1
+  vars_prompt:
+    - name: 'erpnext_installmethod_selection'
+      prompt: "Please select the installation method? \n
+      1: Shell,可用\n
+      2: Docker,待测试\n"
+      private: no
+      default: 1
   vars:
     erpnext_installmethod_select:
       '1': 'Shell'
       '2': 'Docker'
 
-  erpnext_installmethod: "{{erpnext_installmethod_select[erpnext_installmethod_selection]}}"
+    erpnext_installmethod: "{{erpnext_installmethod_select[erpnext_installmethod_selection]}}"
   
   vars_files:
     - vars/main.yml, when: erpnext_installmethod == "Shell"
