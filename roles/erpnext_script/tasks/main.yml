@@ -14,7 +14,7 @@
 # download and run install.py
 - name: Download install.py
   get_url:
-    url: wget https://raw.githubusercontent.com/frappe/bench/develop/install.py
+    url: https://raw.githubusercontent.com/frappe/bench/develop/install.py
     dest: /tmp/install.py
 
 - name: Run install.py
