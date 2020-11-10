@@ -1,4 +1,7 @@
 ---
+vars_files:
+- vars/main.yml
+
 # preparation before start-up
 - name: Clone erpnext and rename dir
   shell: |
