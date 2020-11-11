@@ -57,12 +57,12 @@
   - name: Check node.js Version
     shell: sudo echo "node.js version:" $(nodejs -v) |sudo tee -a /data/logs/install_version.txt
   
-  - name: Check bench Version
-    shell: sudo echo "bench version:" $(su frappe -c "export GIT_PYTHON_REFRESH=quiet && bench --version |egrep 5") | tee -a /data/logs/install_version.txt
+  # - name: Check bench Version
+  #   shell: sudo echo "bench version:" $(su frappe -c "export GIT_PYTHON_REFRESH=quiet && bench --version |egrep 5") | tee -a /data/logs/install_version.txt
 
 # check service state
 - name: Check nginx Service
-  shell: systemctl status {{item}} | grep Active*
+  shell: systemctl status nginx | grep Active*
   register: check_nginx_service
   notify: check_nginx_service
   
