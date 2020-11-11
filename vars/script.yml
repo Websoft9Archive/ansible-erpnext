@@ -13,7 +13,7 @@ init_application:
     username: Administrator
     password: admin
     commands : 
-      - su - frappe -c "cd /home/frappe/frappe-bench && export GIT_PYTHON_REFRESH=quiet && bench --site {{erpnext_site_name}} set-admin-password $newpassword"
+      - sudo -H -u frappe bash -c "cd /home/frappe/frappe-bench && export GIT_PYTHON_REFRESH=quiet && bench --site {{erpnext_site_name}} set-admin-password $new_password"
       
 
     
