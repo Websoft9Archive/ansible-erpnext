@@ -32,7 +32,7 @@
 sudo su -
 
 #自动化安装命令
-wget -N https://raw.githubusercontent.com/Websoft9/linux/master/ansible_script/install.py ; python install.py erpnext https://github.com/Websoft9/ansible-erpnext.git
+wget -N https://raw.githubusercontent.com/Websoft9/linux/main/ansible_script/install.py ; python install.py erpnext https://github.com/Websoft9/ansible-erpnext.git
 ```  
 
 注意：  
