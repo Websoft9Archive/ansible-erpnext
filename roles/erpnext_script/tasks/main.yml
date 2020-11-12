@@ -34,10 +34,12 @@
     src: '{{item.src}}'
     dest: '{{item.dest}}'
     state: link
+    force: yes
   with_items:
-    - {src: /home/frappe/frappe-bench/apps,dest: /data/apps}
-    - {src: /home/frappe/frappe-bench/config,dest: /data/config}
-    - {src: /home/frappe/frappe-bench/logs,dest: /data/logs}
+    - {src: /home/frappe/frappe-bench/apps/frappe,dest: /data/apps/frappe}
+    - {src: /home/frappe/frappe-bench/apps/erpnext,dest: /data/apps/erpnext}
+    - {src: /home/frappe/frappe-bench/config,dest: /data/config/erpnext_config}
+    - {src: /home/frappe/frappe-bench/logs,dest: /data/logs/erpnext_logs}
     
 # Check version,
 - block:
