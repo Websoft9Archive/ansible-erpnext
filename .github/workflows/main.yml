@@ -2,7 +2,7 @@ name: Docs Build and Upload
 
 on: 
   push:
-    paths: docs/*
+    paths: docs/**
 
 jobs:
   build:
@@ -17,21 +17,16 @@ jobs:
     - name: vuepress build
       run: |
         cd docs
-        sudo vuepress build .
+        sudo vuepress build
       env:
         CI: true
     
-    - name: Git Push
-      run: |
-        cd docs
-        git clone https://github.com/Websoft9/websoft9.github.io.git
-        cp -r html/* websoft9.github.io/docs/
-        echo $(ls websoft9.github.io/docs/)
-        cd websoft9.github.io
-        echo "https://${{ secrets.ACCESS_TOKEN }}" > ~/.git-credentials
-        git config --global credential.helper store
-        git config --global user.email "xu_junkai@foxmail.com"
-        git config --global user.name "Mozlk"
-        git add .
-        git commit -m "Add changes" 
-        git push origin master
+    #  to azure blob
+    - name: debug
+      run: ls
+    - uses: bacongobbler/azure-blob-storage-upload@v1.0.0
+      with:
+        source_dir: docs/html
+        container_name: $web
+        connection_string: ${{ secrets.Azure_blob }}
+        extra_args: '--destination-path docs'
