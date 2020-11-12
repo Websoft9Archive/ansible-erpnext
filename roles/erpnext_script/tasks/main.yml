@@ -35,8 +35,7 @@
     dest: '{{item.dest}}'
     state: link
   with_items:
-    - {src: /home/frappe/frappe-bench/apps/erpnext,dest: /data/wwwroot}
-    - {src: /home/frappe/frappe-bench/apps/frappe,dest: /data/wwwroot}
+    - {src: /home/frappe/frappe-bench/apps,dest: /data/apps}
     - {src: /home/frappe/frappe-bench/config,dest: /data/config}
     - {src: /home/frappe/frappe-bench/logs,dest: /data/logs}
     
@@ -57,9 +56,6 @@
   - name: Check node.js Version
     shell: sudo echo "node.js version:" $(nodejs -v) |sudo tee -a /data/logs/install_version.txt
   
-  # - name: Check bench Version
-  #   shell: sudo echo "bench version:" $(su frappe -c "export GIT_PYTHON_REFRESH=quiet && bench --version |egrep 5") | tee -a /data/logs/install_version.txt
-
 # check service state
 - name: Check nginx Service
   shell: systemctl status nginx | grep Active*
