@@ -1,0 +1,47 @@
+---
+- name: Added user for erpnext
+  user:
+    name: erpnext
+    shell: /bin/bash
+    home: /home/erpnext
+
+# install bench 
+- name: Install bench
+  shell: |
+    sudo -H pip install frappe-bench
+
+# configure mariadb
+- name: Insert mariadb host
+  blockinfile:
+    path: /home/erpnext/frappe-bench/sites/common_site_config.json
+    block: |
+      "db_host": "127.0.0.1"
+
+- name: copy mariadb configure file
+  copy:
+    src: my.cnf
+    dest: /etc/my.cnf
+
+- name: Restart mairadb
+  service:
+    name: mariadb
+    state: restarted
+
+# # bench init 
+# - name: Init bench
+#   shell: |
+#     su erpnext 
+#     cd /home/erpnext
+#     export GIT_PYTHON_REFRESH=quiet
+#     bench init --frappe-branch version-{{erpnext_version}} frappe-bench
+#     frappe-bench/env/bin/pip install -q -U -e bench-frappe/apps/frappe  --use-feature=2020-resolver
+#     cd /home/erpnext/frappe-bench
+#     ./env/bin/pip install -e apps/frappe/
+
+# # install erpnext
+# - name: 
+#   shell:
+    
+# # instal bench manager
+# - name: download bench manager
+#   shell: 

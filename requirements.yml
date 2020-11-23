@@ -7,6 +7,12 @@
 
 - src: http://github.com/websoft9dev/role_mariadb
 
+- src: http://github.com/websoft9dev/role_redis
+
+- src: http://github.com/websoft9dev/role_nodejs
+
+- src: http://github.com/websoft9dev/role_nginx
+
 - src: http://github.com/websoft9dev/role_init
 
 - src: http://github.com/websoft9dev/role_preend

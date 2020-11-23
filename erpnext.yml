@@ -2,34 +2,53 @@
   hosts: all
   become: yes
   become_method: sudo
+  # vars_prompt:
+  #   - name: 'erpnext_installmethod_selection'
+  #     prompt: "Please select the installation method? \n
+  #     1: Script,可用\n
+  #     2: Docker,待测试\n"
+  #     private: no
+  #     default: 1
+  # vars:
+  #   erpnext_installmethod_select:
+  #     '1': 'Script'
+  #     '2': 'Docker'
+
+  #   erpnext_installmethod: "{{erpnext_installmethod_select[erpnext_installmethod_selection]}}"
+
+  # pre_tasks:
+  #   - debug:
+  #       msg: erpnext will be installed using {{erpnext_installmethod}}
+  #   - include_vars: vars/script.yml
+  #     when: erpnext_installmethod == "Script"
+  #   - include_vars: vars/docker.yml
+  #     when: erpnext_installmethod == "Docker"
+  vars_files:
+    - vars/main.yml
   vars_prompt:
-    - name: 'erpnext_installmethod_selection'
-      prompt: "Please select the installation method? \n
-      1: Script,可用\n
-      2: Docker,待测试\n"
+    - name: 'erpnext_python_version_selection'
+      prompt: "Please select the erpnext python version? \n
+      1: python2.7\n
+      2: python3.5+\n"
       private: no
       default: 1
   vars:
-    erpnext_installmethod_select:
-      '1': 'Script'
-      '2': 'Docker'
-
-    erpnext_installmethod: "{{erpnext_installmethod_select[erpnext_installmethod_selection]}}"
-
-  pre_tasks:
-    - debug:
-        msg: erpnext will be installed using {{erpnext_installmethod}}
-    - include_vars: vars/script.yml
-      when: erpnext_installmethod == "Script"
-    - include_vars: vars/docker.yml
-      when: erpnext_installmethod == "Docker"
+    erpnext_python_version_select:
+      '1': 'python2'
+      '2': 'python3'
+    erpnext_python_version: "{{erpnext_python_version_select[erpnext_python_version_selection]}}"  
 
   roles:
     - {role: role_common , tags: "role_common"}
     - {role: role_cloud , tags: "role_cloud"}
     - {role: role_docker , tags: "role_docker"}
-    - {role: erpnext_script , tags: "erpnext_cript", when: erpnext_installmethod == "Script"}
-    - {role: erpnext_docker , tags: "erpnext_docker", when: erpnext_installmethod == "Docker"}
+    - {role: role_mariadb , tags: "role_mairadb"}
+    - {role: role_nodejs , tags: "role_nodejs"}
+    - {role: role_redis , tags: "role_redis"}
+    # - {role: erpnext_script , tags: "erpnext_cript", when: erpnext_installmethod == "Script"}
+    # - {role: erpnext_docker , tags: "erpnext_docker", when: erpnext_installmethod == "Docker"}
+    - {role: erpnext , tags: "erpnext"}
+    - {role: role_redis , tags: "role_nginx"}
     - {role: role_init , tags: "role_init"}
     - {role: role_preend , tags: "role_preend"}
     - {role: role_end , tags: "role_end"}
