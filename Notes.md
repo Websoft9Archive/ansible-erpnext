@@ -50,18 +50,18 @@ nginx
 ```
 ##  configure
 mariadb:
-edit /etc/my.cnf:
-[mysqld]
-character-set-client-handshake = FALSE
-character-set-server = utf8mb4
-collation-server = utf8mb4_unicode_ci
+edit /etc/my.cnf:  
+[mysqld]  
+character-set-client-handshake = FALSE  
+character-set-server = utf8mb4  
+collation-server = utf8mb4_unicode_ci  
 
-[mysql]
-default-character-set = utf8mb4
+[mysql]  
+default-character-set = utf8mb4  
 
-edit /frappe-bench/sites/common_site_config.json:
-"db_host": "127.0.0.1"
-
+edit /frappe-bench/sites/common_site_config.json:  
+"db_host": "127.0.0.1"  
+ 
 
 
 
