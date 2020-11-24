@@ -37,9 +37,9 @@
 #3. install erpnext and new site
   - name: New site and Install erpnext
     shell: |
-      cd /home/erpnext 
+      cd /home/erpnext/frappe-bench
       export GIT_PYTHON_REFRESH=quiet
-      test -d /home/erpnext/
+      test -d sites/site1.local && rm -rf  sites/site1.local
       bench new-site --db-name {{erpnext_db_name}} --db-password {{erpnext_db_password}} --db-type {{erpnext_db_type}} --mariadb-root-password {{erpnext_db_root_password}} --admin-password {{erpnext_admin_password}} {erpnext_site_name}} 
       bench get-app --branch version-{{erpnext_version}} erpnext
       bench --site {{erpnext_site_name}} install-app erpnext
