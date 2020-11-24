@@ -48,12 +48,6 @@
     become_method: su 
   when: erpnext_python_version == "python2"
 
-
-
-    
-    
-    
-
 # instal bench manager
 - name: download bench manager
   
