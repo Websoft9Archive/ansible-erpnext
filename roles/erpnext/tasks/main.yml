@@ -52,6 +52,7 @@
 #4. other configure
 - name: nginx configure
   shell: |
+    test -f /etc/nginx/conf.d/default.conf && rm -rf /etc/nginx/conf.d/default.conf
     ln -sf /home/erpnext/frappe-bench/nginx.conf /etc/nginx/conf.d/erpnext.conf
     systemctl restart nginx
 
