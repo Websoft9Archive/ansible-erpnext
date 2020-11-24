@@ -1,3 +1,11 @@
 # erpnext_version list: 12 11 10
 erpnext_version: "12"
 
+erpnext_site_name: "local.site1"
+
+erpnext_db_name: "erpnext"
+erpnext_db_password: "123456"
+# erpnext_db_type list: mariadb postgresql
+erpnext_db_type: "mariadb"
+erpnext_db_root_password: "123456"
+erpnext_admin_password: "admin"
