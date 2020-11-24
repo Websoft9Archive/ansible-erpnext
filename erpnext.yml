@@ -42,13 +42,14 @@
     - {role: role_common , tags: "role_common"}
     - {role: role_cloud , tags: "role_cloud"}
     - {role: role_docker , tags: "role_docker"}
+    - {role: role_wkhtmltopdf , tags: "role_wkhtmltopdf"}
     - {role: role_mariadb , tags: "role_mairadb"}
     - {role: role_nodejs , tags: "role_nodejs"}
     - {role: role_redis , tags: "role_redis"}
+    - {role: role_nginx , tags: "role_nginx"}
     # - {role: erpnext_script , tags: "erpnext_cript", when: erpnext_installmethod == "Script"}
     # - {role: erpnext_docker , tags: "erpnext_docker", when: erpnext_installmethod == "Docker"}
     - {role: erpnext , tags: "erpnext"}
-    - {role: role_redis , tags: "role_nginx"}
     - {role: role_init , tags: "role_init"}
     - {role: role_preend , tags: "role_preend"}
     - {role: role_end , tags: "role_end"}

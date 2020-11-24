@@ -5,6 +5,8 @@
 
 - src: http://github.com/websoft9dev/role_docker
 
+- src: http://github.com/websoft9dev/role_wkhtmltopdf
+
 - src: http://github.com/websoft9dev/role_mariadb
 
 - src: http://github.com/websoft9dev/role_redis
