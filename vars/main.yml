@@ -12,4 +12,5 @@ docker_applications:
 init_db: 
   mariadb:
     admin: root
+    users: ["erpnext"]
     password: "123456"
