@@ -4,13 +4,19 @@ mariadb_remote: True
 
 nodejs_version: "12"
 
+# docker
+docker_applications: 
+  - phpmyadmin
+
 # add databases and users
-mysql_databases:
- - name: erpnext
+mariadb__databases:
+  - name: erpnext
  
-mysql_users:
- - name: erpnext
-   priv: 'erpnext.*:ALL'
+mariadb__users:
+  - name: erpnext
+    host: locahost
+    password: 123456
+    priv: 'erpnext.*:ALL'
 
 # init passsword of database
 init_db: 
