@@ -4,8 +4,17 @@ mariadb_remote: True
 
 nodejs_version: "12"
 
+# add databases and users
+mysql_databases:
+ - name: erpnext
+ 
+mysql_users:
+ - name: erpnext
+   priv: 'erpnext.*:ALL'
+
+# init passsword of database
 init_db: 
   mariadb:
     admin: root
+    users: ["erpnext"]
     password: "123456"
-

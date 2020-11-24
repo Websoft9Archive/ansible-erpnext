@@ -34,20 +34,24 @@
     become_user: erpnext
     become_method: su
 
-# install erpnext and nginx configure
+# install erpnext 
   - name: Install erpnext
     shell: |
       cd /home/erpnext 
       export GIT_PYTHON_REFRESH=quiet
       bench get-app --branch version-{{erpnext_version}} erpnext
       bench --site {{erpnext_site_name}} install-app erpnext
-      bench setup nginx
-      ln -sf /home/erpnext/frappe-bench/nginx.conf /etc/nginx/conf.d/erpnext.conf
-      systemctl restart nginx
+      bench setup nginx 
     become_user: erpnext
     become_method: su 
   when: erpnext_python_version == "python2"
 
-# instal bench manager
-- name: download bench manager
+# nginx configure
+- name: nginx configure
+  shell: |
+    ln -sf /home/erpnext/frappe-bench/nginx.conf /etc/nginx/conf.d/erpnext.conf
+    systemctl restart nginx
+
+# # instal bench manager
+# - name: download bench manager
   
