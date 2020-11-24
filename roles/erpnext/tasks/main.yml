@@ -56,4 +56,4 @@
 
 # instal bench manager
 - name: download bench manager
-  shell: 
+  
