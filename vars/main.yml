@@ -8,16 +8,6 @@ nodejs_version: "12"
 docker_applications: 
   - phpmyadmin
 
-# add databases and users
-mariadb__databases:
-  - name: erpnext
- 
-mariadb__users:
-  - name: erpnext
-    host: locahost
-    password: 123456
-    priv: 'erpnext.*:ALL'
-
 # init passsword of database
 init_db: 
   mariadb:
