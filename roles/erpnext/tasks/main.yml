@@ -1,4 +1,8 @@
 ---
+# install rethinkdb by OS_family
+- name: Install this role on {{ansible_os_family}}
+  include: "{{ansible_os_family}}.yml"
+  
 - name: Added user for erpnext
   user:
     name: erpnext
