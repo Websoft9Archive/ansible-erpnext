@@ -1,7 +1,7 @@
 mariadb_version: 10.3
 mariadb_root_password: "123456"
 mariadb_remote: True
-
+mariadb_engine: "MyISAM"
 nodejs_version: "12"
 
 # docker
