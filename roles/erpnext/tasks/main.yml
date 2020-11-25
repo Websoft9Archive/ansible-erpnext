@@ -15,7 +15,7 @@
 
 - name: copy mariadb configure file
   copy:
-    src: my.cnf
+    src: my.cnf.j2
     dest: /etc/my.cnf
 
 - name: Restart mairadb
