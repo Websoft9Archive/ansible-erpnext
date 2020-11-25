@@ -14,7 +14,7 @@
   shell: sudo -H pip install frappe-bench
 
 - name: copy mariadb configure file
-  copy:
+  template:
     src: my.cnf.jinja2
     dest: /etc/my.cnf
 
