@@ -34,7 +34,7 @@
       cd /home/erpnext/frappe-bench
       ./env/bin/pip install -e apps/frappe/
       yarn install
-      bench start              
+      nohup bench start &              
     become_user: erpnext
     become_method: su
     failed_when: false
