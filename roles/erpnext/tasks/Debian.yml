@@ -1,12 +1,12 @@
 # install python dependence 
 - name: Install python2 dependence
   apt: 
-    name: [git,python-setuptools,python-pip,python-dev,virtualenv,libmysqlclient-dev]
+    name: [git,python-setuptools,python-pip,python-dev,virtualenv,libmysqlclient-dev,virtualenv]
     update_cache: yes
   when: erpnext_python_version == "python2"
 
 - name: Install python3 dependence
   apt: 
-    name: [git,python3-setuptools,python3-pip,python3-dev,virtualenv,libmysqlclient-dev]
+    name: [git,python3-setuptools,python3-pip,python3-dev,virtualenv,libmysqlclient-dev,virtualenv]
     update_cache: yes
   when: erpnext_python_version == "python3"
