@@ -38,7 +38,6 @@
       nohup bench start &              
     become_user: erpnext
     become_method: su
-    failed_when: false
 
 #3. install erpnext and new site
   - name: New site and Install erpnext
