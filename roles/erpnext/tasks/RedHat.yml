@@ -1,13 +1,13 @@
 # install python dependence 
 - name: Install python2 dependence
   yum: 
-    name: [git,python-setuptools,python-pip,python-devel,python-virtualenv]
+    name: [git,python-setuptools,python-pip,python-devel]
     update_cache: yes
   when: erpnext_python_version == "python2"
 
 - name: Install python3 dependence
   yum: 
-    name: [git,python3-setuptools,python3-pip,python3-devel,python3-virtualenv]
+    name: [git,python3-setuptools,python3-pip,python3-devel]
     update_cache: yes
   when: erpnext_python_version == "python3"
 
