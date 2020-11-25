@@ -1,40 +1,8 @@
+!includedir /etc/mysql/conf.d/
 [mysqld]
-default_authentication_plugin=mysql_native_password
-datadir=/data/mysql
-socket=/data/mysql/mysqld.sock
-default-storage-engine=MyISAM
-symbolic-links=0
-table_cache=65535
-table_definition_cache=65535
-max_allowed_packet=4M
-net_buffer_length=1M
-bulk_insert_buffer_size=16M
-query_cache_type=0
-query_cache_size=0
-key_buffer_size=8M
-innodb_buffer_pool_size=4G
-myisam_sort_buffer_size=32M
-max_heap_table_size=16M
-tmp_table_size=16M
-sort_buffer_size=256K
-read_buffer_size=128k
-read_rnd_buffer_size=4M
-join_buffer_size=1M
-thread_stack=256k
-binlog_cache_size=64K
-innodb_file_per_table = 1
-skip-external-locking
-max_connections=2048
-skip-name-resolve
-long_query_time = 30
-group_concat_max_len=65536
-thread_cache_size = 8
-thread_concurrency = 16
-concurrent_insert=2
 character-set-client-handshake = FALSE
 character-set-server = utf8mb4
 collation-server = utf8mb4_unicode_ci
 
 [mysql]
 default-character-set = utf8mb4
-socket=/data/mysql/mysqld.sock
