@@ -15,6 +15,9 @@
     src: my.cnf.jinja2
     dest: /etc/my.cnf
 
+- name: Delete configure file
+  shell: test -f /etc/mysql/my.cnf &&  rm -rf /etc/mysql/my.cnf
+
 - name: Restart mairadb
   service:
     name: mariadb
