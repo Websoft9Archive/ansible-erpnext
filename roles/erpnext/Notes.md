@@ -12,6 +12,7 @@
    Frappe是一个用Python和Javascript编写的全栈Web框架,同时他也是app;
    Bench是一个命令行实用程序，用来安装，更新和管理linux系统上用于开发和生产的Frappe/ERPNext应用程序的多个站点;
    erpnext是基于frappe开发的应用程序;
+   补充: Bench Manager是具有相同功能的Bench GUI前端;
 
 ## requirest
    MariaDB 10.3

@@ -60,7 +60,7 @@
     ln -sf /home/erpnext/frappe-bench/config/nginx.conf  /etc/nginx/conf.d/nginx.conf
     systemctl restart nginx
 
-#5. instal bench manager(To be added)
+#5. instal bench manager(To do)
 
 #6. check version and service state
 - block:
