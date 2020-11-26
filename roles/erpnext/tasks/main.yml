@@ -71,9 +71,9 @@
     shell: sudo echo $(bench version)  |sudo tee -a /data/logs/install_version.txt
 
 
- - name: Check nginx Service
-   shell: systemctl status nginx | grep Active*
-   register: check_nginx_service
-   notify: check_nginx_service
+  - name: Check nginx Service
+    shell: systemctl status nginx | grep Active*
+    register: check_nginx_service
+    notify: check_nginx_service
 
   
