@@ -1,6 +1,0 @@
-# prerequisites  
-- name: Install requisite package
-  shell: |
-    apt install build-essential python3-setuptools
-    pip3 install minimum
-
