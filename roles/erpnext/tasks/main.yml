@@ -57,7 +57,7 @@
 - name: nginx configure
   shell: |
     test -f /etc/nginx/conf.d/default.conf && rm -rf /etc/nginx/conf.d/default.conf
-    ln -sf /home/erpnext/frappe-bench/config/nginx.conf  /etc/nginx/conf.d/
+    ln -sf /home/erpnext/frappe-bench/config/nginx.conf  /etc/nginx/conf.d/nginx.conf
     systemctl restart nginx
 
 # # instal bench manager
