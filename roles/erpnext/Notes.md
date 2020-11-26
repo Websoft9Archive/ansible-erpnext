@@ -9,9 +9,9 @@
    最终采用手动安装方式,即源码安装;
 
 ## erpnext frappe bench 三者的关系?
-   Frappe是一个用Python和Javascript编写的全栈Web框架,同时他也是app;
+   Frappe是一个用Python和Javascript编写的全栈Web框架,Frappe应用程序是使用Frappe框架的python软件包;
    Bench是一个命令行实用程序，用来安装，更新和管理linux系统上用于开发和生产的Frappe/ERPNext应用程序的多个站点;
-   erpnext是基于frappe开发的应用程序;
+   erpnext是基于frappe开发的应用程序,SAP的免费和开源替代品;
    补充: Bench Manager是具有相同功能的Bench GUI前端;
 
 ## requirest
@@ -29,7 +29,7 @@
    yum install python3-setuptools python3-pip python3-devel
    yum install python-virtualenv
 ```
-
+   官网给出了python2和python3两种安装,本项目采用python3的安装方式;
 ## install erpnext requirest package on ubuntu
 ```shell
 
@@ -64,7 +64,7 @@
 
    [mysql]  
    default-character-set = utf8mb4  
-
+   本机可不配置:
    edit /frappe-bench/sites/common_site_config.json:  
    "db_host": "127.0.0.1"  
  
