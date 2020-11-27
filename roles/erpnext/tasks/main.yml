@@ -17,6 +17,7 @@
 
 - name: Delete configure file
   shell: test -f /etc/mysql/my.cnf &&  rm -rf /etc/mysql/my.cnf
+  when: {{ansible_os_family}} == "Debian"
 
 - name: Restart mairadb
   service:
