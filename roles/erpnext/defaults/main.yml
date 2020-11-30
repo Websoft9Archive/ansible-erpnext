@@ -1,7 +1,5 @@
 erpnext_version: "12"
 
-erpnext_site_name: "erpnext"
-
 erpnext_db_name: "erpnext"
 erpnext_db_password: "123456"
 # erpnext_db_type: mariadb   postgresql not tested 

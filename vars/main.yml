@@ -3,6 +3,16 @@ mariadb_root_password: "123456"
 mariadb_remote: "True"
 nodejs_version: "12"
 
+mariadb_configuration_default:
+  - name: default-storage-engine
+    value: MyISAM
+  - name: character-set-client-handshake
+    value: FALSE
+  - name: character-set-server
+    value: utf8mb4
+  - name: collation-server
+    value: utf8mb4_unicode_ci
+
 # docker
 docker_applications: 
   - phpmyadmin

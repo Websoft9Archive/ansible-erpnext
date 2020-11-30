@@ -1,79 +1,71 @@
 ---
-# install erpnext by OS_family
+## install erpnext by OS_family
 - name: Install this role on {{ansible_os_family}}
   include: "{{ansible_os_family}}.yml"
-  
+
+#1. installation-pre  
 - name: Added user for erpnext
   user:
     name: erpnext
     shell: /bin/bash
     home: /home/erpnext
 
-# configure mariadb 
-- name: copy mariadb configure file
+# set environment variable
+- name: Copy jdk_env to /etc/profile.d
   template:
-    src: my.cnf.jinja2
-    dest: /etc/my.cnf
+    src: erpnext_env.sh
+    dest: '/etc/profile.d'
+    mode: 0640
 
-- name: Delete configure file
-  shell: test -f /etc/mysql/my.cnf &&  rm -rf /etc/mysql/my.cnf
-  when: ansible_os_family == "Debian"
-
-- name: Restart mairadb
-  service:
-    name: mariadb
-    state: restarted
-
-#1. install bench 
+# change file permissions
+- name: change file permissions
+  shell: |
+    chown -R erpnext /data/wwwroot
+    chown -R erpnext /data/logs
+    
+#2. install bench 
 - block:
   - name: Install bench
-    shell: pip3 install frappe-bench
+    pip: 
+      name: frappe-bench
+      executable: pip3 
 
-#2. init and start bench
-  - name: Init bench 
+#3. init frappe-bench,install erpnext,new site;  
+  - name: Init frappe-bench and Install erpnext and New site 
     shell: |
-      cd /home/erpnext 
-      export GIT_PYTHON_REFRESH=quiet
+      cd /data/wwwroot
+      source /etc/profile.d
       bench init --frappe-branch version-{{erpnext_version}} --python /usr/bin/python3 frappe-bench
-      frappe-bench/env/bin/pip3 install -q -U -e frappe-bench/apps/frappe  --use-feature=2020-resolver
-      cd /home/erpnext/frappe-bench
-      ./env/bin/pip3 install -e apps/frappe/
-      yarn install
-      nohup bench start &              
+      cd /data/wwwroot/frappe-bench
+      yarn install 
+      ./env/bin/pip3 install -q -U -e frappe-bench/apps/frappe  --use-feature=2020-resolver
+      test -d sites/erpnext && rm -rf  sites/erpnext
+      bench new-site --db-name {{erpnext_db_name}} --db-password {{erpnext_db_password}} --db-type {{erpnext_db_type}} --mariadb-root-password {{erpnext_db_root_password}} --admin-password {{erpnext_admin_password}} --no-mariadb-socket erpnext  
+      bench get-app --branch version-{{erpnext_version}} --python /usr/bin/python3 erpnext 
+      ./env/bin/pip3 install -e apps/erpnext/
+      bench --site erpnext install-app erpnext
+      bench setup nginx
     become_user: erpnext
     become_method: su
-
-#3. install erpnext and new site
-  - name: New site and Install erpnext
-    shell: |
-      cd /home/erpnext/frappe-bench
-      export GIT_PYTHON_REFRESH=quiet
-      test -d sites/site1.local && rm -rf  sites/site1.local
-      bench new-site --db-name {{erpnext_db_name}} --db-password {{erpnext_db_password}} --db-type {{erpnext_db_type}} --mariadb-root-password {{erpnext_db_root_password}} --admin-password {{erpnext_admin_password}} --no-mariadb-socket {{erpnext_site_name}} 
-      bench get-app --branch version-{{erpnext_version}} --python /usr/bin/python3 erpnext
-      ./env/bin/pip3 install -e apps/erpnext/
-      bench --site {{erpnext_site_name}} install-app erpnext
-      bench setup nginx 
-    become_user: erpnext
-    become_method: su 
 
 #4. nginx configure
 - name: nginx configure
   shell: |
-    test -f /etc/nginx/conf.d/default.conf && rm -rf /etc/nginx/conf.d/default.conf
-    ln -sf /home/erpnext/frappe-bench/config/nginx.conf  /etc/nginx/conf.d/nginx.conf
+    sudo cat /data/wwwroot/frappe-bench/config/nginx.conf |sudo tee /etc/nginx/conf.d/default.conf
     systemctl restart nginx
 
 #5. instal bench manager(To do)
 
 #6. check version and service state
-- block:
-  - name: Check bench version
-    shell: sudo echo "bench_version:" $(bench --version)  |sudo tee -a /data/logs/install_version.txt
+  - name: Check erpnext、frappe version
+    shell: | 
+      source /etc/profile.d
+      sudo echo "bench_version:" $(bench --version)  |tee -a /data/logs/install_version.txt
+      sudo echo $(bench version)  |tee -a /data/logs/install_version.txtz
+    become_user: erpnext
+    become_method: su
 
-  - name: Check erpnext and frappe version
-    shell: sudo echo $(bench version)  |sudo tee -a /data/logs/install_version.txt
-
+bench service
 
   - name: Check nginx Service
     shell: systemctl status nginx | grep Active*
