@@ -15,7 +15,7 @@
   copy:
     src: erpnext_env.sh
     dest: '/etc/profile.d'
-    mode: 0640
+    mode: 0755
 
 # change file permissions
 - name: change file permissions
