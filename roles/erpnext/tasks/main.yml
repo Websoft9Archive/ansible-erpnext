@@ -51,11 +51,18 @@
     become_user: erpnext
     become_method: su
 
-#4. nginx configure
+#4. nginx and erpnext configure
 - name: nginx configure
-  shell: |
-    sudo cat /data/wwwroot/frappe-bench/config/nginx.conf |sudo tee /etc/nginx/conf.d/default.conf
-    systemctl restart nginx
+  shell: sudo cat /data/wwwroot/frappe-bench/config/nginx.conf |sudo tee /etc/nginx/conf.d/default.conf
+
+- name: Restart service
+  service: 
+    name: '{{item}}'
+    state: restarted
+    enabled: yes
+  with_items: 
+    - nginx
+    - erpnext
 
 #5. instal bench manager(To do)
 
