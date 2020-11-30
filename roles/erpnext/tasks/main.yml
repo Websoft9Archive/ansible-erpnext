@@ -13,16 +13,19 @@
 # set environment variable
 - name: Copy jdk_env to /etc/profile.d
   copy:
-    src: erpnext_env.sh
-    dest: '/etc/profile.d'
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
     mode: 0755
+  with_items:
+    - {src: erpnext_env.sh,dest: /etc/profile.d/erpnext_env.sh}
+    - {src: erpnext.service,dest: /lib/systemd/system/erpnext.service}
 
 # change file permissions
 - name: change file permissions
   shell: |
-    chown -R erpnext /data/wwwroot
-    chown -R erpnext /data/logs
-    
+    setfacl -R -m u:erpnext:rwx /data/wwwroot 
+    setfacl -R -m u:erpnext:rwx /data/logs
+
 #2. install bench 
 - block:
   - name: Install bench
@@ -41,7 +44,7 @@
       ./env/bin/pip3 install -q -U -e frappe-bench/apps/frappe  --use-feature=2020-resolver
       test -d sites/erpnext && rm -rf  sites/erpnext
       bench new-site --db-name {{erpnext_db_name}} --db-password {{erpnext_db_password}} --db-type {{erpnext_db_type}} --mariadb-root-password {{erpnext_db_root_password}} --admin-password {{erpnext_admin_password}} --no-mariadb-socket erpnext  
-      bench get-app --branch version-{{erpnext_version}} --python /usr/bin/python3 erpnext 
+      bench get-app --branch version-{{erpnext_version}} erpnext 
       ./env/bin/pip3 install -e apps/erpnext/
       bench --site erpnext install-app erpnext
       bench setup nginx
@@ -60,14 +63,16 @@
 - name: Check erpnext、frappe version
   shell: | 
     source /etc/profile.d/erpnext_env.sh
-    sudo echo "bench_version:" $(bench --version)  |tee -a /data/logs/install_version.txt
-    sudo echo $(bench version)  |tee -a /data/logs/install_version.txtz
+    echo "bench_version:" $(bench --version)  |tee -a /data/logs/install_version.txt
+    echo $(bench version)  |tee -a /data/logs/install_version.txt
   become_user: erpnext
   become_method: su
+  args:
+    chdir: /data/wwwroot/frappe-bench
 
-- name: Check nginx Service
-  shell: systemctl status nginx | grep Active*
-  register: check_nginx_service
-  notify: check_nginx_service
+- name: Check erpnext Service
+  shell: systemctl status erpnext | grep Active*
+  register: check_erpnext_service
+  notify: check_erpnext_service
 
   

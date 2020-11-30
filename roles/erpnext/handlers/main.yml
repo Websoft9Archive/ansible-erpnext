@@ -1,3 +1,3 @@
-- name: check_nginx_service
+- name: check_erpnext_service
   debug:
-    var: check_nginx_service.stdout
+    var: check_erpnext_service.stdout

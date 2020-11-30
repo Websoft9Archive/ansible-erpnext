@@ -1,0 +1,14 @@
+[Unit]
+Description=Erpnext Service
+
+[Service]
+Type=simple
+User=erpnext
+Group=erpnext
+ExecStart=/usr/local/bin/bench start
+WorkingDirectory=/data/wwwroot/frappe-bench
+EnvironmentFile=/etc/profile.d/erpnext_env.sh
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target

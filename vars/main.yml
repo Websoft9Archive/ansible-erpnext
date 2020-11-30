@@ -29,4 +29,4 @@ init_application:
     username: Administrator
     password: admin
     commands: 
-      - sudo -H -u erpnext bash -c "cd /home/erpnext/frappe-bench && export GIT_PYTHON_REFRESH=quiet && bench --site {{erpnext_site_name}} set-admin-password $new_password"
+      - sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && bench --site erpnext set-admin-password $new_password"
