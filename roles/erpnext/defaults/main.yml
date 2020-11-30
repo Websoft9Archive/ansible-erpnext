@@ -2,7 +2,6 @@ erpnext_version: "12"
 
 erpnext_db_name: "erpnext"
 erpnext_db_password: "123456"
-# erpnext_db_type: mariadb   postgresql not tested 
 erpnext_db_type: "mariadb"
 erpnext_db_root_password: "123456"
 erpnext_admin_password: "admin"
