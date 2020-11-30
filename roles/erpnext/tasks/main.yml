@@ -57,19 +57,19 @@
 #5. instal bench manager(To do)
 
 #6. check version and service state
-  - name: Check erpnext、frappe version
-    shell: | 
-      source /etc/profile.d/erpnext_env.sh
-      sudo echo "bench_version:" $(bench --version)  |tee -a /data/logs/install_version.txt
-      sudo echo $(bench version)  |tee -a /data/logs/install_version.txtz
-    become_user: erpnext
-    become_method: su
+- name: Check erpnext、frappe version
+  shell: | 
+    source /etc/profile.d/erpnext_env.sh
+    sudo echo "bench_version:" $(bench --version)  |tee -a /data/logs/install_version.txt
+    sudo echo $(bench version)  |tee -a /data/logs/install_version.txtz
+  become_user: erpnext
+  become_method: su
 
 bench service
 
-  - name: Check nginx Service
-    shell: systemctl status nginx | grep Active*
-    register: check_nginx_service
-    notify: check_nginx_service
+- name: Check nginx Service
+  shell: systemctl status nginx | grep Active*
+  register: check_nginx_service
+  notify: check_nginx_service
 
   
