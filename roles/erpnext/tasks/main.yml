@@ -65,8 +65,6 @@
   become_user: erpnext
   become_method: su
 
-bench service
-
 - name: Check nginx Service
   shell: systemctl status nginx | grep Active*
   register: check_nginx_service
