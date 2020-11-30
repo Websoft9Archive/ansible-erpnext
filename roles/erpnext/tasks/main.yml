@@ -34,7 +34,7 @@
   - name: Init frappe-bench and Install erpnext and New site 
     shell: |
       cd /data/wwwroot
-      source /etc/profile.d
+      source /etc/profile.d/erpnext_env.sh
       bench init --frappe-branch version-{{erpnext_version}} --python /usr/bin/python3 frappe-bench
       cd /data/wwwroot/frappe-bench
       yarn install 
@@ -59,7 +59,7 @@
 #6. check version and service state
   - name: Check erpnext、frappe version
     shell: | 
-      source /etc/profile.d
+      source /etc/profile.d/erpnext_env.sh
       sudo echo "bench_version:" $(bench --version)  |tee -a /data/logs/install_version.txt
       sudo echo $(bench version)  |tee -a /data/logs/install_version.txtz
     become_user: erpnext
