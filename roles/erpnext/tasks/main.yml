@@ -12,7 +12,7 @@
 
 # set environment variable
 - name: Copy jdk_env to /etc/profile.d
-  template:
+  copy:
     src: erpnext_env.sh
     dest: '/etc/profile.d'
     mode: 0640
