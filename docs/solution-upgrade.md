@@ -21,5 +21,6 @@ apt update && apt upgrade -y
 
 #For Centos&Redhat
 yum update -y
+
 ```
 > This deployment package is preconfigured with a scheduled task for automatic updates. If you want to remove the automatic update, please delete the corresponding Cron
