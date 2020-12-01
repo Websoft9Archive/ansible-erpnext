@@ -64,19 +64,19 @@
     - nginx
     - erpnext
 
-- name: Remove mariadb_erpnext user accounts
-  mysql_user: 
-    login_user: root 
-    login_password: "{{erpnext_db_root_password}}"
-    login_unix_socket: /data/mysql/mysqld.sock
-    name: 'erpnext' 
-    host: '::1'
-    state: absent
+# - name: Remove mariadb_erpnext user accounts
+#   mysql_user: 
+#     login_user: root 
+#     login_password: "{{erpnext_db_root_password}}"
+#     login_unix_socket: /data/mysql/mysqld.sock
+#     name: 'erpnext' 
+#     host: '::1'
+#     state: absent
 
 #5. install bench manager(To do)
 
 #6. check version and service state
-- name: Check erpnext、frappe version
+- name: Check bench、erpnext、frappe version
   shell: | 
     source /etc/profile.d/erpnext_env.sh
     echo "bench_version:" $(bench --version)  |tee -a /data/logs/install_version.txt
