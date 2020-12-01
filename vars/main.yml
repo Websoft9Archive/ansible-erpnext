@@ -23,6 +23,9 @@ init_db:
     admin: root
     users: ["erpnext"]
     password: "123456"
+    service_before: "erpnext.service"
+    config_paths:
+      - /data/wwwroot/frappe-bench/sites/erpnext/site_config.json
 
 init_application:
   erpnext:
