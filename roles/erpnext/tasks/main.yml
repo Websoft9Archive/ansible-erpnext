@@ -73,7 +73,7 @@
     host: '::1'
     state: absent
 
-#5. instal bench manager(To do)
+#5. install bench manager(To do)
 
 #6. check version and service state
 - name: Check erpnext、frappe version
