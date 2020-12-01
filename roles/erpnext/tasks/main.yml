@@ -64,14 +64,17 @@
     - nginx
     - erpnext
 
-# - name: Remove mariadb_erpnext user accounts
-#   mysql_user: 
-#     login_user: root 
-#     login_password: "{{erpnext_db_root_password}}"
-#     login_unix_socket: /data/mysql/mysqld.sock
-#     name: 'erpnext' 
-#     host: '::1'
-#     state: absent
+- name: Remove mariadb_erpnext user accounts
+  mysql_user: 
+    login_user: root 
+    login_password: "{{erpnext_db_root_password}}"
+    login_unix_socket: /data/mysql/mysqld.sock
+    name: 'erpnext' 
+    host: '::1'
+    state: absent
+
+- name: Change mariadb_erpnext user 
+  shell: echo "REVOKE ALL PRIVILEGES ON *.* FROM 'erpnext'@'%'; REVOKE GRANT OPTION ON *.* FROM 'erpnext'@'%'; GRANT  SUPER ON *.* TO 'erpnext'@'%' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;" |mysql -uroot -p{{erpnext_db_root_password}}
 
 #5. install bench manager(To do)
 
