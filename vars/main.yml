@@ -23,7 +23,6 @@ init_db:
     admin: root
     users: ["erpnext"]
     password: "123456"
-    service_before: "erpnext.service"
     config_paths:
       - /data/wwwroot/frappe-bench/sites/erpnext/site_config.json
 
@@ -32,4 +31,7 @@ init_application:
     username: Administrator
     password: admin
     commands: 
-      - sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench --site erpnext set-admin-password $new_password"
+      - sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench --site erpnext set-admin-password $new_password && /usr/local/bin/bench setup nginx --yes"
+      - sudo cat /data/wwwroot/frappe-bench/config/nginx.conf |sudo tee /etc/nginx/conf.d/default.conf
+      - sudo systemctl restart nginx erpnext
+       
