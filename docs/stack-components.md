@@ -6,8 +6,29 @@ The ERPNext deployment package contains a sequence software (referred to as "com
 
 ### ERPNext
 
-ERPNext installation directory:  */data/erpnext*  
-ERPNext logs directory:  */data/logs/erpnext*   
+ERPNext application installation directory:  */data/wwwroot/frappe-bench/apps/erpnext*
+ERPNext site installation directory:  */data/wwwroot/frappe-bench/sites*
+ERPNext database configuration file: /data/wwwroot/frappe-bench/sites/erpnext/site_config.json
+ERPNext configuration : */data/wwwroot/frappe-bench/config*
+ERPNext logs directory:  */data/wwwroot/frappe-bench/logs*   
+
+### Node.js
+
+Node.JS modules directory: */usr/lib/node_modules*  
+Node.js application directory: */data/wwwroot*  
+Node.JS log file: */root/.pm2/pm2.log*
+
+### MariaDB
+
+MariaDB data directory: */data/mysql*  
+MariaDB configuration file: */etc/my.cnf*    
+MariaDB Web Management URL: *http://Internet IP/phpmyadmin*, [get credential](/stack-accounts.md)
+
+### phpMyAdmin
+
+phpMyAdmin installation directory: */data/apps/phpmyadmin*  
+phpMyAdmin configuration file: */data/apps/phpmyadmin/config.inc.php*   
+phpMyAdmin vhost configuration file: */etc/httpd/conf.d/phpMyAdmin.conf* or */etc/nginx/php.conf* 
 
 ## Ports
 
@@ -18,8 +39,9 @@ You can run the cmd `netstat -tunlp` to list all used ports, and we list the fol
 | Name | Number | Use |  Necessity |
 | --- | --- | --- | --- |
 | HTTP | 80 | HTTP requests for ERPNext Console| Required |
-
-
+| HTTP | 443 | HTTP requests for ERPNext Console| Required |
+| TCP | 9090 | phpmyadmin web GUI tool | Optional |
+| TCP | 3306 | mariadb server | Optional |
 
 ## Version
 
@@ -31,5 +53,23 @@ sudo cat /data/logs/install_version.txt
 
 # Linux Version
 lsb_release -a
+
+# Node.js version
+node -v
+
+# Docker Version
+docker -v
+
+# Docker Version
+bench version
+
+# Nginx version
+nginx -v
+
+# MariaDB version:
+mysql -V
+
+# Redis version
+redis-server -v
 
 ```
