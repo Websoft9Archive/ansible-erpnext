@@ -18,6 +18,31 @@
 
 3. 登录后通过：【Users】设置新密码  
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-pw-websoft9.png)
+1. 使用本地电脑的 Chrome 或 Firefox 浏览器访问网址：*http://DNS* or *http://Internet IP*, 进入初始化页面
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-login-websoft9.png)
+
+2. 输入账号密码（[不知道账号密码？](/zh/stack-accounts.md#erpnext)），选择语言， 进入下一步 
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-installlanguage-websoft9.png)
+
+3. 选择国家时区，进入下一步
+
+4. 设置管理员信息
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-installadmin-websoft9.png)
+
+5. 选择应用范围，进入下一步
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-installdomains-websoft9.png)
+
+6. 设置公司信息，进入下一步
+
+7. 设置组织，点击[完成设置]
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-installcp-websoft9.png)
+
+8. 设置完成,开始使用ERPNext
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-adminui-websoft9.png)
+
+9. 搜索栏检索 "用户",搜索结果列表里面选择用户，可以修改管理员密码
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-changpw-websoft9.png)
+
 
 > 需要了解更多 ERPNext 的使用，请参考官方文档：[ERPNext Documentation](https://docs.erpnext.org)
 
@@ -29,4 +54,10 @@
 
 #### ERPNext 服务启动失败？
 
-暂无
+请确认hostname是否包含字符串 "."，例如 erpnext12.14.0对于ERPNext来说是一个不合规的hostname
+
+你可以使用下列命令来修改hostname：
+
+```
+hostnamectl set-hostname erpnext
+```

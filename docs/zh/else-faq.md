@@ -7,12 +7,17 @@
 
 #### 是否有可视化的数据库管理工具？
 
-有，本身就是数据库，访问地址：*http://服务器公网IP/_utils*
+有可视化数据库管理工具phpmyadmin,访问地址：*http://服务器公网IP/9090*
 
 
 #### 是否可以修改ERPNext的源码路径？
 
 不可以
+
+#### 是否有ERPNext的API文档？
+
+有，包括Python，Javascript，Jinja API等  
+详情参考官方备份文档：[ERPNext API](https://frappeframework.com/docs/user/en/api)
 
 #### 如何修改上传的文件权限?
 

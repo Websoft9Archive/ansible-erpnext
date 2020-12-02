@@ -4,7 +4,7 @@
 
 ## 配置
 
-参考官方方案：https://docs.erpnext.org/en/latest/config/index.html
+参考官方方案：https://docs.erpnext.com/
 
 ## 域名绑定
 

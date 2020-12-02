@@ -6,7 +6,8 @@ home: false
 
 本文档由 [Websoft9](https://www.websoft9.com/) 公司提供，用于指导用户学习 ERPNext 的安装部署与基本运维技术，包括：CouchDB部署、初始化安装、环境配置、HTTPS、SMTP、备份升级和连接云服务器操作等基本操作。
 
-[ERPNext](https://erpnext.apache.org/) ERPNext 是一个开源的面向文档的数据库管理系统，可以通过 RESTful JavaScript Object Notation (JSON) API 访问。 ERPNext 的目标具有高度可伸缩性，提供了高可用性和高可靠性，即使运行在容易出现故障的硬件上也是如此。
+[ERPNext](https://erpnext.com/)  是世界上最好的100％开源ERP。它是全面的，旨在实现自我实现，并且易于使用。
+![](http://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-adminui-websoft9.png)
 
 ---
 

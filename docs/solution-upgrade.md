@@ -24,3 +24,28 @@ yum update -y
 
 ```
 > This deployment package is preconfigured with a scheduled task for automatic updates. If you want to remove the automatic update, please delete the corresponding Cron
+
+## ERPNext Update
+
+To update your sites, just run the following command. It will update all of your apps (git pull), run patches on all sites, build JS and CSS assets and restart supervisor.
+
+``` shell
+# update everything
+bench update
+
+# update apps
+bench update --pull
+
+# run patches only
+bench update --patch
+
+# build assets only
+bench update --build
+
+# update bench (the cli)
+bench update --bench
+
+# update python packages and node_modules
+bench update --requirements
+
+```

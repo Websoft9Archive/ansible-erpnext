@@ -6,10 +6,10 @@ The ERPNext deployment package contains a sequence software (referred to as "com
 
 ### ERPNext
 
-ERPNext application installation directory:  */data/wwwroot/frappe-bench/apps/erpnext*
-ERPNext site installation directory:  */data/wwwroot/frappe-bench/sites*
-ERPNext database configuration file: /data/wwwroot/frappe-bench/sites/erpnext/site_config.json
-ERPNext configuration : */data/wwwroot/frappe-bench/config*
+ERPNext application installation directory:  */data/wwwroot/frappe-bench/apps/erpnext*  
+ERPNext site installation directory:  */data/wwwroot/frappe-bench/sites*  
+ERPNext database configuration file: /data/wwwroot/frappe-bench/sites/erpnext/site_config.json  
+ERPNext configuration : */data/wwwroot/frappe-bench/config*  
 ERPNext logs directory:  */data/wwwroot/frappe-bench/logs*   
 
 ### Node.js
@@ -60,7 +60,7 @@ node -v
 # Docker Version
 docker -v
 
-# Docker Version
+# ERPNext Version
 bench version
 
 # Nginx version

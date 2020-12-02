@@ -24,17 +24,17 @@ sudo systemctl status nginx
 ### MariaDB
 
 ```shell
-systemctl start mysql
-systemctl stop mysql
-systemctl restart mysql
-udo systemctl status mysql
+sudo systemctl start mysql
+sudo systemctl stop mysql
+sudo systemctl restart mysql
+sudo systemctl status mysql
 ```
 
 ### Redis
 
 ```shell
-systemctl start redis
-systemctl stop redis
-systemctl restart redis
-udo systemctl status redis
+sudo systemctl start redis
+sudo systemctl stop redis
+sudo systemctl restart redis
+sudo systemctl status redis
 ```

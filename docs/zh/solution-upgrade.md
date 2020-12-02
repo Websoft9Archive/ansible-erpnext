@@ -22,6 +22,27 @@ yum update -y
 > 本部署包已预配置一个用于自动更新的计划任务。如果希望去掉自动更新，请删除对应的Cron
 
 
-## ERPNext升级
+## ERPNext更新
 
-详情参考官方升级文档：[Upgrading ERPNext](https://docs.erpnext.org/en/latest/install/upgrading.html)
+要更新您的站点，只需运行以下命令。它将更新您的所有应用（git pull），在所有网站上运行补丁，构建JS和CSS资产并重新启动主管。
+
+``` shell
+# update everything
+bench update
+
+# update apps
+bench update --pull
+
+# run patches only
+bench update --patch
+
+# build assets only
+bench update --build
+
+# update bench (the cli)
+bench update --bench
+
+# update python packages and node_modules
+bench update --requirements
+
+```

@@ -8,7 +8,7 @@
 
 日志文件路径为：`/data/logs`。检索关键词 **Failed** 或者 **error** 查看错误
 
-#### CouchDB服务无法启动？
+#### ERPNext服务无法启动？
 
 1. 运行`systemctl status erpnext`，便可以查看启动状态和错误
 
@@ -19,3 +19,9 @@
 
 这个并不是服务器端的问题，只要更新浏览器即可。
 
+#### 运行Bench时报错 "You should not run this command as root" when run bench?
+
+Bench只能通过frapper运行,必须先切换到此用户
+```shell
+su - frapper
+```

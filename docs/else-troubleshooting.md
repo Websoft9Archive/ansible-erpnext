@@ -10,7 +10,7 @@ You can find the keywords **Failed** or **error** from the logs directory: `/dat
 
 1. Execute `systemctl status erpnext` and you can see the errors
 
-2. Search the keywords **Failed** or **error** from logs: */data/logs/erpnext-server*
+2. Search the keywords **Failed** or **error** from logs: */data/logs/erpnext*
 
 #### Error in Chrome when modify password?
 
