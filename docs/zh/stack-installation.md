@@ -44,7 +44,7 @@
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-changpw-websoft9.png)
 
 
-> 需要了解更多 ERPNext 的使用，请参考官方文档：[ERPNext Documentation](https://docs.erpnext.org)
+> 需要了解更多 ERPNext 的使用，请参考官方文档：[ERPNext Documentation](https://docs.erpnext.com)
 
 ## 常见问题
 

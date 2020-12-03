@@ -9,7 +9,6 @@ This documentation is provided by [Websoft9](https://www.websoft9.com/), it can 
 [ERPNext](https://erpnext.com/) is the world's best 100% open source ERP.  It is comprehensive, designed for self implementation, and easy to use.
 ![](http://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-adminui-websoft9.png)
 
-Websoft9 ERPNext is a pre-configured, ready to run image for running ERPNext on Public Cloud.
 ---
 
 ## Improve

@@ -5,7 +5,7 @@
 
 Yes, execute shell like below:
 ```shell
-sudo -H -u frappe bash -c "cd /home/frappe/frappe-bench && export GIT_PYTHON_REFRESH=quiet && bench --site site1.local set-admin-password $new_password"
+sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench --site erpnext set-admin-password $new_password
 ```
 
 #### If there is no domain name, can I deploy ERPNext?
