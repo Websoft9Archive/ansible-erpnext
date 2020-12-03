@@ -64,18 +64,29 @@
     - nginx
     - erpnext
 
-- name: Remove mariadb_erpnext user accounts
-  mysql_user: 
-    login_user: root 
-    login_password: "{{erpnext_db_root_password}}"
-    login_unix_socket: /data/mysql/mysqld.sock
-    name: 'erpnext' 
-    host: '::1'
-    state: absent
+# - name: Remove mariadb_erpnext user accounts
+#   mysql_user: 
+#     login_user: root 
+#     login_password: "{{erpnext_db_root_password}}"
+#     login_unix_socket: /data/mysql/mysqld.sock
+#     name: 'erpnext' 
+#     host: '::1'
+#     state: absent
 
 - name: Change mariadb_erpnext user SUPER permission
-  shell: echo "REVOKE ALL PRIVILEGES ON *.* FROM 'erpnext'@'%'; REVOKE GRANT OPTION ON *.* FROM 'erpnext'@'%'; GRANT  SUPER ON *.* TO 'erpnext'@'%' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;" |mysql -uroot -p{{erpnext_db_root_password}}
+  shell: echo "REVOKE ALL PRIVILEGES ON *.* FROM 'erpnext'@'%'; REVOKE GRANT OPTION ON *.* FROM 'erpnext'@'%'; GRANT  all ON erpnext.* TO 'erpnext'@'%' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;" |mysql -uroot -p{{erpnext_db_root_password}}
 
+# create link
+- name: Create link
+  file:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    state: link
+    force: yes
+  with_items:
+    - {src: /data/wwwroot/frappe-bench/config,dest: /data/config/erpnext_config}
+    - {src: /data/wwwroot/frappe-bench/logs,dest: /data/logs/erpnext_logs}
+     
 #5. install bench manager(To do)
 
 #6. check version and service state

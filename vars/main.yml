@@ -17,6 +17,13 @@ mariadb_configuration_default:
 docker_applications: 
   - phpmyadmin
 
+#  mysql_databases:
+#   - name: erpnext
+ 
+# mysql_users:
+#  - name: erpnext
+#    priv: 'erpnext.*:ALL'
+
 # init passsword of database
 init_db: 
   mariadb:
@@ -25,6 +32,8 @@ init_db:
     password: "123456"
     config_paths:
       - /data/wwwroot/frappe-bench/sites/erpnext/site_config.json
+    commands:
+      - echo "drop user erpnext@::1 ;" |mysql -uroot -p$new_password
 
 init_application:
   erpnext:
