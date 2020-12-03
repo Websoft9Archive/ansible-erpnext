@@ -73,8 +73,8 @@
 #     host: '::1'
 #     state: absent
 
-# - name: Change mariadb_erpnext user SUPER permission
-#   shell: echo "REVOKE ALL PRIVILEGES ON *.* FROM 'erpnext'@'%'; REVOKE GRANT OPTION ON *.* FROM 'erpnext'@'%'; GRANT  all ON erpnext.* TO 'erpnext'@'%' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;" |mysql -uroot -p{{erpnext_db_root_password}}
+- name: Change mariadb_erpnext user SUPER permission
+  shell: echo "GRANT ALL PRIVILEGES ON *.* TO 'erpnext'@'%' ;" |mysql -uroot -p{{erpnext_db_root_password}}
 
 # create link
 - name: Create link
