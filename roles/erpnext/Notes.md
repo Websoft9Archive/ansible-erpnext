@@ -1,18 +1,20 @@
 # install erpnext
 ---
-[安装](https://github.com/frappe/frappe/wiki/The-Hitchhiker%27s-Guide-to-Installing-Frappe-on-Linux)   
 
-## 安装简介
-   erpnext,官网给出三种安装方式:    
-   其中,docker安装方式优势在于初始化和第一次安装;但是随机化密码困难,docker容器过多,更适用于测试安装;  
-   而官网给出的一键安装脚本,其本质上是通过本地跑ansible的方式,对我们而言,这种"ansible套ansible"不可控,故不采用;
-   最终采用手动安装方式,即源码安装;
 
-## erpnext frappe bench 三者的关系?
-   Frappe是一个用Python和Javascript编写的全栈Web框架,Frappe应用程序是使用Frappe框架的python软件包;
-   Bench是一个命令行实用程序，用来安装，更新和管理linux系统上用于开发和生产的Frappe/ERPNext应用程序的多个站点;
-   erpnext是基于frappe开发的应用程序,SAP的免费和开源替代品;
-   补充: Bench Manager是具有相同功能的Bench GUI前端;
+## [安装](https://github.com/frappe/frappe/wiki/The-Hitchhiker%27s-Guide-to-Installing-Frappe-on-Linux)
+
+官方提供了三种安装方式：
+
+* Docker 安装：容器过多，考虑客户使用ERP有个性化开发，担心不方便保存数据
+* 自动化安装脚本：经过调研，发现本质上是通过本地跑ansible的方式，对我们而言,这种"ansible套ansible"不可控,故不采用;
+* 手动安装：先安装CLI工具Bench，再安装Frappe框架以及其中的应用ERPNext
+
+综合评估，采用手工安装方式。  
+
+> ERPNext的架构原理：ERPNext是基于[Frappe](https://github.com/frappe/frappe)框架开发的免费ERP。而Frappe是一个用于快速开发JS和Python集成化应用的框架。[Bench](https://github.com/frappe/bench)是Frappe框架体系中的CLI工具，用于创建和管理基于Frappe的应用程序。
+
+   补充: 
 
 ## requirest
    MariaDB 10.3
@@ -69,15 +71,17 @@
    "db_host": "127.0.0.1"  
  
 ## FAQ
-   经过研究,本项目有如下坑:
-   1. 需要修改mariadb存储引擎为MyISAM   
-      修改my.cnf配置文件即可;
 
-   2. 新建站点时需指定用户权限为 "%"
-      bench new-site   --no-mariadb-socket  
-      Set MariaDB host to % and use TCP/IP Socket instead of using the UNIX Socket
+#### Bench Manager 是什么？
+Bench Manager是具有相同功能的Bench GUI前端
 
-
+#### 本项目数据库配置有什么特殊之处？
+1. 需要修改mariadb存储引擎为MyISAM   
+2. 新建站点时需指定用户权限为 "%"
+   ```      
+   bench new-site   --no-mariadb-socket  
+   Set MariaDB host to % and use TCP/IP Socket instead of using the UNIX Socket
+   ```
 
 
 
