@@ -17,15 +17,6 @@ mariadb_configuration_default:
 docker_applications: 
   - phpmyadmin
 
-# mysql_databases:
-#   - name: erpnext
- 
-# mysql_users:
-#  - name: erpnext
-#    host: '%'
-#    password: 123456
-#    priv: 'erpnext.*:ALL'
-
 # init passsword of database
 init_db: 
   mariadb:
@@ -40,7 +31,6 @@ init_application:
     username: Administrator
     password: admin
     commands: 
-      - sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench --site erpnext set-admin-password $new_password"
-      - sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench clear-website-cache && /usr/local/bin/bench  clear-cache && /usr/local/bin/bench clear-command-cache"
-      - sudo systemctl restart nginx erpnext mysql
-       
+      - sudo -H -u erpnext bash -c "bench new-site --db-name erpnext --db-password $new_password --db-type mariadb --mariadb-root-password $new_password --admin-password $new_password"
+      - echo "drop user erpnext@'127.0.0.1';" |mysql -uroot -p$new_password
+      - echo "REVOKE ALL PRIVILEGES ON *.* FROM 'erpnext'@'%';GRANT USAGE ON *.* TO 'erpnext'@'%' ;" |mysql -uroot -p$new_password
