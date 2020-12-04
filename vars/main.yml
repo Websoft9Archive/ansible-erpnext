@@ -5,7 +5,7 @@ nodejs_version: "12"
 
 mariadb_configuration_default:
   - name: default-storage-engine
-    value: MyISAM
+    value: InnoDB
   - name: character-set-client-handshake
     value: FALSE
   - name: character-set-server
