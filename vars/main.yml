@@ -17,14 +17,14 @@ mariadb_configuration_default:
 docker_applications: 
   - phpmyadmin
 
-mysql_databases:
-  - name: erpnext
+# mysql_databases:
+#   - name: erpnext
  
-mysql_users:
- - name: erpnext
-   host: '%'
-   password: 123456
-   priv: 'erpnext.*:ALL'
+# mysql_users:
+#  - name: erpnext
+#    host: '%'
+#    password: 123456
+#    priv: 'erpnext.*:ALL'
 
 # init passsword of database
 init_db: 
