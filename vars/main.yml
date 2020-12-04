@@ -12,6 +12,7 @@ mariadb_configuration_default:
     value: utf8mb4
   - name: collation-server
     value: utf8mb4_unicode_ci
+  - 
 
 # docker
 docker_applications: 
