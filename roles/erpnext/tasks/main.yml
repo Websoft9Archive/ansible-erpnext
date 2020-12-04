@@ -22,7 +22,7 @@
     - {src: my.cnf,dest: /etc/my.cnf}
 
 # change file permissions
-- name: change file permissions
+- name: Restart mysql and Change file permissions 
   shell: |
     systemctl restart mysql
     setfacl -R -m u:erpnext:rwx /data/wwwroot 
