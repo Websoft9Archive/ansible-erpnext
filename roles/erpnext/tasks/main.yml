@@ -43,7 +43,7 @@
       yarn install 
       ./env/bin/pip3 install -q -U -e frappe-bench/apps/frappe  --use-feature=2020-resolver
       test -d sites/erpnext && rm -rf  sites/erpnext
-      bench new-site --db-port 3306 --db-name {{erpnext_db_name}} --db-password {{erpnext_db_password}} --db-type {{erpnext_db_type}} --mariadb-root-password {{erpnext_db_root_password}} --admin-password {{erpnext_admin_password}} --no-mariadb-socket erpnext  --force
+      bench new-site --db-name {{erpnext_db_name}} --db-password {{erpnext_db_password}} --db-type {{erpnext_db_type}} --mariadb-root-password {{erpnext_db_root_password}} --admin-password {{erpnext_admin_password}} --no-mariadb-socket erpnext  --force
       bench get-app --branch version-{{erpnext_version}} erpnext 
       ./env/bin/pip3 install -e apps/erpnext/
       bench --site erpnext install-app erpnext
