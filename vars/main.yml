@@ -22,7 +22,7 @@ mysql_databases:
  
 mysql_users:
  - name: erpnext
-   host: %
+   host: '%'
    password: 123456
    priv: 'erpnext.*:ALL'
 
