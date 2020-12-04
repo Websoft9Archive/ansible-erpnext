@@ -34,8 +34,6 @@ init_db:
     password: "123456"
     config_paths:
       - /data/wwwroot/frappe-bench/sites/erpnext/site_config.json
-    commands:
-      - echo "REVOKE ALL PRIVILEGES ON *.* FROM 'erpnext'@'%'; GRANT USAGE *.* TO 'erpnext'@'%';" |mysql -uroot -p$new_password;
 
 init_application:
   erpnext:
