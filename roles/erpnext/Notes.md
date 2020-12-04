@@ -1,4 +1,4 @@
-## [安装](https://github.com/frappe/frappe/wiki/The-Hitchhiker%27s-Guide-to-Installing-Frappe-on-Linux)
+## [安装](https://github.com/frappe/frappe/wiki/The-Hitchhiker%27s-Guide-to-Installing-Frappe-on-Linux)概要
 
 官方提供了三种安装方式：
 
@@ -15,13 +15,24 @@
 
 由于 Frappe 是 ERPNext 的基础，因此理解其关键要素，对于安装配置和维护显得非常重要。 
 
+Frappe 框架主要由两个部分组成：app 和 site，app 是后端Python代码，site 是用于处理 HTTP 请求的前端部分。
+
+## 安装ERPNext
+
+ERPNext的安装大致流程如下：
+
+1. 使用Bench命令初始化一个Frappe框架
+2. 安装ERPNext app
+3. 创建一个名称同样为 ERPNext 的site
+4. 将site与app 连接起来
+
 
  
 ## FAQ
 
 #### Bench Manager 是什么？
 
-Bench Manager是具有相同功能的Bench GUI前端
+Bench Manager 是Bench 的GUI工具，它也是 Frappe 下的一个app
 
 #### ERPNext数据库配置有什么特殊之处？
 
