@@ -1,6 +1,6 @@
 # install python dependence 
 - name: Install python3 dependence
   apt: 
-    name: [git,python3-setuptools,python3-pip,python3-dev,virtualenv,libmysqlclient-dev]
+    name: [git,python3-setuptools,python3-pip,python3-dev,virtualenv,libmysqlclient-dev,python3-mysqldb]
     update_cache: yes
 
