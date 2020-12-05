@@ -54,8 +54,14 @@ sidebarDepth: 3
 ```
 通用的手动备份操作步骤如下：
 
-1. 通过 WinSCP 将网站目录（*/data/wwwroot/*）**压缩后**再完整的下载到本地
-2. 通过 phpMyAdmin 逐个导出数据库
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/mysql/phpmyadmin-export-websoft9.png)
+1. 通过 WinSCP 将网站目录（*/data/wwwroot/frappe-bench*）**压缩后**再完整的下载到本地
+
+2. 通过 **mysqldump** 备份 erpnext 数据库
+   ```
+   mysqldump -uroot -p erpnext>erpnext.sql
+   ```
+   > ERPNext 超过 1000 个表且部分表中字段过多，使用 phpMyAdmin 导出数据库可能会丢失数据
+
 3. 将程序文件和数据库文件放到同一个文件夹，根据日期命名
+
 4. 备份工作完成

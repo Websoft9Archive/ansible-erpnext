@@ -24,9 +24,18 @@ yum update -y
 
 ## ERPNext更新
 
-要更新您的站点，只需运行以下命令。它将更新您的所有应用（git pull），在所有网站上运行补丁，构建JS和CSS资产并重新启动主管。
+由于我们的 ERPNext 是采用 Bench 命令安装的，因此它的升级也 Bench 密切相关，大致原理是通过 Bench 命令做好升级准备，然后命令会到响应的代码库中 Git 最新的版本，再完成升级。  
+
+ERPNext 官方提供了完整的[升级文档](https://frappeframework.com/docs/user/en/production-setup#updating)。
+
+升级是一项复杂慎重的任务，下面我们主要列出其中的升级要点供用户参考：
+
 
 ``` shell
+#切换用户并进入应用目录
+su erpnext
+cd /data/wwwroot/frappe-bench
+
 # update everything
 bench update
 
@@ -44,5 +53,4 @@ bench update --bench
 
 # update python packages and node_modules
 bench update --requirements
-
 ```

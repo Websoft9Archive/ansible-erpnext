@@ -10,30 +10,26 @@
 
 ## ERPNext 安装向导
 
-1. 使用本地电脑的 Chrome 或 Firefox 浏览器访问网址：*http://域名* 或 *http://Internet IP*, 进入初始化页面
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-login-websoft9.png)
+1. 使用本地电脑 Chrome 或 Firefox 浏览器访问网址：*http://域名* 或 *http://服务器公网IP*, 进入初始化页面
+   ![erpnext安装登录](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-login-websoft9.png)
 
 2. 输入账号密码（[不知道账号密码？](/zh/stack-accounts.md#erpnext)），选择语言， 进入下一步 
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-language-websoft9.png)
+   ![erpnext安装](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-language-websoft9.png)
 
-3. 选择国家时区，进入下一步
+3. 根据安装向导依次完成后续步骤
 
-4. 设置管理员信息
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-setadmin-websoft9.png)
+4. 安装完成之后，ERPNext 会弹出如下界面
+   ![erpnext后台](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-cpsetup-websoft9.png)
 
-5. 选择应用范围，进入下一步
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-hy-websoft9.png)
+   可能会出现安装错误提示，此时需要反复安装：
 
-6. 设置公司信息，进入下一步
+   ![erpnext 向导安装报错](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-wizarderror-websoft9.png)
 
-7. 设置组织，点击[完成设置]
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-org-websoft9.png)
+5. ERPNext 顶部菜单中提供了搜索框，用于快速检索并进入 ERPNext 所有的功能
+   ![erpnext 快速检索](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-sbar-websoft9.png)
 
-8. 设置完成,开始使用ERPNext
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-cpsetup-websoft9.png)
-
-9. 搜索栏检索 "用户",搜索结果列表里面选择用户，可以修改管理员密码
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-users-websoft9.png)
+6. 通过检索功能，进入【用户】设置，可以管理当前系统下所有账号
+   ![erpnext 用户管理](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-users-websoft9.png)
 
 
 > 需要了解更多 ERPNext 的使用，请参考官方文档：[ERPNext Documentation](https://docs.erpnext.com)
@@ -43,6 +39,11 @@
 #### 浏览器打开IP地址，无法访问 ERPNext（白屏没有结果）？
 
 您的服务器对应的安全组80端口没有开启（入规则），导致浏览器无法访问到服务器的任何内容
+
+#### ERPNext 安装向导最后一步出现错误提示？
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-wizarderror-websoft9.png)
+原因：未知  
+方案：重复安装几次直至成功  
 
 #### ERPNext 服务启动失败？
 

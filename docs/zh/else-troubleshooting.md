@@ -6,7 +6,13 @@
 
 #### 如何查看错误日志？
 
-日志文件路径为：`/data/logs`。检索关键词 **Failed** 或者 **error** 查看错误
+ERPNext 报错后，有如下几个可以分析日志的入口：
+
+1. ERPNext 程序运行日志：`/data/logs/erpnext_logs`
+2. 进程管理日志，运行 `systemctl status erpnext -l` 查看
+3. Nginx日志:` /data/logs/nginx`
+
+检索关键词 **Failed** 或者 **error** 查看错误
 
 #### ERPNext服务无法启动？
 
@@ -25,3 +31,8 @@ Bench只能通过frapper运行,必须先切换到此用户
 ```shell
 su - frapper
 ```
+
+#### ERPNext 安装向导最后一步出现错误提示？
+![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-wizarderror-websoft9.png)
+原因：未知  
+方案：重复安装几次直至成功  

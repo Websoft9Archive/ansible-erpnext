@@ -1,5 +1,31 @@
 # FAQ
 
+#### 本项目中 ERPNext 采用何种安装方式？
+
+采用 bench 命令安装，即官方提供更多源码安装方式。
+
+ERPNext的安装大致流程如下：
+
+1. 使用Bench命令初始化一个Frappe框架
+2. 安装ERPNext app
+3. 创建一个名称同样为 ERPNext 的site
+4. 将site与app 连接起来
+
+#### Frappe，bench，ERPNext 有什么关系和区别？
+
+ERPNext 是基于 [Frappe](https://github.com/frappe/frappe) 框架开发的免费 ERP 。而 Frappe 是一个用于快速开发JS和Python集成化应用的框架。[Bench](https://github.com/frappe/bench) 是Frappe框架体系中的 CLI 工具，用于创建和管理基于 Frappe 的应用程序。
+
+#### ERPNext 安装的时候需要创建 site 是什么原理？
+
+Frappe 框架主要由两个部分组成：app 和 site，app 是后端Python代码，site 是用于处理 HTTP 请求的前端部分。
+
+#### ERPNext 支持外部数据库吗？
+
+支持，只需在[数据库配置文件](/zh/stack-components.md#erpnext) 中添加 db_host 为外部数据库地址即可。更多数据库连接参数参考官方文档[Standard Config](https://frappeframework.com/docs/user/en/basics/site_config#mandatory-settings)
+
+#### ERPNext 支持哪些数据库？
+
+MariaDB 和 PostgreSQL
 
 #### 数据库用户对应的密码是多少？
 
@@ -7,26 +33,24 @@
 
 #### 是否有可视化的数据库管理工具？
 
-有可视化数据库管理工具phpmyadmin,访问地址：*http://服务器公网IP/9090*
+有可视化数据库管理工具 phpMyAdmin,访问地址：*http://服务器公网IP:9090*
 
+#### 是否可以修改 ERPNext 的源码路径？
 
-#### 是否可以修改ERPNext的源码路径？
-
-不可以
+不建议
 
 #### 是否有ERPNext的API文档？
 
-有，包括Python，Javascript，Jinja API等  
-详情参考官方备份文档：[ERPNext API](https://frappeframework.com/docs/user/en/api)
+有，包括Python，Javascript，Jinja API等，参考官方文档[ERPNext API](https://frappeframework.com/docs/user/en/api)
 
 #### 如何修改上传的文件权限?
 
 ```shell
 # 拥有者
-chown -R apache.apache /data/wwwroot/
+chown -R erpnext.erpnext /data/wwwroot/frappe-bench
 # 读写执行权限
-find /data/wwwroot/ -type d -exec chmod 750 {} \;
-find /data/wwwroot/ -type f -exec chmod 640 {} \;
+find /data/wwwroot/frappe-bench -type d -exec chmod 750 {} \;
+find /data/wwwroot/frappe-bench -type f -exec chmod 640 {} \;
 ```
 
 #### 部署和安装有什么区别？

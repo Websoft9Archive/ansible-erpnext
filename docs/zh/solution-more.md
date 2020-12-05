@@ -25,11 +25,31 @@
 
 ## 重置密码
 
-常用的 ERPNext 重置密码相关的操作主要通过bench命令来实现：
+常用的 ERPNext 重置密码相关的操作主要有修改密码和找回密码两种类型：
 
 ### 修改密码
 
-   ```shell
-   sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench set-admin-password $new_password"
-   
-   ```
+
+1. 登录 RabbiERP 后台，依次打开：【设置】>【个人设置】，找到修改密码项
+  ![ERPNext 修改密码](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-modifypw-websoft9.png)
+
+2. 直接设置新密码，保存后生效
+
+### 找回密码
+
+如果用户忘记了 ERPNext 密码，可以通过如下的命令直接设置一个新密码：
+
+```
+sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench set-admin-password newpassword"
+```
+
+### 使用RDS
+
+如果用户不喜欢使用服务器上安装的 MariaDB，而希望迁移到云数据库中（RDS），大致流程：
+
+1. 备份已有数据库，并导入到 RDS 中（适合于 ERPNext 已经完成安装）
+2. 编辑[数据库配置文件](/zh/stack-components.md#erpnext) 中。添加 db_host 为外部数据库地址即可
+3. 修改其中的账号信息
+4. 测试更改数据库后的连接可用性
+
+> 更多数据库连接参数参考官方文档[Standard Config](https://frappeframework.com/docs/user/en/basics/site_config#mandatory-settings)
