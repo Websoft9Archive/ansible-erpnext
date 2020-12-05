@@ -89,6 +89,9 @@ bench version
 # Nginx version
 nginx -v
 
+# Python version
+python -V
+
 # MariaDB version:
 mysql -V
 

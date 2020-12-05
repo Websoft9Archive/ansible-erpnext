@@ -29,7 +29,7 @@ yum update -y
 
 Since our erpnext is installed with the bench command, its upgrade is also closely related to bench. The general principle is to prepare for upgrade through the bench command, and then the command will send the latest version of git in the response code base, and then complete the upgrade.
 
-Erpnext officially provides complete[upgrade documentation](https://frappeframework.com/docs/user/en/production-setup#updating)
+Erpnext officially provides [upgrade documentation](https://frappeframework.com/docs/user/en/production-setup#updating)
 
 Upgrading is a complex and prudent task.Here we mainly list the key points of upgrading for users' reference:
 

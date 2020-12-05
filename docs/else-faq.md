@@ -19,7 +19,6 @@ Erpnext is based on [Frappe](https://github.com/frappe/frappe)Free ERP framework
 
 Frappe framework is mainly composed of two parts: app and site. App is the back-end Python code, and site is the front-end part for handling HTTP requests.
 
-
 #### Does erptext support external databases?
 
 Yes, only in the database configuration file(/zh/stack)-components.md#erpnext)Add dB in_ Host is the external database address. For more database connection parameters, please refer to the official document [standard config](https://frappeframework.com/docs/user/en/basics/site_config#mandatory-settings)
@@ -34,7 +33,7 @@ The password is stored in the server related file: `/credentials/password.txt`
 
 #### Is there a web-base GUI database management tools?
 
-Yes, phpMyAdmin is on it, visit by *http://Internet IP/9090*
+Yes, phpMyAdmin is on it, visit by *http://Internet IP:9090*
 
 #### Is it possible to modify the source path of ERPNext?
 

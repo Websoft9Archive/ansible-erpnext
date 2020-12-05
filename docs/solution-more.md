@@ -31,7 +31,7 @@ There are two types of commonly used erpnext password reset operations: password
 ### Change password
 
 1. Log in to the background of erpnext and open Settings > personal settings to find the password modification item
-![erpnext change password](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-modifypw-websoft9.png)
+![erpnext change password](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-modifypw-websoft9.png)
 2. Set the new password directly and take effect after saving
 
 ### Retrieve password
