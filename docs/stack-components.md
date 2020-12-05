@@ -21,9 +21,9 @@ Nginx pseudo static directory： */etc/nginx/conf.d/rewrite*
 
 ### Python
 
-Python application installation directory： */usr/lib/python**  
-Python virtual directory：: */usr/bin/python**  
-*is version 2.7/3/3.6/3.7
+Python application installation directory： */usr/lib/python*   
+Python virtual directory：: */usr/bin/python*  
+*is version 2.7/3/3.6/3.7  
 
 ### Node.js
 

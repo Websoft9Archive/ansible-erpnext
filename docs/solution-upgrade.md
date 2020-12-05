@@ -27,9 +27,18 @@ yum update -y
 
 ## ERPNext Update
 
-To update your sites, just run the following command. It will update all of your apps (git pull), run patches on all sites, build JS and CSS assets and restart supervisor.
+Since our erpnext is installed with the bench command, its upgrade is also closely related to bench. The general principle is to prepare for upgrade through the bench command, and then the command will send the latest version of git in the response code base, and then complete the upgrade.
+
+Erpnext officially provides complete[upgrade documentation](https://frappeframework.com/docs/user/en/production-setup#updating)
+
+Upgrading is a complex and prudent task.Here we mainly list the key points of upgrading for users' reference:
 
 ``` shell
+
+# cd to erpnext install directory and execute by erpnext user
+su erpnext
+cd /data/wwwroot/frappe-bench
+
 # update everything
 bench update
 

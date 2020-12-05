@@ -6,7 +6,7 @@ home: false
 
 This documentation is provided by [Websoft9](https://www.websoft9.com/), it can help users to acquire skills of ERPNext Deployment, Installation, Configuration, HTTPS, SMTP, Backup, Upgrade, Connect Instance and more.
 
-[ERPNext](https://erpnext.com/) is the world's best 100% open source ERP.  It is comprehensive, designed for self implementation, and easy to use.
+[ERPNext](https://erpnext.com/) is 100% open source ERP,based on Python and node development, it has comprehensive functions, including accounting, human resources, manufacturing, website, e-commerce, CRM, asset management, customer service workbench and other comprehensive functions. It is very suitable as a substitute for SAP, which has been used by more than 5000 enterprise customers all over the world.
 ![](http://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-adminui-websoft9.png)
 
 ---
