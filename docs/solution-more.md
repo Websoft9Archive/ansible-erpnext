@@ -2,9 +2,6 @@
 
 Each of the following solutions has been proven to be effective and we hope to be helpful to you.
 
-## Configuration 
-
-Refer to the official docs: https://docs.erpnext.org/en/latest/config/index.html
 
 ## Domain binding
 
