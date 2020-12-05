@@ -13,6 +13,16 @@ mariadb_configuration_default:
   - name: collation-server
     value: utf8mb4_unicode_ci
 
+mariadb_databases: 
+  - name: erpnext
+    encoding: utf8mb4
+
+mariadb_users: 
+  - name: erpnext
+    host: '%'
+    password: '123456'
+    priv: 'erpnext.*:ALL'
+
 # docker
 docker_applications: 
   - phpmyadmin
@@ -31,6 +41,5 @@ init_application:
     username: Administrator
     password: admin
     commands: 
-      - sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && bench new-site --db-name erpnext --db-password $new_password --db-type mariadb --mariadb-root-password $new_password --admin-password $new_password --force"
-      - echo "drop user erpnext@'127.0.0.1';" |mysql -uroot -p$new_password
-      - echo "REVOKE ALL PRIVILEGES ON *.* FROM 'erpnext'@'%';GRANT USAGE ON *.* TO 'erpnext'@'%' ;" |mysql -uroot -p$new_password
+      - sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench set-admin-password $new_password"
+   
