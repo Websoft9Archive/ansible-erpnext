@@ -19,16 +19,16 @@ If you have completed the ERPNext deployment on Cloud Platform, the following st
 3. Follow the installation wizard to complete the next steps
 
 4. After installation, the following interface will pop up in erpnext
-   ! [erpnext background](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-ok-websoft9.png)
+   ![erpnext background](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-ok-websoft9.png)
 
    There may be an installation error prompt, which requires repeated installation:
-   ! [erpnext wizard installation error](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-wizarderror-websoft9.png)
+   ![erpnext wizard installation error](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-wizarderror-websoft9.png)
 
 5. A search box is provided in the top menu of erpnext for quick retrieval and access to all functions of erpnext
-! [erpnext quick search](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-usersearch-websoft9.png)
+   ![erpnext quick search](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-usersearch-websoft9.png)
 
 6. Through the search function, enter the [user] settings to manage all accounts under the current system
-! [erpnext user management](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-userlist-websoft9.png)
+   ![erpnext user management](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-userlist-websoft9.png)
 
 > More useful ERPNext guide, please refer to [ERPNext Documentation](https://erpnext.com/)
 

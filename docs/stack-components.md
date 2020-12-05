@@ -61,9 +61,10 @@ You can run the cmd `netstat -tunlp` to list all used ports, and we list the fol
 | Name | Number | Use |  Necessity |
 | --- | --- | --- | --- |
 | HTTP | 80 | HTTP requests for ERPNext Console| Required |
-| HTTP | 443 | HTTP requests for ERPNext Console| Required |
-| TCP | 9090 | phpmyadmin web GUI tool | Optional |
-| TCP | 3306 | mariadb server | Optional |
+| HTTP | 443 | HTTP requests for ERPNext Console| Optional |
+| HTTP | 8000 | access ERPNext server by ip&port | Optional |
+| TCP | 9090 | mariadb web GUI tool phpmyadmin | Optional |
+| TCP | 3306 | remote to mariadb server | Optional |
 
 ## Version
 
