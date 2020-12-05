@@ -20,15 +20,20 @@ Node.JS log file: */root/.pm2/pm2.log*
 
 ### MariaDB
 
+MariaDB installation directory: */usr/local/mysql*  
 MariaDB data directory: */data/mysql*  
 MariaDB configuration file: */etc/my.cnf*    
-MariaDB Web Management URL: *http://Internet IP/phpmyadmin*, [get credential](/stack-accounts.md)
 
-### phpMyAdmin
+MariaDB Web Management refer to [MariaDB Management](/admin-mysql.md)
 
-phpMyAdmin installation directory: */data/apps/phpmyadmin*  
-phpMyAdmin configuration file: */data/apps/phpmyadmin/config.inc.php*   
-phpMyAdmin vhost configuration file: */etc/httpd/conf.d/phpMyAdmin.conf* or */etc/nginx/php.conf* 
+
+####  phpMyAdmin
+
+phpMyAdmin is a visual MySQL management tool, is installed based on docker.  
+
+phpMyAdmin directory：*/data/apps/phpmyadmin*  
+phpMyAdmin docker compose file：*/data/apps/phpmyadmin/docker-compose.yml* 
+
 
 ## Ports
 

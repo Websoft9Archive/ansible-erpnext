@@ -2,7 +2,7 @@
 
 **Deployment is to copy the ERPNext pre-packaged online to your Cloud Server**. For example, after the user subscribe ERPNext on the Cloud Platform, the Platform will automatically copy the ERPNext to the corresponding Cloud Server.
 
-- If ERPNext has been deployed, go to [Initial Installation](/zh/stack-installation.md) to complete the operation.
+- If ERPNext has been deployed, go to [Initial Installation](/stack-installation.md) to complete the operation.
 - If ERPNext is not deployed, you need to deploy ERPNext to your cloud server first.
 
 We offer two deployment ERPNext scenarios (the deployment results are the same):
