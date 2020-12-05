@@ -14,26 +14,26 @@
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-login-websoft9.png)
 
 2. 输入账号密码（[不知道账号密码？](/zh/stack-accounts.md#erpnext)），选择语言， 进入下一步 
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-installlanguage-websoft9.png)
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-language-websoft9.png)
 
 3. 选择国家时区，进入下一步
 
 4. 设置管理员信息
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-installadmin-websoft9.png)
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-setadmin-websoft9.png)
 
 5. 选择应用范围，进入下一步
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-installdomains-websoft9.png)
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-hy-websoft9.png)
 
 6. 设置公司信息，进入下一步
 
 7. 设置组织，点击[完成设置]
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-installcp-websoft9.png)
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-org-websoft9.png)
 
 8. 设置完成,开始使用ERPNext
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-adminui-websoft9.png)
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-cpsetup-websoft9.png)
 
 9. 搜索栏检索 "用户",搜索结果列表里面选择用户，可以修改管理员密码
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-changpw-websoft9.png)
+   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-users-websoft9.png)
 
 
 > 需要了解更多 ERPNext 的使用，请参考官方文档：[ERPNext Documentation](https://docs.erpnext.com)
