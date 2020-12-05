@@ -12,10 +12,22 @@ ERPNext database configuration file: /data/wwwroot/frappe-bench/sites/erpnext/si
 ERPNext configuration : */data/wwwroot/frappe-bench/config*  
 ERPNext logs directory:  */data/wwwroot/frappe-bench/logs*   
 
+### Nginx
+
+Nginx default configuration file：*/etc/nginx/conf.d/default.conf*  
+Nginx main configuration file： */etc/nginx/nginx.conf*  
+Nginx logs directory： */var/log/nginx*  
+Nginx pseudo static directory： */etc/nginx/conf.d/rewrite*
+
+### Python
+
+Python application installation directory： */usr/lib/python**  
+Python virtual directory：: */usr/bin/python**  
+*is version 2.7/3/3.6/3.7
+
 ### Node.js
 
 Node.JS modules directory: */usr/lib/node_modules*  
-Node.js application directory: */data/wwwroot*  
 Node.JS log file: */root/.pm2/pm2.log*
 
 ### MariaDB
@@ -27,13 +39,18 @@ MariaDB configuration file: */etc/my.cnf*
 MariaDB Web Management refer to [MariaDB Management](/admin-mysql.md)
 
 
-####  phpMyAdmin
+###  phpMyAdmin
 
 phpMyAdmin is a visual MySQL management tool, is installed based on docker.  
 
 phpMyAdmin directory：*/data/apps/phpmyadmin*  
 phpMyAdmin docker compose file：*/data/apps/phpmyadmin/docker-compose.yml* 
 
+### Redis
+
+Redis configuration file： */etc/redis.conf*  
+Redis data directory： */var/lib/redis*  
+Redis logs directory： */var/log/redis/redis.log*
 
 ## Ports
 

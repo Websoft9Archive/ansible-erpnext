@@ -49,8 +49,11 @@ Manual backup for application is based on the **Exporting source code and databa
 ```
 The general manual backup operation steps are as follows:
 
-1. Just compression and download the entire */data/wwwroot* directory by SFTP 
-2. Export ERPNext database by [phpMyAdmin](/admin-mysql.md)
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/phpmyadmin/phpmyadmin-export-websoft9.png)
+1. Just compression and download the entire */data/wwwroot/frappe-bench* directory by SFTP 
+2. Export ERPNext database by **mysqldump**
+   ```
+   mysqldump -uroot -p erpnext>erpnext.sql
+   ```
+   > There are more than 1000 tables in erptext db and too many fields in some tables. If you export the database with phpMyAdmin, you may lose data
 3. Put the source code file and database file in the same folder, named according to the date
 4. Backup completed

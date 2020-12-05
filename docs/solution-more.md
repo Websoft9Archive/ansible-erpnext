@@ -24,12 +24,31 @@ ERPNext domain name binding steps:
    }
    ```
 
-## Resetting Password
+## Reset password
 
-Reset password by bench shell.
+There are two types of commonly used erpnext password reset operations: password modification and password retrieval
 
-### Changing password
+### Change password
 
-   ```shell
-   sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench set-admin-password $new_password"
-   ```
+1. Log in to the background of erpnext and open Settings > personal settings to find the password modification item
+![erpnext change password](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-modifypw-websoft9.png)
+2. Set the new password directly and take effect after saving
+
+### Retrieve password
+
+If the user forgets the erpnext password, you can directly set a new password through the following command:
+
+````
+sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench set-admin-password newpassword"
+````
+
+### Using RDS
+
+If the user does not like to use the MariaDB installed on the server and wants to migrate to the cloud database (RDS), the general process is as follows:
+
+1. Back up the existing database and import it into RDS (suitable for erpnext has been installed)
+2. Edit [database configuration file] (/zh/stack)-components.md#erpnext ）Medium. Add db_host is the external database address
+3. Modify the account information
+4. Test the connection availability after changing the database
+
+>For more database connection parameters, please refer to the official document [standard config](https://frappeframework.com/docs/user/en/basics/site_config#mandatory-settings)

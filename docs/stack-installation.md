@@ -11,29 +11,24 @@ If you have completed the ERPNext deployment on Cloud Platform, the following st
 ## ERPNext Installation Wizard
 
 1. Using local Chrome or Firefox to visit the URL *http://DNS* or *http://Internet IP*, you will enter installation wizard of ERPNext
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-login-websoft9.png)
+   ![erpnext login](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-login-websoft9.png)
 
 2. Log in to ERPNext web console([Don't have password?](/stack-accounts.md#erpnext)),select your language,go to next  
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-installlanguage-websoft9.png)
+   ![erpnext install lang](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-installlanguage-websoft9.png)
 
-3. Select Your Country/ Time Zone/ Currency,go to next
+3. Follow the installation wizard to complete the next steps
 
-4. Set your administrator information
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-installadmin-websoft9.png)
+4. After installation, the following interface will pop up in erpnext
+   ! [erpnext background](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-cpsetup-websoft9.png)
 
-5. Select the domains,go to next step
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-installdomains-websoft9.png)
+   There may be an installation error prompt, which requires repeated installation:
+   ! [erpnext wizard installation error](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-wizarderror-websoft9.png)
 
-6. Set your Company Name/Company Abbreviation, go to next step
+5. A search box is provided in the top menu of erpnext for quick retrieval and access to all functions of erpnext
+! [erpnext quick search](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-sbar-websoft9.png)
 
-7. Set your Organization, click "Complete Setup"
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-installcp-websoft9.png)
-
-8. Complete your setup,start to ERPNext experience
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-adminui-websoft9.png)
-
-9. Search "user" in the search bar,select the User tab,you can see the all users listed.please modify the Administrator password
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-changpw-websoft9.png)
+6. Through the search function, enter the [user] settings to manage all accounts under the current system
+! [erpnext user management](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-users-websoft9.png)
 
 > More useful ERPNext guide, please refer to [ERPNext Documentation](https://erpnext.com/)
 

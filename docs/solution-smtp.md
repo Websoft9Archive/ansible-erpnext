@@ -8,16 +8,15 @@ Follow is the sample using **SendGrid's SMTP Service** to configure sending mail
 
 1. Log in SendGrid console, prepare your SMTP settings like the follow sample
    ```
-   SMTP host: smtp.sendgrid.net
-   SMTP port: 25 or 587 for unencrypted/TLS email, 465 for SSL-encrypted email
+   SMTP host: smtp.qq.com
+   SMTP port: 465 or 587 for SSL-encrypted email
    SMTP Authentication: must be checked
    SMTP Encryption: must SSL
    SMTP username: websoft9smpt
-   SMTP password: #fdfwwBJ8f    
+   SMTP password: #fdfwwBJ8f  
    ```
-2. Log in ERPNext Console
-3. Enter Settings>Email Domain
+2. Log in ERPNext Console,set SMTP parameters in【Settings】>【Email Domain】
 ![ERPNext SMTP](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-smtp-websoft9.png)
-4. Click the **Test Connection**, you can get the feedback *"no errors were..."* if SMTP is useful
+3. After clicking **save**,the system will conduct a preliminary verification of SMTP.Only after passing the verification can it be saved successfully
 
 More SMTP Service(Gmail, Hotmail, QQ mail, Yahoo mail, SendGrid and so on)  settings or Issues with SMTP, please refer to Websoft9's *[SMTP Guide](https://support.websoft9.com/docs/faq/tech-smtp.html)*

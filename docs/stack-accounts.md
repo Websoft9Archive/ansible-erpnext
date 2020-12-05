@@ -6,10 +6,13 @@ These accounts are required for ERPNext image installation and configuration
 
 ## ERPNext
 
-* ERPNext administrator username: `admin`
+* ERPNext administrator username: `Administrator`
 * ERPNext administrator password: stored in the file of your server */credentials/password.txt*
-  > If there no password.txt exist, the administrator password is `admin`
 
+## MariaDB
+
+* MariaDB administrator username: `root`
+* MariaDB administrator password: stored in the file of your server */credentials/password.txt*
 
 ## Linux
 

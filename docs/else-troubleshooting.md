@@ -21,7 +21,6 @@ Search the keywords failed or error to view the error
 #### ERPNext service can't start?
 
 1. Execute `systemctl status erpnext` and you can see the errors
-
 2. Search the keywords **Failed** or **error** from logs: */data/logs/erpnext*
 
 #### Error in Chrome when modify password?
@@ -38,5 +37,5 @@ su - frapper
 #### Error prompt in the last step of the erptext installation wizard?
 
 ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-wizarderror-websoft9.png)
-Cause: unknown
+Cause: unknown  
 Solution: repeat the installation several times until successful
