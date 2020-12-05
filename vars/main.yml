@@ -15,7 +15,6 @@ mariadb_configuration_default:
 
 mariadb_databases: 
   - name: erpnext
-    encoding: utf8mb4
 
 mariadb_users: 
   - name: erpnext
