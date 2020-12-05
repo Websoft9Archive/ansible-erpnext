@@ -2,6 +2,8 @@
 
 We collect the most common troubleshooting of using ERPNext for your reference:
 
+> Most of the failures are closely related to the cloud platform. If you can confirm that the fault is caused by the cloud platform, please refer to [online document](https://support.websoft9.com/docs/faq/zh/tech-instance.html)
+
 #### How can I use the logs?
 
 Get an error for ERPNext, there are several entries that can be used to analyze the log:
