@@ -9,4 +9,4 @@ ERPNext 预装包中内置 MariaDB 及可视化数据库管理工具 `phpMyadmin
 4. 开始管理数据库
   ![phpMyadmin](https://libs.websoft9.com/Websoft9/DocsPicture/zh/mysql/phpmyadmin-adddb-websoft9.png)
 
-> 阅读Websoft9提供的 [《MySQL教程》](https://support.websoft9.com/docs/mysql/zh/admin-phpmyadmin.html) ，掌握更多的MariaDB实用技能：修改密码、导入/导出数据、创建用户、开启或关闭远程访问、日志配置等
+> 阅读Websoft9提供的 [《MySQL教程》](https://support.websoft9.com/docs/mysql/zh/) ，掌握更多的MariaDB实用技能：修改密码、导入/导出数据、创建用户、开启或关闭远程访问、日志配置等

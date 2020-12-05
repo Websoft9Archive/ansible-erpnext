@@ -14,4 +14,4 @@ Follow the steps below to use it:
 4. Start to manage MySQL now.  
   ![phpMyadmin](https://libs.websoft9.com/Websoft9/DocsPicture/en/phpmyadmin/phpmyadmin-createdb-websoft9.png)
 
-> View *[MySQL guide](https://support.websoft9.com/docs/mysql/admin-phpmyadmin.html)* provided by Websoft9 to learn more skills of MariaDB, including: how to change password, create user, import/export data, open or close remote access, configure log and so on.
+> View *[MySQL guide](https://support.websoft9.com/docs/mysql/)* provided by Websoft9 to learn more skills of MariaDB, including: how to change password, create user, import/export data, open or close remote access, configure log and so on.
