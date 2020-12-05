@@ -22,17 +22,20 @@ Node.JS modules directory: */usr/lib/node_modules*
 Node.js application directory: */data/wwwroot*  
 Node.JS log file: */root/.pm2/pm2.log*
 
-### MariaDB
+#### MariaDB
 
-MariaDB data directory: */data/mysql*  
-MariaDB configuration file: */etc/my.cnf*    
-MariaDB Web Management URL: *http://Internet IP/phpmyadmin*, [get credential](/stack-accounts.md)
+MariaDB 安装路径: */usr/local/mysql*  
+MariaDB 数据文件 */data/mysql*  
+MariaDB 配置文件: */etc/my.cnf*  
 
-### phpMyAdmin
+MySQL 可视化管理参考 [MySQL 管理](/zh/admin-mysql.md) 章节。
 
-phpMyAdmin installation directory: */data/apps/phpmyadmin*  
-phpMyAdmin configuration file: */data/apps/phpmyadmin/config.inc.php*   
-phpMyAdmin vhost configuration file: */etc/httpd/conf.d/phpMyAdmin.conf* or */etc/nginx/php.conf* 
+####  phpMyAdmin
+
+phpMyAdmin 是一款可视化 MySQL 管理工具，在本项目中它基于 Docker 安装。  
+
+phpMyAdmin directory：*/data/apps/phpmyadmin*  
+phpMyAdmin docker compose file：*/data/apps/phpmyadmin/docker-compose.yml* 
 
 
 

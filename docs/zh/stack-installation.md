@@ -10,15 +10,7 @@
 
 ## ERPNext 安装向导
 
-1. 使用本地电脑的 Chrome 或 Firefox 浏览器访问网址：*http://域名/_utils* 或 *http://Internet IP/_utils*, 进入初始化页面
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-init-websoft9.png)
-
-2. 输入账号密码（[不知道账号密码？](/zh/stack-accounts.md#erpnext)），成功登录到 ERPNext 后台  
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-bk-websoft9.png)
-
-3. 登录后通过：【Users】设置新密码  
-   ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-pw-websoft9.png)
-1. 使用本地电脑的 Chrome 或 Firefox 浏览器访问网址：*http://DNS* or *http://Internet IP*, 进入初始化页面
+1. 使用本地电脑的 Chrome 或 Firefox 浏览器访问网址：*http://域名* 或 *http://Internet IP*, 进入初始化页面
    ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-login-websoft9.png)
 
 2. 输入账号密码（[不知道账号密码？](/zh/stack-accounts.md#erpnext)），选择语言， 进入下一步 

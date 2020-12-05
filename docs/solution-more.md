@@ -26,3 +26,13 @@ ERPNext domain name binding steps:
    ...
    }
    ```
+
+## Resetting Password
+
+Reset password by bench shell.
+
+### Changing password
+
+   ```shell
+   sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench set-admin-password $new_password"
+   ```

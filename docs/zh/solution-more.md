@@ -26,3 +26,14 @@
    }
    ```
 3. 保存配置文件，重启 [Nginx 服务](/zh/admin-services.md#nginx)
+
+## 重置密码
+
+常用的 ERPNext 重置密码相关的操作主要通过bench命令来实现：
+
+### 修改密码
+
+   ```shell
+   sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench set-admin-password $new_password"
+   
+   ```
