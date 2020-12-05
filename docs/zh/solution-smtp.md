@@ -16,7 +16,7 @@
    SMTP password: #fdfwwBJ8f 
    ```
 2. 登录 ERPNext控制台
-3. 填写 SMTP 参数
+3. 在设置>电子邮件域名 填写SMTP参数
 ![ERPNext SMTP](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-smtp-websoft9.png)
 4. 点击【Test Connection】
 
