@@ -30,7 +30,7 @@
 ### 修改密码
 
 
-1. 登录 RabbiERP 后台，依次打开：【设置】>【个人设置】，找到修改密码项
+1. 登录 ERPNext后台，依次打开：【设置】>【个人设置】，找到修改密码项
   ![ERPNext 修改密码](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-modifypw-websoft9.png)
 
 2. 直接设置新密码，保存后生效
