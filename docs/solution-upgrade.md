@@ -27,15 +27,15 @@ yum update -y
 
 ## ERPNext Update
 
-Since our erpnext is installed with the bench command, its upgrade is also closely related to bench. The general principle is to prepare for upgrade through the bench command, and then the command will send the latest version of git in the response code base, and then complete the upgrade.
+Since our ERPNext is installed with the bench command, its upgrade is also closely related to bench. The general principle is to prepare for upgrade through the bench command, and then the command will send the latest version of git in the response code base, and then complete the upgrade.
 
-Erpnext officially provides [upgrade documentation](https://frappeframework.com/docs/user/en/production-setup#updating)
+ERPNext officially provides [upgrade documentation](https://frappeframework.com/docs/user/en/production-setup#updating)
 
-Upgrading is a complex and prudent task.Here we mainly list the key points of upgrading for users' reference:
+Upgrading is a complex task, we list the key points of upgrading for your reference:
 
 ``` shell
 
-# cd to erpnext install directory and execute by erpnext user
+# cd to ERPNext install directory and execute by ERPNext user
 su erpnext
 cd /data/wwwroot/frappe-bench
 

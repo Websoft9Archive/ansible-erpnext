@@ -54,6 +54,6 @@ The general manual backup operation steps are as follows:
    ```
    mysqldump -uroot -p erpnext>erpnext.sql
    ```
-   > There are more than 1000 tables in erptext db and too many fields in some tables. If you export the database with phpMyAdmin, you may lose data
+   > There are more than 1000 tables and too many fields in some tables of ERPNext database. If you export the database with phpMyAdmin, you may lose data
 3. Put the source code file and database file in the same folder, named according to the date
 4. Backup completed

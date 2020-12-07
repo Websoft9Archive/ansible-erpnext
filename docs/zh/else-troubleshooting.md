@@ -8,9 +8,9 @@
 
 ERPNext 报错后，有如下几个可以分析日志的入口：
 
-1. ERPNext 程序运行日志：`/data/logs/erpnext_logs`
+1. ERPNext 程序运行日志：*/data/logs/erpnext*
 2. 进程管理日志，运行 `systemctl status erpnext -l` 查看
-3. Nginx日志:` /data/logs/nginx`
+3. Nginx日志：*/data/logs/nginx*
 
 检索关键词 **Failed** 或者 **error** 查看错误
 

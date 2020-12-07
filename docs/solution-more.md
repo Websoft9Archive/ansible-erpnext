@@ -17,36 +17,35 @@ ERPNext domain name binding steps:
    server
    {
    listen 80;
-   server_name www.example.com;  # 此处修改为你的域名
-   index index.html index.htm index.php;
-   root  /data/wwwroot/www.example.com;
+   server_name name;  # 此处修改为你的域名
+   root /data/wwwroot/frappe-bench/sites;
    ...
    }
    ```
 
 ## Reset password
 
-There are two types of commonly used erpnext password reset operations: password modification and password retrieval
+There are two main measures to reset password.
 
 ### Change password
 
-1. Log in to the background of erpnext and open Settings > personal settings to find the password modification item
-![erpnext change password](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-modifypw-websoft9.png)
+1. Log in to the background of ERPNext and open Settings > personal settings to find the password modification item
+![ERPNext change password](https://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-modifypw-websoft9.png)
 2. Set the new password directly and take effect after saving
 
-### Retrieve password
+### Forgot Password
 
-If the user forgets the erpnext password, you can directly set a new password through the following command:
+Try to retrieve your password by the following commands when forgot it.
 
 ````
 sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench set-admin-password newpassword"
 ````
 
-### Using RDS
+## Using RDS
 
 If the user does not like to use the MariaDB installed on the server and wants to migrate to the cloud database (RDS), the general process is as follows:
 
-1. Back up the existing database and import it into RDS (suitable for erpnext has been installed)
+1. Back up the existing database and import it into RDS (suitable for ERPNext has been installed)
 2. Edit [database configuration file] (/zh/stack)-components.md#erpnext ）Medium. Add db_host is the external database address
 3. Modify the account information
 4. Test the connection availability after changing the database

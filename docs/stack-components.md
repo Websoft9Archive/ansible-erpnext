@@ -54,9 +54,11 @@ Redis logs directory： */var/log/redis/redis.log*
 
 ## Ports
 
-You can control(open or shut down) ports by **[Security Group Setting](https://support.websoft9.com/docs/faq/zh/tech-instance.html)** of your Cloud Server whether the port can be accessed from Internet.
+Open or close ports by **[Security Group Setting](https://support.websoft9.com/docs/faq/tech-instance.html)** of your Cloud Server to decide whether the port can be accessed from Internet.  
 
-You can run the cmd `netstat -tunlp` to list all used ports, and we list the following most useful ports for you:
+You can run the cmd `netstat -tunlp` to check all related ports.  
+
+The following are the ports you may use:
 
 | Name | Number | Use |  Necessity |
 | --- | --- | --- | --- |

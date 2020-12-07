@@ -1,29 +1,32 @@
 # FAQ
 
-#### which is install way of erpnext?
+#### Which install solution for this ERPNext?
 
-Use the bench command to install, the official provides more source code installation methods.
+Although official provides three installation methods, we use the **Manual installation** method.
 
-The general installation process of erpnext is as follows:
+The general installation process of ERPNext is as follows:
 
-1. Use the bench command to initialize a Frappe framework
-2. Install erpnext app
-3. Create a site with the same name as erptext
+1. Use the **bench** command to initialize a Frappe framework
+2. Install ERPNext app
+3. Create a site with the same name as ERPNext
 4. Connect the site with the app
 
-#### What are the relationships and differences between Frappe, bench and erpnext?
+#### What are the relationship and difference between Frappe, bench and ERPNext?
 
-Erpnext is based on [Frappe](https://github.com/frappe/frappe)Free ERP framework development. Frappe is a framework for rapid development of JS and python integrated applications. [Bench](https://github.com/frappe/bench)Is a cli tool in Frappe framework, which is used to create and manage Frappe based applications.
+[ERPNext](https://github.com/frappe/erpnext) is based on Frappe for free ERP framework development.  
+[Frappe](https://github.com/frappe/frappe) is a framework for rapid development of JS and Python integrated applications.  
+[Bench](https://github.com/frappe/bench) is a CLI tool of Frappe framework, which used to create and manage Frappe by commands.
 
-#### What is the principle of creating a site when installing erpnext?
+#### Why should create *site* for ERPNext installation?
 
 Frappe framework is mainly composed of two parts: app and site. App is the back-end Python code, and site is the front-end part for handling HTTP requests.
 
-#### Does erptext support external databases?
+#### Does ERPNext support external databases?
 
-Yes, only in the database configuration file(/zh/stack)-components.md#erpnext)Add dB in_ Host is the external database address. For more database connection parameters, please refer to the official document [standard config](https://frappeframework.com/docs/user/en/basics/site_config#mandatory-settings)
+Yes. Just need to modify the [database configuration file](/zh/stack-components.md#erpnext) and add db_host items in it.   
+For more database connection parameters, please refer to the official document [Standard Config](https://frappeframework.com/docs/user/en/basics/site_config#mandatory-settings)
 
-#### What databases does erptext support?
+#### What databases does ERPNext support?
 
 MariaDB and PostgreSQL
 
@@ -33,15 +36,15 @@ The password is stored in the server related file: `/credentials/password.txt`
 
 #### Is there a web-base GUI database management tools?
 
-Yes, phpMyAdmin is on it, visit by *http://Internet IP:9090*
+Yes, phpMyAdmin is on it, visit by *http://Server's Internet IP:9090*
 
 #### Is it possible to modify the source path of ERPNext?
 
 Not recommended
 
-#### Is there API documentation for erptext?
+#### Is there API documentation for ERPNext?
 
-Yes, including python, JavaScript, Jinja API, refer to the official document [erptext API](https://frappeframework.com/docs/user/en/api)
+Yes, including python, JavaScript, Jinja API, refer to the official document [ERPNext API](https://frappeframework.com/docs/user/en/api)
 
 #### How to change the permissions of filesytem?
 
