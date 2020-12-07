@@ -76,6 +76,17 @@
 - name: Change mariadb_erpnext user SUPER permission
   shell: echo "REVOKE ALL PRIVILEGES ON *.* FROM 'erpnext'@'%'; REVOKE GRANT OPTION ON *.* FROM 'erpnext'@'%'; GRANT  SUPER ON *.* TO 'erpnext'@'%' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;" |mysql -uroot -p{{erpnext_db_root_password}}
 
+# create link
+- name: Create link
+  file:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    state: link
+    force: yes
+  with_items:
+    - {src: /data/wwwroot/frappe-bench/config,dest: /data/config/erpnext}
+    - {src: /data/wwwroot/frappe-bench/logs,dest: /data/logs/erpnext}
+
 #5. install bench manager(To do)
 
 #6. check version and service state
