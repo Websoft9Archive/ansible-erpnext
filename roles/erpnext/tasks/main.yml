@@ -1,123 +1,108 @@
 ---
-# 配置数据库，添加frappe用户
+## install erpnext by OS_family
+- name: Install this role on {{ansible_os_family}}
+  include: "{{ansible_os_family}}.yml"
+
+#1. installation-pre  
+- name: Added user for erpnext
+  user:
+    name: erpnext
+    shell: /bin/bash
+    home: /home/erpnext
+
+# set environment variable
+- name: Copy jdk_env to /etc/profile.d
+  copy:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    mode: 0755
+  with_items:
+    - {src: erpnext_env.sh,dest: /etc/profile.d/erpnext_env.sh}
+    - {src: erpnext.service,dest: /lib/systemd/system/erpnext.service}
+
+# change file permissions
+- name: change file permissions
+  shell: |
+    setfacl -R -m u:erpnext:rwx /data/wwwroot 
+    setfacl -R -m u:erpnext:rwx /data/logs
+
+#2. install bench 
 - block:
-  - name: replace mariadb's configration file
-    template:
-      src: mariadb.cnf.j2
-      dest: /etc/mysql/conf.d/mysql.cnf
-
-  - name: restart mariadb
-    service: 
-      name: mysql  
-      state: restarted 
-      enabled: yes
-
-  - name: update pip
-    command: pip install --upgrade pip
-
-  - name: add a linux user
-    user:
-      name: frappe
-      shell: /bin/bash
-      home: /home/frappe
-  become: yes
-  become_user: root
-
-# 安装 erpnext
-- block:
-  - name: Download bench repo
-    git:
-      repo: https://github.com/frappe/bench
-      dest: /home/frappe/bench-repo
-
   - name: Install bench
-    pip: name={{ bench_repo_path }} extra_args='-e'
-    become: yes
-    become_user: root
+    pip: 
+      name: frappe-bench
+      executable: pip3 
 
-  - name: python3 bench init for production
-    command: bench init {{ bench_path }} --frappe-path {{ frappe_repo_url }} --frappe-branch {{ frappe_branch }} --python {{ python }}
-    args:
-      creates: "{{ bench_path }}"
-      
-  - name: change mariadb host
-    shell:
-      bench set-mariadb-host 127.0.0.1
-    args:
-      chdir: /home/frappe/frappe-bench
-
-  - name: Add a site
-    expect:
-      command: bench new-site erpnext
-      responses: 
-        "password": "{{mariadb_password}}"
-      timeout: 300
-    args:
-      chdir: /home/frappe/frappe-bench
-
-  - name: get apps
-    command: 
-      bench get-app erpnext https://github.com/frappe/erpnext
-    args:
-      chdir: /home/frappe/frappe-bench
-
-  - name: Add apps
-    command: 
+#3. init frappe-bench,install erpnext,new site;  
+  - name: Init frappe-bench and Install erpnext and New site 
+    shell: |
+      cd /data/wwwroot
+      source /etc/profile.d/erpnext_env.sh
+      bench init --frappe-branch version-{{erpnext_version}} --python /usr/bin/python3 frappe-bench
+      cd /data/wwwroot/frappe-bench
+      yarn install 
+      ./env/bin/pip3 install -q -U -e frappe-bench/apps/frappe  --use-feature=2020-resolver
+      test -d sites/erpnext && rm -rf  sites/erpnext
+      bench new-site --db-host 127.0.0.1 --db-port 3306 --db-name {{erpnext_db_name}} --db-password {{erpnext_db_password}} --db-type {{erpnext_db_type}} --mariadb-root-password {{erpnext_db_root_password}} --admin-password {{erpnext_admin_password}} --no-mariadb-socket erpnext  --force
+      bench get-app --branch version-{{erpnext_version}} erpnext 
+      ./env/bin/pip3 install -e apps/erpnext/
       bench --site erpnext install-app erpnext
-    args:
-      chdir: /home/frappe/frappe-bench
-
-  - name: generate nginx port forwarding file
-    command:
       bench setup nginx
-    args:
-      chdir: /home/frappe/frappe-bench
-  become: yes
-  become_user: frappe
+    become_user: erpnext
+    become_method: su
 
-# 配置服务并设置端口转发
-- block: 
-  - name: add erpnext.service
-    copy:
-      src: erpnext.service
-      dest: /etc/systemd/system/erpnext.service
-      owner: root
-      group: root
-      mode: 0640
+#4. other configure
+- name: nginx configure
+  shell: sudo cat /data/wwwroot/frappe-bench/config/nginx.conf |sudo tee /etc/nginx/conf.d/default.conf
 
-  - name: start erpnext.service
-    service: name=erpnext.service  state=started  enabled=yes
+- name: Restart service
+  service: 
+    name: '{{item}}'
+    state: restarted
+    enabled: yes
+  with_items: 
+    - nginx
+    - erpnext
 
-  - name: delete default nginx configurationfile
-    file: 
-      path: /etc/nginx/conf.d/default.conf
-      state: absent
+- name: Remove mariadb_erpnext user accounts
+  mysql_user: 
+    login_user: root 
+    login_password: "{{erpnext_db_root_password}}"
+    login_unix_socket: /data/mysql/mysqld.sock
+    name: 'erpnext' 
+    host: '::1'
+    state: absent
 
-  - name: generate soft link of nginx configrationfile
-    file:
-      src: /home/frappe/frappe-bench/config/nginx.conf
-      dest: /etc/nginx/conf.d/default.conf
-      owner: root
-      group: root
-      state: link
+- name: Change mariadb_erpnext user SUPER permission
+  shell: echo "REVOKE ALL PRIVILEGES ON *.* FROM 'erpnext'@'%'; REVOKE GRANT OPTION ON *.* FROM 'erpnext'@'%'; GRANT  SUPER ON *.* TO 'erpnext'@'%' REQUIRE NONE WITH MAX_QUERIES_PER_HOUR 0 MAX_CONNECTIONS_PER_HOUR 0 MAX_UPDATES_PER_HOUR 0 MAX_USER_CONNECTIONS 0;" |mysql -uroot -p{{erpnext_db_root_password}}
 
-  - name: restart nginx
-    service: name=nginx  state=restarted  enabled=yes
+# create link
+- name: Create link
+  file:
+    src: '{{item.src}}'
+    dest: '{{item.dest}}'
+    state: link
+    force: yes
+  with_items:
+    - {src: /data/wwwroot/frappe-bench/config,dest: /data/config/erpnext}
+    - {src: /data/wwwroot/frappe-bench/logs,dest: /data/logs/erpnext}
 
-  - name: get erpnext database username
-    shell: grep 'db_name' /home/frappe/frappe-bench/sites/erpnext/site_config.json | awk -F '"' '{print $4}'
-    register: erpnext_dbuser
+#5. install bench manager(To do)
 
-  - name: get erpnext database password
-    shell: grep 'db_password' /home/frappe/frappe-bench/sites/erpnext/site_config.json | awk -F '"' '{print $4}'
-    register: erpnext_dbpass    
-  become: yes
-  become_user: root
-
-# 更新
-- name: bench update
-  command: bench update --patch
+#6. check version and service state
+- name: Check bench、erpnext、frappe version
+  shell: | 
+    source /etc/profile.d/erpnext_env.sh
+    echo "bench_version:" $(bench --version)  |tee -a /data/logs/install_version.txt
+    echo $(bench version)  |tee -a /data/logs/install_version.txt
+  become_user: erpnext
+  become_method: su
   args:
-    chdir: /home/frappe/frappe-bench
-  become: yes
-  become_user: frappe
+    chdir: /data/wwwroot/frappe-bench
+
+- name: Check erpnext Service
+  shell: systemctl status erpnext | grep Active*
+  register: check_erpnext_service
+  notify: check_erpnext_service
+
+  

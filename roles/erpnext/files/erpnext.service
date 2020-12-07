@@ -1,12 +1,13 @@
 [Unit]
-Description=erpnext
-After=network.target mysql.service redis.service
+Description=Erpnext Service
+
 [Service]
 Type=simple
-User=frappe
-Group=frappe
-WorkingDirectory=/home/frappe/frappe-bench
+User=erpnext
+Group=erpnext
 ExecStart=/usr/local/bin/bench start
-RemainAfterExit=yes
+WorkingDirectory=/data/wwwroot/frappe-bench
+EnvironmentFile=/etc/profile.d/erpnext_env.sh
+
 [Install]
 WantedBy=multi-user.target

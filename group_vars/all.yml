@@ -1,5 +1,0 @@
-mariadbver: 10.3      # 10.1 10.2 10.3 10.4
-nodejs_ver: 10  # 默认版本10  8 10 11 13
-redis_ver: stable #默认版本 stable  全版本支持 版本信息查看http://download.redis.io/releases/
-
-mariadb_password: 123456

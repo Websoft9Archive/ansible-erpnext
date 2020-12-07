@@ -1,0 +1,36 @@
+mariadb_version: "10.3"
+mariadb_root_password: "123456"
+mariadb_remote: "True"
+nodejs_version: "12"
+
+mariadb_configuration_default:
+  - name: default-storage-engine
+    value: MyISAM
+  - name: character-set-client-handshake
+    value: FALSE
+  - name: character-set-server
+    value: utf8mb4
+  - name: collation-server
+    value: utf8mb4_unicode_ci
+
+# docker
+docker_applications: 
+  - phpmyadmin
+
+# init passsword of database
+init_db: 
+  mariadb:
+    admin: root
+    users: ["erpnext"]
+    password: "123456"
+    config_paths:
+      - /data/wwwroot/frappe-bench/sites/erpnext/site_config.json
+
+init_application:
+  erpnext:
+    username: Administrator
+    password: admin
+    commands: 
+      - sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench --site erpnext set-admin-password $new_password "
+      - rm -rf /var/lib/redis/ && systemctl restart redis
+       

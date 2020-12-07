@@ -1,58 +1,23 @@
-# 服务器前置任务(ubuntu使用 Centos项目注释或删掉)
-- name: main
+- name: Erpnext
   hosts: all
   become: yes
   become_method: sudo
-  gather_facts: False
-  pre_tasks:
-    - name: Install Python
-      raw: sudo apt update && sudo apt-get -y install python
-      ignore_errors: yes
 
-# 安装必须软件
-- name: main
-  hosts: all
-  become: yes
-  become_method: sudo
+  vars_files:
+    - vars/main.yml
+
   roles:
-    - { role: common , tags: "common"} 
-    - { role: cloud, tags: "cloud" }
-    - { role: node.js, tags: "node.js" }
-    - { role: redis, tags: "redis" }
-    - { role: mariadb, tags: "mariadb" }
-    - { role: wkhtmltopdf, tags: "wkhtmltopdf" }
-    - { role: nginx, tags: "nginx" }
+    - {role: role_common , tags: "role_common"}
+    - {role: role_cloud , tags: "role_cloud"}
+    - {role: role_docker , tags: "role_docker"}
+    - {role: role_wkhtmltopdf , tags: "role_wkhtmltopdf"}
+    - {role: role_mariadb , tags: "role_mairadb"}
+    - {role: role_nodejs , tags: "role_nodejs"}
+    - {role: role_redis , tags: "role_redis"}
+    - {role: role_nginx , tags: "role_nginx"}
+    - {role: erpnext , tags: "erpnext"}
+    - {role: role_init , tags: "role_init"}
+    - {role: role_preend , tags: "role_preend"}
+    - {role: role_end , tags: "role_end"}
 
-# Erpnext
-- name: setup bench and dev environment
-  hosts: all
-  gather_facts: False
-  vars:
-    bench_repo_path: "/home/frappe/bench-repo"
-    bench_path: "/home/frappe/frappe-bench"
-    frappe_repo_url: "https://github.com/frappe/frappe"
-    frappe_branch: "version-12"
-    python: "/usr/bin/python3"
-  roles:
-    - { role: erpnext, tags: "erpnext"}
-  tasks:
-    - name: get erpnext database username
-      shell: grep 'db_name' /home/frappe/frappe-bench/sites/erpnext/site_config.json | awk -F '"' '{print $4}'
-      register: erpnext_dbuser
-
-    - name: get erpnext database password
-      shell: grep 'db_password' /home/frappe/frappe-bench/sites/erpnext/site_config.json | awk -F '"' '{print $4}'
-      register: erpnext_dbpass
-
-# 初始化
-- name: end
-  hosts: all
-  become: yes
-  become_method: sudo 
-  vars: 
-    app_db_user: "{{erpnext_dbuser.stdout}}"
-    db_config_path: "/home/frappe/frappe-bench/sites/erpnext/site/site_config.json"  # 应用的数据库配置文件
-  roles:
-    - { role: initdb, tags: initdb }
-    - { role: end, tags: "end" }
                                                                                                

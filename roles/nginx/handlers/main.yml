@@ -1,3 +1,0 @@
-- name: Nginx Version
-  debug:
-    var: nginx_ver.stderr
