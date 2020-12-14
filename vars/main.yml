@@ -4,8 +4,8 @@ mariadb_remote: "True"
 nodejs_version: "12"
 
 mariadb_configuration_default:
-  - name: default-storage-engine
-    value: MyISAM
+  - name: innodb-file-format
+    value: barracuda
   - name: character-set-client-handshake
     value: FALSE
   - name: character-set-server
@@ -32,5 +32,6 @@ init_application:
     password: admin
     commands: 
       - sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench --site erpnext set-admin-password $new_password "
-      - rm -rf /var/lib/redis/ && systemctl restart redis
+      - sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench migrate && /usr/local/bin/bench clear-cache"
+      - systemctl restart erpnext
        
