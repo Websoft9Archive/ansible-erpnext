@@ -4,8 +4,8 @@ mariadb_remote: "True"
 nodejs_version: "12"
 
 mariadb_configuration_default:
-  - name: default-storage-engine
-    value: MyISAM
+  - name: innodb-file-format
+    value: barracuda
   - name: character-set-client-handshake
     value: FALSE
   - name: character-set-server
