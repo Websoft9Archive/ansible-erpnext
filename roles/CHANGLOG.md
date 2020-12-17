@@ -1,9 +1,5 @@
 # CHANGELOG
 
-## To do
-
-1. install Bench Manager 
-
 ## Logs
 
 ### Bug Fixes
