@@ -4,7 +4,7 @@
   include: "{{ansible_os_family}}.yml"
 
 #1. installation-pre  
-- name: Added user for erpnext
+- name: Added user for ERPNext
   user:
     name: erpnext
     shell: /bin/bash
