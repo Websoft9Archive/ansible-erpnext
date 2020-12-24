@@ -11,7 +11,7 @@
     home: /home/erpnext
 
 # set environment variable
-- name: Copy jdk_env to /etc/profile.d
+- name: Copy erpnext_env to /etc/profile.d
   copy:
     src: '{{item.src}}'
     dest: '{{item.dest}}'
