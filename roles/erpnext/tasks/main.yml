@@ -90,7 +90,7 @@
 #5. install bench manager(To do)
 
 #6. check version and service state
-- name: Check bench、erpnext、frappe version
+- name: Check bench, erpnext, frappe version
   shell: | 
     source /etc/profile.d/erpnext_env.sh
     echo "bench_version:" $(bench --version)  |tee -a /data/logs/install_version.txt
