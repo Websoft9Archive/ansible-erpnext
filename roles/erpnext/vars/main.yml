@@ -1,0 +1,31 @@
+erpnext_meta:
+
+  "11":
+     mariadb_version: "10.3"
+     nodejs_version: "12"
+     redis_version: "5.0"
+     erpnext_frappe_version: "12"
+     mariadb_configuration_default:
+      - name: innodb-file-format
+        value: barracuda
+      - name: character-set-client-handshake
+        value: FALSE
+      - name: character-set-server
+        value: utf8mb4
+      - name: collation-server
+        value: utf8mb4_unicode_ci
+
+  "12":
+     mariadb_version: "10.3"
+     nodejs_version: "12"
+     redis_version: "5.0"
+     erpnext_frappe_version: "12"
+     mariadb_configuration_default:
+      - name: innodb-file-format
+        value: barracuda
+      - name: character-set-client-handshake
+        value: FALSE
+      - name: character-set-server
+        value: utf8mb4
+      - name: collation-server
+        value: utf8mb4_unicode_ci

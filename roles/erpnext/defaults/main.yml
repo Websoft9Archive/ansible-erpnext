@@ -1,6 +1,4 @@
-
 erpnext_version: "12"
-erpnext_frappe_version: "12"
 
 erpnext_db_name: "erpnext"
 erpnext_db_password: "123456"

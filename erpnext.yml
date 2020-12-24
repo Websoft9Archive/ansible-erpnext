@@ -6,6 +6,26 @@
   vars_files:
     - vars/main.yml
 
+  vars_prompt:
+    - name: 'erpnext_selection'
+      prompt: "\nPlease choose the number for ERPNext version [ 1/2] \n\n
+      1: ERPNext12\n
+      2: ERPNext11\n"
+      private: no
+      default: 1
+  
+  vars:
+    erpnext_select:
+      '1': '12'
+      '2': '11'
+
+    erpnext_version: "{{erpnext_select[erpnext_selection]}}" 
+    mariadb_version: "{{erpnext_meta[erpnext_version].mariadb_version}}" 
+    mariadb_configuration_default: "{{erpnext_meta[erpnext_version].mariadb_configuration_default}}" 
+    nodejs_version: "{{erpnext_meta[erpnext_version].nodejs_version}}" 
+    redis_version: "{{erpnext_meta[erpnext_version].redis_version}}" 
+
+
   roles:
     - {role: role_common , tags: "role_common"}
     - {role: role_cloud , tags: "role_cloud"}
@@ -19,5 +39,3 @@
     - {role: role_init , tags: "role_init"}
     - {role: role_preend , tags: "role_preend"}
     - {role: role_end , tags: "role_end"}
-
-                                                                                               

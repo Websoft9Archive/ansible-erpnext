@@ -38,7 +38,7 @@
     shell: |
       cd /data/wwwroot
       source /etc/profile.d/erpnext_env.sh
-      bench init --frappe-branch version-{{erpnext_frappe_version}} --python /usr/bin/python3 frappe-bench
+      bench init --frappe-branch version-{{erpnext_meta[erpnext_version].erpnext_frappe_version}} --python /usr/bin/python3 frappe-bench
       cd /data/wwwroot/frappe-bench
       yarn install 
       ./env/bin/pip3 install -q -U -e frappe-bench/apps/frappe  --use-feature=2020-resolver
