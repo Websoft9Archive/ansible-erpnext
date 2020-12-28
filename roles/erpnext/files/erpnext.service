@@ -5,9 +5,8 @@ Description=Erpnext Service
 Type=simple
 User=erpnext
 Group=erpnext
-ExecStart=/usr/local/bin/bench start
+ExecStart=/bin/bash -c 'source /opt/nvm/nvm.sh;/usr/local/bin/bench start'
 WorkingDirectory=/data/wwwroot/frappe-bench
-EnvironmentFile=/etc/profile.d/erpnext_env.sh
 
 [Install]
 WantedBy=multi-user.target
