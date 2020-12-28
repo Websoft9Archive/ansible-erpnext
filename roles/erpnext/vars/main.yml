@@ -5,6 +5,7 @@ erpnext_meta:
      nodejs_version: "12"
      redis_version: "5.0"
      erpnext_frappe_version: "11"
+     erpnext_db_config: ""
      mariadb_configuration_default:
       - name: innodb-file-format
         value: barracuda
@@ -20,6 +21,7 @@ erpnext_meta:
      nodejs_version: "12"
      redis_version: "5.0"
      erpnext_frappe_version: "12"
+     erpnext_db_config: "--db-host 127.0.0.1 --db-port 3306"
      mariadb_configuration_default:
       - name: innodb-file-format
         value: barracuda
