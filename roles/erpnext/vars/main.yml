@@ -1,5 +1,6 @@
 erpnext_db_password: "123456"
 erpnext_db_type: "mariadb"
+erpnext_db_config: "--db-host 127.0.0.1 --db-port 3306 --db-password erpnext_db_password --db-type erpnext_db_type"
 
 erpnext_meta:
 
@@ -8,7 +9,7 @@ erpnext_meta:
      nodejs_version: "12"
      redis_version: "5.0"
      erpnext_frappe_version: "11"
-     erpnext_db_config: ""
+     erpnext_db_config_flag: False
      mariadb_configuration_default:
       - name: innodb-file-format
         value: barracuda
@@ -24,7 +25,7 @@ erpnext_meta:
      nodejs_version: "12"
      redis_version: "5.0"
      erpnext_frappe_version: "12"
-     erpnext_db_config: "--db-host 127.0.0.1 --db-port 3306 --db-password erpnext_db_password --db-type erpnext_db_type"
+     erpnext_db_config_flag: True
      mariadb_configuration_default:
       - name: innodb-file-format
         value: barracuda
