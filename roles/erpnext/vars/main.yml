@@ -1,3 +1,6 @@
+erpnext_db_password: "123456"
+erpnext_db_type: "mariadb"
+
 erpnext_meta:
 
   "11":
