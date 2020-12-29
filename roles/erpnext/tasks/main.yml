@@ -1,6 +1,6 @@
 ---
 # prepare 
-- setfact: 
+- set_fact: 
     erpnext_db_config: "{{erpnext_meta[erpnext_version].erpnext_db_config}}"
     erpnext_frappe_version: "{{erpnext_meta[erpnext_version].erpnext_frappe_version}}"
 
