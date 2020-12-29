@@ -1,7 +1,8 @@
 ---
 # prepare 
- - setfact: erpnext_db_config={{erpnext_meta[erpnext_version].erpnext_db_config}}
- - setfact: erpnext_frappe_version={{erpnext_meta[erpnext_version].erpnext_frappe_version}}
+ - setfact: 
+     erpnext_db_config: "{{erpnext_meta[erpnext_version].erpnext_db_config}}"
+     erpnext_frappe_version: "{{erpnext_meta[erpnext_version].erpnext_frappe_version}}"
 
 ## install erpnext by OS_family
 - name: Install this role on {{ansible_os_family}}
