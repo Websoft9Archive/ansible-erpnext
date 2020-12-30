@@ -11,14 +11,15 @@ init_db:
     admin: root
     users: ["erpnext"]
     password: "123456"
+    commands: 
+      - sudo sed -i  's/\("db_password":."\).*/\1'"$new_password"'",/g' /data/wwwroot/frappe-bench/sites/erpnext/site_config.json
+      - sudo sed -i  $(wc -l < /data/wwwroot/frappe-bench/sites/erpnext/site_config.json)'s/,//' /data/wwwroot/frappe-bench/sites/erpnext/site_config.json
 
 init_application:
   erpnext:
     username: Administrator
     password: admin
     commands: 
-      - sudo sed -i  's/\("db_password":."\).*/\1'"$new_password"'",/g' /data/wwwroot/frappe-bench/sites/erpnext/site_config.json
-      - sudo sed -i  $(wc -l < /data/wwwroot/frappe-bench/sites/erpnext/site_config.json)'s/,//' /data/wwwroot/frappe-bench/sites/erpnext/site_config.json
       - sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench --site erpnext set-admin-password $new_password"
       - sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench migrate && /usr/local/bin/bench clear-cache"
       - systemctl restart erpnext
