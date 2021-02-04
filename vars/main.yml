@@ -5,6 +5,10 @@ mariadb_remote: "True"
 docker_applications: 
   - phpmyadmin
 
+# ubuntu 20.04 is not support  
+common_os_support: ["CentOS", "Ubuntu", "Amazon"]
+
+
 # init passsword of database
 init_db: 
   mariadb:
