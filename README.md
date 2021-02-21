@@ -48,7 +48,7 @@ Follow our [ERPNext image](https://apps.websoft9.com/erpnext) for installation o
 
 ## Documentation
 
-To get information about initial installation, default username and password, HTTPS, SMTP, Backup, Upgrade and more, please view **Graylog Administrator Guide** ([English](https://support.websoft9.com/docs/erpnext) | [简体中文](https://support.websoft9.com/docs/erpnext/zh))
+To get information about initial installation, default username and password, HTTPS, SMTP, Backup, Upgrade and more, please view **ERPNext Administrator Guide** ([English](https://support.websoft9.com/docs/erpnext) | [简体中文](https://support.websoft9.com/docs/erpnext/zh))
 
 ## Changelog
 
