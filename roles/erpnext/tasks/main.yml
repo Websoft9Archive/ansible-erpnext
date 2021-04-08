@@ -27,7 +27,7 @@
     docker-compose up -d
     sleep 30
   args:
-    chdir: /data/wwwroot/erpnext/erpnext-server
+    chdir: /data/wwwroot/erpnext
 
 - name: Set soft link for erpnext
   file:
