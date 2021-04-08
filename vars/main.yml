@@ -19,7 +19,7 @@ init_docker:
     compose_path: "/data/wwwroot/erpnext/docker-compose-production.yml"
     compose_commands:
       - cd /data/wwwroot/erpnext
-      - sudo sed -i "s/admin/$new_password/g" /data/wwwroot/erpnext/env-production.env 
+      - sudo sed -i "s/admin/$new_password/g" /data/wwwroot/erpnext/.env 
     volumes:
       - /data/wwwroot/erpnext/mariadb-vol
       - /data/wwwroot/erpnext/redis-socketio-vol

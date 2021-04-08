@@ -18,9 +18,9 @@
 
 - name: Modify the selected version and site name
   shell: |
-    sed -i 's/ERPNEXT_VERSION=.*/ERPNEXT_VERSION=v{{erpnext_version}}/g' /data/wwwroot/erpnext/env-production.env
-    sed -i 's/FRAPPE_VERSION=.*/FRAPPE_VERSION=v{{erpnext_version}}/g' /data/wwwroot/erpnext/env-production.env
-    sed -i "s/erp.example.com/$(curl ifconfig.me)/g"  /data/wwwroot/erpnext/env-production.env
+    sed -i 's/ERPNEXT_VERSION=.*/ERPNEXT_VERSION=v{{erpnext_version}}/g' /data/wwwroot/erpnext/.env
+    sed -i 's/FRAPPE_VERSION=.*/FRAPPE_VERSION=v{{erpnext_version}}/g' /data/wwwroot/erpnext/.env
+    sed -i "s/erp.example.com/$(curl ifconfig.me)/g"  /data/wwwroot/erpnext/.env
 
 - name: Run docker-compose 
   shell: | 

@@ -11,7 +11,7 @@
       prompt: "\nPlease choose the number for ERPNext version [ 1/2/3 ] \n\n
       1: ERPNext11\n
       2: ERPNext12\n
-      2: ERPNext13\n"
+      3: ERPNext13\n"
       private: no
       default: 2
   
@@ -19,7 +19,7 @@
     erpnext_select:
       '1': '11'
       '2': '12'
-      '2': '13'
+      '3': '13'
 
     erpnext_version: "{{erpnext_select[erpnext_selection]}}" 
   
