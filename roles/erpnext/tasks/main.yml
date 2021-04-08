@@ -9,17 +9,18 @@
     - /data/wwwroot/erpnext
     - /data/db/mariadb
     - /data/db/redis
-    
+  
 - name: Clone erpnext in Websoft9 
   git:
     repo: "{{erpnext_git_url}}"
     dest: "/data/wwwroot/erpnext"
     version: dev
 
-- name: Modify the selected version
+- name: Modify the selected version and site name
   shell: |
     sed -i 's/ERPNEXT_VERSION=.*/ERPNEXT_VERSION=v{{erpnext_version}}/g' /data/wwwroot/erpnext/env-production.env
     sed -i 's/FRAPPE_VERSION=.*/FRAPPE_VERSION=v{{erpnext_version}}/g' /data/wwwroot/erpnext/env-production.env
+    sed -i "s/erp.example.com/$(curl ifconfig.me)/g"  /data/wwwroot/erpnext/env-production.env
 
 - name: Run docker-compose 
   shell: | 
