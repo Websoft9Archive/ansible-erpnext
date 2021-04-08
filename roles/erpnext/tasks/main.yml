@@ -24,7 +24,7 @@
 
 - name: Run docker-compose 
   shell: | 
-    docker-compose up -d
+    docker-compose -f docker-compose-production.yml up -d
     sleep 30
   args:
     chdir: /data/wwwroot/erpnext
