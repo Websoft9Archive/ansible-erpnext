@@ -66,7 +66,3 @@
 - name: Check redis version
   shell: |
     sudo echo "redis version:" $(docker inspect redis:latest |grep REDIS_VERSION |head -1 |cut -d= -f2) |sudo tee -a /data/logs/install_version.txt 
-
-- name: Check nginx version
-  shell: |
-    sudo echo "nginx version:" $(docker images |grep mariadb |awk '{print $2}') |sudo tee -a /data/logs/install_version.txt 
