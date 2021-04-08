@@ -19,7 +19,9 @@ init_docker:
     compose_path: "/data/wwwroot/erpnext/docker-compose-production.yml"
     compose_commands:
       - cd /data/wwwroot/erpnext
-      - sudo sed -i "s/admin/$new_password/g" /data/wwwroot/erpnext/.env 
+      - sudo sed -i "s/admin/$new_password/g" /data/wwwroot/erpnext/.env
+      - sudo sed -i "s/SITE_NAME.*/SITE_NAME=$(curl ifconfig.me)/g" /data/wwwroot/erpnext/.env
+      - sudo sed -i "s/SITES=.*/SITES=\`$(curl ifconfig.me)\`/g" /data/wwwroot/erpnext/.env
     volumes:
       - /data/wwwroot/erpnext/*-vol
 
