@@ -43,18 +43,29 @@
   - {src: /data/wwwroot/erpnext/redis-cache-vol/,dest: /data/db/redis/cache}
   - {src: /data/wwwroot/erpnext/logs-vol/,dest: /data/logs/erpnext}
 
-
-
 # check service and version
+- name: Copy check service script
+  copy:
+    src: check_dockerapp_service.sh
+    dest: /tmp/check_dockerapp_service.sh
+
 - name: Check erpnext service 
-  shell: echo "erpnext" `docker inspect erpnext |grep -i status`
+  shell: bash /tmp/check_dockerapp_service.sh
   register: check_erpnext_service
   notify: check_erpnext_service
     
 - name: Check erpnext version
   shell: >
-    sudo echo "erpnext version:" $(docker images |grep erpnextlabs |awk '{print $2}' |head -1 |cut -d- -f1) |sudo tee -a /data/logs/install_version.txt  
+    sudo echo "erpnext version:" $(docker images |grep frappe/frappe-socketio |awk '{print $2}') |sudo tee -a /data/logs/install_version.txt  
 
 - name: Check mariadb version
   shell: >
     sudo echo "mariadb version:" $(docker images |grep mariadb |awk '{print $2}') |sudo tee -a /data/logs/install_version.txt  
+
+- name: Check redis version
+  shell: >
+    sudo echo "redis version:" $(docker inspect redis:latest |grep REDIS_VERSION |head -1 |cut -d= -f2) |sudo tee -a /data/logs/install_version.txt 
+
+- name: Check nginx version
+  shell: >
+    sudo echo "nginx version:" $(docker images |grep mariadb |awk '{print $2}') |sudo tee -a /data/logs/install_version.txt 
