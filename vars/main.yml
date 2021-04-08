@@ -1,30 +1,29 @@
-mariadb_root_password: "123456"
-mariadb_remote: "True"
+common_install_docker: True
+docker_install: False
+mysql_install_server: False
 
-# docker
-docker_applications: 
+nginx_reverse_proxy_port: "8000"
+
+docker_applications:
   - phpmyadmin
 
-# ubuntu 20.04 is not support  
-common_os_support: ["CentOS", "Ubuntu", "Amazon"]
-
-
-# init passsword of database
-init_db: 
-  mariadb:
-    admin: root
-    users: ["erpnext"]
-    password: "123456"
-    commands: 
-      - sudo sed -i  's/\("db_password":."\).*/\1'"$new_password"'",/g' /data/wwwroot/frappe-bench/sites/erpnext/site_config.json
-      - sudo sed -i  $(wc -l < /data/wwwroot/frappe-bench/sites/erpnext/site_config.json)'s/,//' /data/wwwroot/frappe-bench/sites/erpnext/site_config.json
-
-init_application:
-  erpnext:
-    username: Administrator
-    password: admin
-    commands: 
-      - sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench --site erpnext set-admin-password $new_password"
-      - sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_REFRESH=quiet && /usr/local/bin/bench migrate && /usr/local/bin/bench clear-cache"
-      - systemctl restart erpnext
+init_docker:
+  knowage:
+    db: mariadb
+    db_name: erpnext
+    db_username: root
+    db_password: "123456"
+    admin_username: admin
+    admin_password: "admin"
+    service_after: "docker.service"
+    compose_path: "/data/wwwroot/erpnext/docker-compose-production.yml"
+    compose_commands:
+      - cd /data/wwwroot/erpnext
+      - sudo sed -i "s/admin/$new_password/g" /data/wwwroot/erpnext/env-production.env 
+    volumes:
+      - /data/wwwroot/erpnext/mariadb-vol
+      - /data/wwwroot/erpnext/redis-socketio-vol
+      - /data/wwwroot/erpnext/redis-queue-vol
+      - /data/wwwroot/erpnext/redis-cache-vol
+      - /data/wwwroot/erpnext/sites-vol
        

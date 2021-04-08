@@ -1,7 +1,0 @@
-# install python dependence 
-- name: Install python3 dependence
-  yum: 
-    name: [git,python3-setuptools,python3-pip,python3-devel,mysql-devel]
-    update_cache: yes
-
-

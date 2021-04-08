@@ -8,32 +8,26 @@
 
   vars_prompt:
     - name: 'erpnext_selection'
-      prompt: "\nPlease choose the number for ERPNext version [ 1/2] \n\n
-      1: ERPNext12\n
-      2: ERPNext11\n"
+      prompt: "\nPlease choose the number for ERPNext version [ 1/2/3 ] \n\n
+      1: ERPNext11\n
+      2: ERPNext12\n
+      2: ERPNext13\n"
       private: no
-      default: 1
+      default: 2
   
   vars:
     erpnext_select:
-      '1': '12'
-      '2': '11'
+      '1': '11'
+      '2': '12'
+      '2': '13'
 
     erpnext_version: "{{erpnext_select[erpnext_selection]}}" 
-    mariadb_version: "{{erpnext_meta[erpnext_version].mariadb_version}}" 
-    mariadb_configuration_default: "{{erpnext_meta[erpnext_version].mariadb_configuration_default}}" 
-    nodejs_version: "{{erpnext_meta[erpnext_version].nodejs_version}}" 
-    redis_version: "{{erpnext_meta[erpnext_version].redis_version}}" 
-
-
+  
   roles:
     - {role: role_common , tags: "role_common"}
     - {role: role_cloud , tags: "role_cloud"}
     - {role: role_docker , tags: "role_docker"}
-    - {role: role_wkhtmltopdf , tags: "role_wkhtmltopdf"}
-    - {role: role_mariadb , tags: "role_mairadb"}
-    - {role: role_nodejs , tags: "role_nodejs"}
-    - {role: role_redis , tags: "role_redis"}
+    - {role: role_mysql , tags: "role_mysql"}
     - {role: role_nginx , tags: "role_nginx"}
     - {role: erpnext , tags: "erpnext"}
     - {role: role_init , tags: "role_init"}
