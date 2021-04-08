@@ -21,9 +21,5 @@ init_docker:
       - cd /data/wwwroot/erpnext
       - sudo sed -i "s/admin/$new_password/g" /data/wwwroot/erpnext/.env 
     volumes:
-      - /data/wwwroot/erpnext/mariadb-vol
-      - /data/wwwroot/erpnext/redis-socketio-vol
-      - /data/wwwroot/erpnext/redis-queue-vol
-      - /data/wwwroot/erpnext/redis-cache-vol
-      - /data/wwwroot/erpnext/sites-vol
-      - /data/wwwroot/erpnext/assets-vol
+      - /data/wwwroot/erpnext/*-vol
+
