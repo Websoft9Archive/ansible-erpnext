@@ -7,6 +7,7 @@
     path: "{{item}}"
   loop: 
     - /data/wwwroot/erpnext
+    - /data/wwwroot/erpnext/volumes
     - /data/db/mariadb
     - /data/db/redis
   
@@ -37,13 +38,13 @@
     state: link
     force: yes
   with_items:
-  - {src: /data/wwwroot/erpnext/mariadb-vol/,dest: /data/db/mariadb/data}
+  - {src: /data/wwwroot/erpnext/volumes/mariadb-vol/,dest: /data/db/mariadb/data}
   - {src: /data/wwwroot/erpnext/installation/frappe-mariadb.cnf,dest: /data/db/mariadb/frappe-mariadb.cnf}
   - {src: /data/wwwroot/erpnext/installation/frappe-mariadb.cnf,dest: /data/config/frappe-mariadb.cnf}
-  - {src: /data/wwwroot/erpnext/redis-socketio-vol/,dest: /data/db/redis/socketio}
-  - {src: /data/wwwroot/erpnext/redis-queue-vol/,dest: /data/db/redis/queue}
-  - {src: /data/wwwroot/erpnext/redis-cache-vol/,dest: /data/db/redis/cache}
-  - {src: /data/wwwroot/erpnext/logs-vol/,dest: /data/logs/erpnext}
+  - {src: /data/wwwroot/erpnext/volumes/redis-socketio-vol/,dest: /data/db/redis/socketio}
+  - {src: /data/wwwroot/erpnext/volumes/redis-queue-vol/,dest: /data/db/redis/queue}
+  - {src: /data/wwwroot/erpnext/volumes/redis-cache-vol/,dest: /data/db/redis/cache}
+  - {src: /data/wwwroot/erpnext/volumes/logs-vol/,dest: /data/logs/erpnext}
 
 # check service and version
 - name: Copy check service script

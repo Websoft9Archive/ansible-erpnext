@@ -24,5 +24,5 @@ init_docker:
       - sudo sed -i "s/SITE_NAME.*/SITE_NAME=$(curl ifconfig.me)/g" /data/wwwroot/erpnext/.env
       - sudo sed -i "s/SITES=.*/SITES=\`$(curl ifconfig.me)\`/g" /data/wwwroot/erpnext/.env
     volumes:
-      - /data/wwwroot/erpnext/*-vol
+      - /data/wwwroot/erpnext/volumes
 
