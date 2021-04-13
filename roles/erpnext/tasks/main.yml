@@ -1,21 +1,19 @@
 - name: Delete erpnext dir for sec_installation
   shell: rm -rf /data/wwwroot/erpnext
+  
+- name: Clone erpnext in Websoft9 
+  git:
+    repo: "{{erpnext_git_url}}"
+    dest: "/data/wwwroot/erpnext"
 
 - name: Create dir for erpnext
   file: 
     state: directory
     path: "{{item}}"
   loop: 
-    - /data/wwwroot/erpnext
     - /data/wwwroot/erpnext/volumes
     - /data/db/mariadb
     - /data/db/redis
-  
-- name: Clone erpnext in Websoft9 
-  git:
-    repo: "{{erpnext_git_url}}"
-    dest: "/data/wwwroot/erpnext"
-    version: dev
 
 - name: Modify the selected version and site name
   shell: |
