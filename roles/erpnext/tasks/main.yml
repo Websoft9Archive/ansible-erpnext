@@ -15,7 +15,7 @@
     - /data/db/mariadb
     - /data/db/redis
 
-- name: Modify the selected version and site name
+- name: Modify the selected version 
   shell: |
     public_ip=`wget -O - https://download.websoft9.com/ansible/get_ip.sh | bash`
     sed -i 's/ERPNEXT_VERSION=.*/ERPNEXT_VERSION=v{{erpnext_version}}/g' /data/wwwroot/erpnext/.env
