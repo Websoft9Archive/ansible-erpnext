@@ -4,7 +4,7 @@ home: false
 
 # 关于
 
-本文档由 [Websoft9](https://www.websoft9.com/) 公司提供，用于指导用户学习 ERPNext 的安装部署与基本运维技术，包括：CouchDB部署、初始化安装、环境配置、HTTPS、SMTP、备份升级和连接云服务器操作等基本操作。
+本文档由 [Websoft9](https://www.websoft9.com/) 公司提供，用于指导用户学习 ERPNext 的安装部署与基本运维技术，包括：ERPNext部署、初始化安装、环境配置、HTTPS、SMTP、备份升级和连接云服务器操作等基本操作。
 
 [ERPNext](https://erpnext.com/)  是一个 100% 开源的 ERP，基于 Python 和 Node 开发，它功能全面，包含会计、人力资源、制造、网站、电商、CRM、资产管理、客服工作台等全面的功能。非常合适作为 SAP 的替代品，全球已经有超过 5,000 家企业客户使用。
 ![](http://libs.websoft9.com/Websoft9/DocsPicture/en/erpnext/erpnext-adminui-websoft9.png)
