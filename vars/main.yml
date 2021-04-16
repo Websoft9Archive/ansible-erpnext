@@ -8,7 +8,7 @@ docker_applications:
   - phpmyadmin
 
 init_docker:
-  knowage:
+  erpnext:
     db: mariadb
     db_name: erpnext
     db_username: root
