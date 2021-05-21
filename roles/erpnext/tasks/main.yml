@@ -26,8 +26,7 @@
 - name: Modify the selected version 
   shell: |
     public_ip=`wget -O - https://download.websoft9.com/ansible/get_ip.sh | bash`
-    sed -i 's/ERPNEXT_VERSION=.*/ERPNEXT_VERSION=v{{erpnext_version}}/g' {{erpnext_work_dir}}/.env
-    sed -i 's/FRAPPE_VERSION=.*/FRAPPE_VERSION=v{{erpnext_version}}/g' {{erpnext_work_dir}}/.env
+    sed -i 's/APP_VERSION=.*/APP_VERSION=v{{erpnext_version}}/g' {{erpnext_work_dir}}/.env
     sed -i "s/erp.example.com/$public_ip/g"  {{erpnext_work_dir}}/.env
 
 - name: Run docker-compose 
