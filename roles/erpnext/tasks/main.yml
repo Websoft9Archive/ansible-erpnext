@@ -46,9 +46,9 @@
   - {src: '{{erpnext_work_dir}}/volumes/redis-queue-vol/',dest: /data/db/redis/queue}
   - {src: '{{erpnext_work_dir}}/volumes/redis-cache-vol/',dest: /data/db/redis/cache}
   - {src: '{{erpnext_work_dir}}/volumes/logs-vol/',dest: /data/logs/erpnext}
-  - {src: /var/lib/docker/volumes/docker-erpnext_assets-vol,dest: {{erpnext_work_dir}}/volumes/erpnext-assets-vol}
-  - {src: /var/lib/docker/volumes/docker-erpnext_logs-vol,dest: {{erpnext_work_dir}}/volumes/erpnext-logs-vol}
-  - {src: /var/lib/docker/volumes/docker-erpnext_sites-vol,dest: {{erpnext_work_dir}}/volumes/erpnext-site-vol}
+  - {src: /var/lib/docker/volumes/docker-erpnext_assets-vol,dest: '{{erpnext_work_dir}}/volumes/erpnext-assets-vol'}
+  - {src: /var/lib/docker/volumes/docker-erpnext_logs-vol,dest: '{{erpnext_work_dir}}/volumes/erpnext-logs-vol'}
+  - {src: /var/lib/docker/volumes/docker-erpnext_sites-vol,dest: '{{erpnext_work_dir}}/volumes/erpnext-site-vol'}
 
 # check service and version
 - name: Copy check service script
