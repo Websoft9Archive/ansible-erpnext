@@ -15,6 +15,14 @@
     - /data/db/mariadb
     - /data/db/redis
 
+- name: Rename compose and env filename
+  shell: | 
+    rm -rf docker-compose.yml .env
+    mv docker-compose-production-{{zabbix_version}}.yml docker-compose.yml
+    mv .env_all .env
+  args:
+    chdir: '{{erpnext_work_dir}}'
+
 - name: Modify the selected version 
   shell: |
     public_ip=`wget -O - https://download.websoft9.com/ansible/get_ip.sh | bash`
@@ -22,11 +30,8 @@
     sed -i 's/FRAPPE_VERSION=.*/FRAPPE_VERSION=v{{erpnext_version}}/g' {{erpnext_work_dir}}/.env
     sed -i "s/erp.example.com/$public_ip/g"  {{erpnext_work_dir}}/.env
 
-- name: Rename and Run docker-compose 
+- name: Run docker-compose 
   shell: | 
-    rm -rf docker-compose.yml .env
-    mv docker-compose-production-{{zabbix_version}}.yml docker-compose.yml
-    mv .env_all .env
     docker-compose up -d
     sleep 30
   args:
