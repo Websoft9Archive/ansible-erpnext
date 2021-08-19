@@ -73,7 +73,7 @@ sudo docker status erpnext-redis-cache
 
 ```
 
-```shell
+```shell 
 sudo docker start erpnext-redis-schedule
 sudo docker stop erpnext-redis-schedule
 sudo docker restart erpnext-redis-schedule
