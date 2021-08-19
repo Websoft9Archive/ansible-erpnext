@@ -14,16 +14,16 @@ System Requirement to install this repository are as following：
 
 | Conditions       | Details                               | Notes                |
 | ------------------- | --------------------------------| -------------------- |
-| Operating System   | CentOS7.x, Ubuntu18.04, Amazon Linux2 | Optional                 |
+| Operating System   | CentOS7.x, Ubuntu20.04, Amazon Linux2 | Optional                 |
 | Public Cloud     | AWS, Azure, Alibaba Cloud, HUAWEI ClOUD, Tencent Cloud    | Optional                 |
 | Private Cloud     | KVM, VMware, VirtualBox, OpenStack    | Optional                 |
-| Server Configuration | vCPU no less than 1 core, Memory no less than  2 GIB, Storage no less than 10 GB, Bandwidth no less than 100M ||
+| Server Configuration | vCPU no less than 1 core, Memory no less than 2 GIB, Storage no less than 20 GB, Swap no less than 2GB |Bandwidth no less than 100M|
 
-To learn more information, please view [Installation & Configuration](https://github.com/frappe/bench).
+To learn more information, please view [Installation & Configuration](https://github.com/frappe/frappe_docker/blob/develop/README.md).
 
 ## Ecosystem
 
-Core components of this repository: ERPNext, Nginx, Node.js, Python, MariaDB, phpMyAdmin on Docker
+Core components of this repository: ERPNext, Nginx, Node.js
 
 Learn more about [Parameters](/docs/stack-components.md).
 
@@ -48,11 +48,7 @@ Follow our [ERPNext image](https://apps.websoft9.com/erpnext) for installation o
 
 ## Documentation
 
-To get information about initial installation, default username and password, HTTPS, SMTP, Backup, Upgrade and more, please view **ERPNext Administrator Guide** ([English](https://support.websoft9.com/docs/erpnext) | [简体中文](https://support.websoft9.com/docs/erpnext/zh))
-
-## Changelog
-
-Detailed changes are documented in the [CHANGELOG](/CHANGELOG.md).
+**[Administrator Guide](https://support.websoft9.com/docs/erpnext)** 
 
 ## License
 
@@ -64,14 +60,16 @@ This program provided by Websoft9 contains a series of software with separate co
 
 ## FAQ
 
+#### How to install and view the latest release?
+
+This repository install way is Docker install, you can  view the version from [Official URL](https://hub.docker.com/r/frappe/erpnext-worker/tags?page=1&ordering=last_updated).  
+We will check [Release version](https://github.com/Websoft9/ansible-erpnext/releases) regularly. Update and test this project to ensure that users can successfully install the required version of ERPNext.
+
 #### Can I run this repository on Ansible Tower? 
 
 Yes.
 
-#### How to install and view the latest release?
+#### Although the results of the deploy by image are consistent with the results of deploy by script, what is the difference between the two deployment methods?
 
-This repository use [Bench](https://github.com/frappe/bench) to install ERPNex that can make sure to install the latest version. You can get the latest version from [ERPNext Release page](https://github.com/frappe/erpnext/releases)
+Suggest you read the document [Deploy by Image vs Deploy by Script](https://support.websoft9.com/docs/faq/bz-product.html#deployment-comparison).
 
-#### Is the default password safe?
-
-ERPNext Cloud Installer use the random password solution, every installation have different password, that mean your password is different from other users
