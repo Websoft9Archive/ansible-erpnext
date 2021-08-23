@@ -4,13 +4,31 @@ The ERPNext deployment package contains a sequence software (referred to as "com
 
 ## Path
 
+This solution use Docker to deploy all service, you can run the command `docker ps` to list them  
+
+```
+CONTAINER ID   IMAGE                        COMMAND                  CREATED             STATUS             PORTS                                       NAMES
+949746dc0e88   frappe/frappe-socketio:v13   "docker-entrypoint.s…"   About an hour ago   Up About an hour                                               erpnext-socketio
+030c4324b810   frappe/erpnext-worker:v13    "docker-entrypoint.s…"   About an hour ago   Up About an hour                                               erpnext-schedule
+5816692bb579   frappe/erpnext-worker:v13    "docker-entrypoint.s…"   About an hour ago   Up About an hour                                               erpnext-worker-long
+09b2e2242549   frappe/erpnext-worker:v13    "docker-entrypoint.s…"   About an hour ago   Up About an hour                                               erpnext-worker-short
+2252928c2230   frappe/erpnext-worker:v13    "docker-entrypoint.s…"   About an hour ago   Up About an hour                                               erpnext-worker-default
+4108b4ca06d5   redis:latest                 "docker-entrypoint.s…"   About an hour ago   Up About an hour   6379/tcp                                    erpnext-redis-cache
+bbe639069a28   redis:latest                 "docker-entrypoint.s…"   About an hour ago   Up About an hour   6379/tcp                                    erpnext-redis-queue
+29f4870961b4   mariadb:10.3                 "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp   erpnext-mariadb
+9aecda1e6f3e   redis:latest                 "docker-entrypoint.s…"   About an hour ago   Up About an hour   6379/tcp                                    erpnext-redis-socketio
+a404ca45d127   frappe/erpnext-nginx:v13     "/docker-entrypoint.…"   About an hour ago   Up About an hour   0.0.0.0:8000->80/tcp, :::8000->80/tcp       erpnext-nginx
+39d908b3132e   frappe/erpnext-worker:v13    "docker-entrypoint.s…"   About an hour ago   Up About an hour                                               erpnext-worker
+```
+
+> erpnext-worker-default is the main container, you can run the command `docker exec -it erpnext-worker-default bash` to connect it
+
 ### ERPNext
 
-ERPNext application installation directory:  */data/wwwroot/frappe-bench/apps/erpnext*  
-ERPNext site installation directory:  */data/wwwroot/frappe-bench/sites*  
-ERPNext database configuration file: /data/wwwroot/frappe-bench/sites/erpnext/site_config.json  
-ERPNext configuration : */data/wwwroot/frappe-bench/config*  
-ERPNext logs directory:  */data/wwwroot/frappe-bench/logs*   
+ERPNext application installation directory:  */data/wwwroot/erpnext*  
+ERPNext site installation directory:  */var/lib/docker/volumes/docker-erpnext_sites-vol*  
+ERPNext access directory: */var/lib/docker/volumes/docker-erpnext_assets-vol*  
+ERPNext logs directory:  */var/lib/docker/volumes/docker-erpnext_logs-vol*   
 
 ### Nginx
 
@@ -19,25 +37,12 @@ Nginx main configuration file： */etc/nginx/nginx.conf*
 Nginx logs directory： */var/log/nginx*  
 Nginx pseudo static directory： */etc/nginx/conf.d/rewrite*
 
-### Python
+### MariaDB on Docker
 
-Python application installation directory： */usr/lib/python*   
-Python virtual directory：: */usr/bin/python*  
-*is version 2.7/3/3.6/3.7  
-
-### Node.js
-
-Node.JS modules directory: */usr/lib/node_modules*  
-Node.JS log file: */root/.pm2/pm2.log*
-
-### MariaDB
-
-MariaDB installation directory: */usr/local/mysql*  
-MariaDB data directory: */data/mysql*  
-MariaDB configuration file: */etc/my.cnf*    
+MariaDB data directory: */data/db/mysql/data*  
+MariaDB log directory: */data/db/mysql/logs*  
 
 MariaDB Web Management refer to [MariaDB Management](/admin-mysql.md)
-
 
 ###  phpMyAdmin
 
@@ -46,11 +51,11 @@ phpMyAdmin is a visual MySQL management tool, is installed based on docker.
 phpMyAdmin directory：*/data/apps/phpmyadmin*  
 phpMyAdmin docker compose file：*/data/apps/phpmyadmin/docker-compose.yml* 
 
-### Redis
+### Docker
 
-Redis configuration file： */etc/redis.conf*  
-Redis data directory： */var/lib/redis*  
-Redis logs directory： */var/log/redis/redis.log*
+Docker root directory: */var/lib/docker*  
+Docker image directory: */var/lib/docker/image*   
+Docker daemon.json: please create it when you need and save to to the directory */etc/docker*   
 
 ## Ports
 

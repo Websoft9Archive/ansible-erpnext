@@ -8,6 +8,25 @@ ERPNext 预装包包含 ERPNext 运行所需一序列支撑软件（简称为“
 
 ## 路径
 
+本部署方案中的 ERPNext 采用 Docker 部署，运行 `docker ps` 查看运行的容器。
+
+```
+CONTAINER ID   IMAGE                        COMMAND                  CREATED             STATUS             PORTS                                       NAMES
+949746dc0e88   frappe/frappe-socketio:v13   "docker-entrypoint.s…"   About an hour ago   Up About an hour                                               erpnext-socketio
+030c4324b810   frappe/erpnext-worker:v13    "docker-entrypoint.s…"   About an hour ago   Up About an hour                                               erpnext-schedule
+5816692bb579   frappe/erpnext-worker:v13    "docker-entrypoint.s…"   About an hour ago   Up About an hour                                               erpnext-worker-long
+09b2e2242549   frappe/erpnext-worker:v13    "docker-entrypoint.s…"   About an hour ago   Up About an hour                                               erpnext-worker-short
+2252928c2230   frappe/erpnext-worker:v13    "docker-entrypoint.s…"   About an hour ago   Up About an hour                                               erpnext-worker-default
+4108b4ca06d5   redis:latest                 "docker-entrypoint.s…"   About an hour ago   Up About an hour   6379/tcp                                    erpnext-redis-cache
+bbe639069a28   redis:latest                 "docker-entrypoint.s…"   About an hour ago   Up About an hour   6379/tcp                                    erpnext-redis-queue
+29f4870961b4   mariadb:10.3                 "docker-entrypoint.s…"   About an hour ago   Up About an hour   0.0.0.0:3306->3306/tcp, :::3306->3306/tcp   erpnext-mariadb
+9aecda1e6f3e   redis:latest                 "docker-entrypoint.s…"   About an hour ago   Up About an hour   6379/tcp                                    erpnext-redis-socketio
+a404ca45d127   frappe/erpnext-nginx:v13     "/docker-entrypoint.…"   About an hour ago   Up About an hour   0.0.0.0:8000->80/tcp, :::8000->80/tcp       erpnext-nginx
+39d908b3132e   frappe/erpnext-worker:v13    "docker-entrypoint.s…"   About an hour ago   Up About an hour                                               erpnext-worker
+```
+
+> erpnext-worker-default 为项目主容器
+
 ### ERPNext
 
 ERPNext 应用安装路径:  */data/wwwroot/frappe-bench/apps/erpnext*  
@@ -22,17 +41,6 @@ Nginx 虚拟主机配置文件：*/etc/nginx/conf.d/default.conf*
 Nginx 主配置文件： */etc/nginx/nginx.conf*  
 Nginx 日志文件： */var/log/nginx*  
 Nginx 伪静态规则目录： */etc/nginx/conf.d/rewrite*
-
-### Python
-
-Python 安装目录： */usr/lib/python**  
-Python 虚拟机目录: */usr/bin/python**  
-*is version 2.7/3/3.6/3.7
-
-### Node.js
-
-Node.JS 模块路径: */usr/lib/node_modules*  
-Node.JS 日志文件: */root/.pm2/pm2.log*
 
 ### MariaDB
 

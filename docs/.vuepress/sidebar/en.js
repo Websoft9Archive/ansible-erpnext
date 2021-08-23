@@ -30,8 +30,6 @@ module.exports = [
           '/admin-services',
           '/admin-mysql',
           ['https://support.websoft9.com/docs/linux/webs-nginx.html','Nginx'],
-          ['https://support.websoft9.com/docs/linux/lang-nodejs.html','Node.js'],
-          ['https://support.websoft9.com/docs/linux/lang-python.html','Python'],
           ['https://support.websoft9.com/docs/linux/admin-practices.html','Linux'],
         ]
       },
