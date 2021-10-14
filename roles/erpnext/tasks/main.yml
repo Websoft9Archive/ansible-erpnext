@@ -15,14 +15,6 @@
     - /data/db/mariadb
     - /data/db/redis
 
-- name: Rename compose and env filename
-  shell: | 
-    rm -rf docker-compose.yml .env
-    mv docker-compose-production.yml docker-compose.yml
-    mv .env_all .env
-  args:
-    chdir: '{{erpnext_work_dir}}'
-
 - name: Modify the selected version 
   shell: |
     public_ip=`wget -O - https://download.websoft9.com/ansible/get_ip.sh | bash`
