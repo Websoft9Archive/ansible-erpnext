@@ -2,9 +2,11 @@
 
 #### 本项目中 ERPNext 采用何种安装方式？
 
-采用 bench 命令安装，即官方提供更多源码安装方式。
+采用 Docker 安装，查看我们提供的 [Docker-Compose for ERPNext](https://github.com/Websoft9/docker-erpnext) 开源项目
 
-ERPNext的安装大致流程如下：
+#### ERPNext 支持非 Docker 安装方式吗？
+
+支持，具体的安装大致流程如下：
 
 1. 使用Bench命令初始化一个Frappe框架
 2. 安装ERPNext app
@@ -47,10 +49,10 @@ MariaDB 和 PostgreSQL
 
 ```shell
 # 拥有者
-chown -R erpnext.erpnext /data/wwwroot/frappe-bench
+chown -R erpnext.erpnext /data/wwwroot/erpnext
 # 读写执行权限
-find /data/wwwroot/frappe-bench -type d -exec chmod 750 {} \;
-find /data/wwwroot/frappe-bench -type f -exec chmod 640 {} \;
+find /data/wwwroot/erpnext -type d -exec chmod 750 {} \;
+find /data/wwwroot/erpnext -type f -exec chmod 640 {} \;
 ```
 
 #### 部署和安装有什么区别？

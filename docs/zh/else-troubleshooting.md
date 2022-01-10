@@ -16,7 +16,7 @@ ERPNext 报错后，有如下几个可以分析日志的入口：
 
 #### ERPNext服务无法启动？
 
-1. 运行`systemctl status erpnext`，便可以查看启动状态和错误
+1. 运行`docker status erpnext`，便可以查看启动状态和错误
 
 2. 打开日志文件：*/data/logs/erpnext*，检索 **failed** 关键词，分析错误原因
 
@@ -28,11 +28,13 @@ ERPNext 报错后，有如下几个可以分析日志的入口：
 #### 运行Bench时报错 "You should not run this command as root" when run bench?
 
 Bench只能通过frapper运行,必须先切换到此用户
+
 ```shell
 su - frapper
 ```
 
 #### ERPNext 安装向导最后一步出现错误提示？
 ![](https://libs.websoft9.com/Websoft9/DocsPicture/zh/erpnext/erpnext-wizarderror-websoft9.png)
-原因：未知  
-方案：重复安装几次直至成功  
+
+原因：未知   
+方案：重复安装几次直至成功   

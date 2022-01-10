@@ -46,8 +46,25 @@ sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_R
 If the user does not like to use the MariaDB installed on the server and wants to migrate to the cloud database (RDS), the general process is as follows:
 
 1. Back up the existing database and import it into RDS (suitable for ERPNext has been installed)
-2. Edit [database configuration file] (/zh/stack)-components.md#erpnext ）Medium. Add db_host is the external database address
-3. Modify the account information
-4. Test the connection availability after changing the database
 
->For more database connection parameters, please refer to the official document [standard config](https://frappeframework.com/docs/user/en/basics/site_config#mandatory-settings)
+2. Modify the Database connection information at [ERPNext docker configuration file](/stack-components.md#erpnext) 
+   ```
+   # /data/wwwroot/erpnext/.env
+   DB_MRAIADB_USER=root
+   DB_MARIADB_PASSWORD=123456
+   DB_MARIADB_HOST=mariadb
+   DB_MARIADB_PORT=3306
+   DB_MARIADB_VERSION=10.6
+   ```
+
+   > DB_MARIADB_HOST is the RDS host of your db
+
+3. Recreate your container again
+   ```
+   cd /data/wwwroot/erpnext
+   docker-compose up -d
+   ```
+
+4. Test you modification
+
+> For more database connection parameters, please refer to the official document [standard config](https://frappeframework.com/docs/user/en/basics/site_config#mandatory-settings)

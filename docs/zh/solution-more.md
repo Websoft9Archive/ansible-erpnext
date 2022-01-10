@@ -47,8 +47,22 @@ sudo -H -u erpnext bash -c "cd /data/wwwroot/frappe-bench && export GIT_PYTHON_R
 如果用户不喜欢使用服务器上安装的 MariaDB，而希望迁移到云数据库中（RDS），大致流程：
 
 1. 备份已有数据库，并导入到 RDS 中（适合于 ERPNext 已经完成安装）
-2. 编辑[数据库配置文件](/zh/stack-components.md#erpnext) 中。添加 db_host 为外部数据库地址即可
-3. 修改其中的账号信息
-4. 测试更改数据库后的连接可用性
 
-> 更多数据库连接参数参考官方文档[Standard Config](https://frappeframework.com/docs/user/en/basics/site_config#mandatory-settings)
+2. 修改 [ERPNext 容器配置文件:/data/wwwroot/erpnext/.env](/zh/stack-components.md#erpnext) 中的数据库相关信息
+   ```
+   DB_MRAIADB_USER=root
+   DB_MARIADB_PASSWORD=123456
+   DB_MARIADB_HOST=mariadb
+   DB_MARIADB_PORT=3306
+   DB_MARIADB_VERSION=10.6
+   ```
+
+   > DB_MARIADB_HOST 设置为外部数据库地址
+
+3. 重新运行容器
+   ```
+   cd /data/wwwroot/erpnext
+   docker-compose up -d
+   ```
+
+4. 测试更改数据库后的连接可用性

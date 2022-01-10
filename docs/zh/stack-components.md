@@ -29,11 +29,11 @@ a404ca45d127   frappe/erpnext-nginx:v13     "/docker-entrypoint.…"   About an 
 
 ### ERPNext
 
-ERPNext 应用安装路径:  */data/wwwroot/frappe-bench/apps/erpnext*  
-ERPNext 站点安装路径:  */data/wwwroot/frappe-bench/sites*  
-ERPNext 数据库配置文件: */data/wwwroot/frappe-bench/sites/erpnext/site_config.json*  
-ERPNext 配置文件 : */data/wwwroot/frappe-bench/config*  
-ERPNext 日志文件:  */data/wwwroot/frappe-bench/logs*   
+ERPNext 路径:  */data/wwwroot/erpnext*  
+ERPNext 数据库配置文件: */data/wwwroot/erpnext/.env*  
+ERPNext 日志路径:  */data/wwwroot/erpnext/volumes/erpnext-logs-vol*  
+ERPNext 应用路径 : */data/wwwroot/frappe-bench/volumes/erpnext-site-vol*  
+ERPNext 附件路径:  */data/wwwroot/frappe-bench/volumes/erpnext-assets-vol*   
 
 ### Nginx
 
@@ -44,9 +44,9 @@ Nginx 伪静态规则目录： */etc/nginx/conf.d/rewrite*
 
 ### MariaDB
 
-MariaDB 安装路径: */usr/local/mysql*  
-MariaDB 数据文件 */data/mysql*  
-MariaDB 配置文件: */etc/my.cnf*  
+MariaDB 数据目录 */data/db/mariadb/data*  
+MariaDB 日志目录: */data/db/mariadb/log*  
+MariaDB 配置文件：*/data/db/mariadb/config/conf.d*  
 
 MySQL 可视化管理参考 [MySQL 管理](/zh/admin-mysql.md) 章节。
 
@@ -57,12 +57,11 @@ phpMyAdmin 是一款可视化 MySQL 管理工具，在本项目中它基于 Dock
 phpMyAdmin directory：*/data/apps/phpmyadmin*  
 phpMyAdmin docker compose file：*/data/apps/phpmyadmin/docker-compose.yml* 
 
-### Redis
+### Docker
 
-Redis 配置文件： */etc/redis.conf*  
-Redis 数据目录： */var/lib/redis*  
-Redis 日志文件： */var/log/redis/redis.log*
-
+Docker 根目录: */var/lib/docker*  
+Docker 镜像目录: */var/lib/docker/image*   
+Docker daemon.json 文件：默认没有创建，请到 */etc/docker* 目录下根据需要自行创建   
 
 ## 端口号
 
@@ -89,24 +88,9 @@ sudo cat /data/logs/install_version.txt
 # Linux Version
 lsb_release -a
 
-# Node.js version
-node -v
-
 # Docker Version
 docker -v
 
-# ERPNext Version
-bench version
-
 # Nginx version
 nginx -v
-
-# Python version
-python -V
-
-# MariaDB version:
-mysql -V
-
-# Redis version
-redis-server -v
 ```

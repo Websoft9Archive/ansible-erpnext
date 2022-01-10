@@ -22,35 +22,26 @@ yum update -y
 > 本部署包已预配置一个用于自动更新的计划任务。如果希望去掉自动更新，请删除对应的Cron
 
 
-## ERPNext更新
+## ERPNext 更新
 
-由于我们的 ERPNext 是采用 Bench 命令安装的，因此它的升级也 Bench 密切相关，大致原理是通过 Bench 命令做好升级准备，然后命令会到响应的代码库中 Git 最新的版本，再完成升级。  
+ERPNext 基于 Docker 部署，其升级流程：拉取镜像 > 删除容器 > 重建容器
 
-ERPNext 官方提供了完整的[升级文档](https://frappeframework.com/docs/user/en/production-setup#updating)。
+> 升级之前请确保您已经完成了服务器的镜像（快照）备份
 
-升级是一项复杂慎重的任务，下面我们主要列出其中的升级要点供用户参考：
+1. 登录服务器，删除旧容器
+   ```
+   docker-compose down -v
+   ```
+2. 编辑 */data/wwwroot/erpnext/.env* 文件，将版本变量的值修改为目标版本号
 
+2. 拉取目标版本的镜像
+   ```
+   cd /data/wwwroot/erpnext
+   docker-compose pull
+   ```
+   > 如果显示没有镜像可拉取，则无需升级
 
-``` shell
-#切换用户并进入应用目录
-su erpnext
-cd /data/wwwroot/frappe-bench
-
-# update everything
-bench update
-
-# update apps
-bench update --pull
-
-# run patches only
-bench update --patch
-
-# build assets only
-bench update --build
-
-# update bench (the cli)
-bench update --bench
-
-# update python packages and node_modules
-bench update --requirements
-```
+3. 重新创建 ERPNext 容器
+    ```
+    docker-compose up -d
+    ```

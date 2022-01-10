@@ -70,7 +70,7 @@ The following are the ports you may use:
 | HTTP | 80 | HTTP requests for ERPNext Console| Required |
 | HTTP | 443 | HTTP requests for ERPNext Console| Optional |
 | HTTP | 8000 | access ERPNext server by ip&port | Optional |
-| TCP | 9090 | mariadb web GUI tool phpmyadmin | Optional |
+| TCP | 9090 | mariadb web GUI tool phpMyAdmin | Optional |
 | TCP | 3306 | remote to mariadb server | Optional |
 
 ## Version
@@ -84,25 +84,9 @@ sudo cat /data/logs/install_version.txt
 # Linux Version
 lsb_release -a
 
-# Node.js version
-node -v
-
 # Docker Version
 docker -v
 
-# ERPNext Version
-bench version
-
 # Nginx version
 nginx -v
-
-# Python version
-python -V
-
-# MariaDB version:
-mysql -V
-
-# Redis version
-redis-server -v
-
 ```

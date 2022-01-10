@@ -27,34 +27,19 @@ yum update -y
 
 ## ERPNext Update
 
-Since our ERPNext is installed with the bench command, its upgrade is also closely related to bench. The general principle is to prepare for upgrade through the bench command, and then the command will send the latest version of git in the response code base, and then complete the upgrade.
+This deployment solution is based on Docker and so you can upgrade ERPNext by the standard process of Docker:  
 
-ERPNext officially provides [upgrade documentation](https://frappeframework.com/docs/user/en/production-setup#updating)
+> You should complete an image or snapshot backup for instance before upgrade
 
-Upgrading is a complex task, we list the key points of upgrading for your reference:
+1. Use **SFTP** to login Server, modify **APP_VERSION** in the **.env** file of ERPNext directory
 
-``` shell
-
-# cd to ERPNext install directory and execute by ERPNext user
-su erpnext
-cd /data/wwwroot/frappe-bench
-
-# update everything
-bench update
-
-# update apps
-bench update --pull
-
-# run patches only
-bench update --patch
-
-# build assets only
-bench update --build
-
-# update bench (the cli)
-bench update --bench
-
-# update python packages and node_modules
-bench update --requirements
-
-```
+2. Go to the code-server root directory, then pull new images
+   ```
+   cd /data/wwwroot/erpnext
+   docker-compose pull
+   ```
+3. Delete old container and recreate new container
+   ```
+   docker-compose down -v
+   docker-compose up -d
+   ```

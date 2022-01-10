@@ -9,20 +9,19 @@ We collect the most common troubleshooting of using ERPNext for your reference:
 Get an error for ERPNext, there are several entries that can be used to analyze the log:
 
 1. ERPNext program running log */data/logs/erpnext*
-2. Run `sudo systemctl status erpnext -l` to view the process management log
+2. Run `docker status erpnext-work-default` to view the process management log
 3. Nginx log */data/logs/nginx*
 
 Search the keywords failed or error to view the error
 
-
 #### The ERPNext service failed to start?
 
-1. Run `sudo systemctl status erpnext -l`  to view the startup status and errors
+1. Run `docker status erpnext-work-default`  to view the startup status and errors
 2. Open the log file */data/logs/erpnext*, retrieve the failed keyword, and analyze the cause of the error 
 
 #### ERPNext service can't start?
 
-1. Execute `systemctl status erpnext` and you can see the errors
+1. Execute `docker status erpnext-work-default` and you can see the errors
 2. Search the keywords **Failed** or **error** from logs: */data/logs/erpnext*
 
 #### Error in Chrome when modify password?

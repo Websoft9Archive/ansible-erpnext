@@ -2,9 +2,11 @@
 
 #### Which install solution for this ERPNext?
 
-Although official provides three installation methods, we use the **Manual installation** method.
+Use Docker installation, you can access our [Docker-Compose for ERPNext](https://github.com/Websoft9/docker-erpnext) open source project on Github
 
-The general installation process of ERPNext is as follows:
+#### Can I install ERPNext by **Manual installation**?
+
+Yes, the general installation process of ERPNext is as follows:
 
 1. Use the **bench** command to initialize a Frappe framework
 2. Install ERPNext app
@@ -51,9 +53,9 @@ Yes, including python, JavaScript, Jinja API, refer to the official document [ER
 Change owner(group) or permissions like below:
 
 ```shell
-chown -R apache.apache /data/wwwroot/frappe-bench
-find /data/wwwroot/frappe-bench -type d -exec chmod 750 {} \;
-find /data/wwwroot/frappe-bench -type f -exec chmod 640 {} \;
+chown -R apache.apache /data/wwwroot/erpnext
+find /data/wwwroot/erpnext -type d -exec chmod 750 {} \;
+find /data/wwwroot/erpnext -type f -exec chmod 640 {} \;
 ```
 
 #### What's the difference between Deployment and Installation?
