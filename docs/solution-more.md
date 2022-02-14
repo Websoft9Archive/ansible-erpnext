@@ -17,11 +17,16 @@ ERPNext domain name binding steps:
    server
    {
    listen 80;
-   server_name name;  # 此处修改为你的域名
+   server_name name;  # your domain
    root /data/wwwroot/frappe-bench/sites;
    ...
    }
    ```
+3. Save the configuration file and restart the [Nginx service](https://support.websoft9.com/docs/erpnext/zh/admin-services.html#nginx)
+4. Modify the environment variables and set the domain name:
+   Enter the ERPNext directory /data/wwwroot/erpnext , modify the .env file
+   Find the APP_SITE_URL=erp.example.com configuration item and modify it to your domain name
+5. Restart ERPNext : docker-compose up -d
 
 ## Reset password
 
