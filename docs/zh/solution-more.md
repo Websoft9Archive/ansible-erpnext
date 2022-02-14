@@ -21,6 +21,19 @@
    }
    ```
 3. 保存配置文件，重启 [Nginx 服务](/zh/admin-services.md#nginx)
+4. 修改 ERPNext 环境变量，绑定域名:
+   进入 ERPNext 目录 /data/wwwroot/erpnext
+   修改 .env 文件域名配置项
+   ```
+   ...
+   APP_SITE_URL=your domain
+   APP_SITE_NAME=`your domain`
+   ...
+   ```
+6. 重启 ERPNext 
+   ```
+   docker-compose up -d 
+   ```
 
 ## 重置密码
 
