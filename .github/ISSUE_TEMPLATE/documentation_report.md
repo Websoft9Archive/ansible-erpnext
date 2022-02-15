@@ -2,7 +2,6 @@
 name: Documentation report
 about: improve current Documentation
 labels: documentation
-title: xuwie
 ---
 
 
